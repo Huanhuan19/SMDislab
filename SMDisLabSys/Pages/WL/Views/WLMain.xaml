@@ -1,0 +1,301 @@
+﻿<UserControl x:Class="SMDisLabSys.Pages.WL.Views.WLMain"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SMDisLabSys.Pages.WL.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="950" d:DesignWidth="1800">
+    <Grid Background="#fdfCFd">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="60"></RowDefinition>
+            <RowDefinition Height="65"></RowDefinition>
+            <RowDefinition Height="65"></RowDefinition>
+            <RowDefinition Height="65"></RowDefinition>
+            <RowDefinition Height="65"></RowDefinition>
+            <RowDefinition Height="65"></RowDefinition>
+            <RowDefinition Height="65"></RowDefinition>
+            <RowDefinition Height="65"></RowDefinition>
+            <RowDefinition Height="65"></RowDefinition>
+            <RowDefinition Height="65"></RowDefinition>
+            <RowDefinition Height="65"></RowDefinition>
+            <RowDefinition Height="65"></RowDefinition>
+            <RowDefinition Height="65"></RowDefinition>
+            <RowDefinition Height="65"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="120"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="1.1*"></ColumnDefinition>
+            <ColumnDefinition Width="1.2*"></ColumnDefinition>
+            <ColumnDefinition Width="1.3*"></ColumnDefinition>
+            <ColumnDefinition Width="1.4*"></ColumnDefinition>
+            <ColumnDefinition Width="100"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Button Grid.Row="1" Grid.Column="0" Height="50" Width="100" Style="{StaticResource BtnInfoShowStyle}" Command="{Binding WLCommand}" VerticalAlignment="Bottom"
+Margin="10,0,10,10" HorizontalAlignment="Left" >
+            <Button.Background>
+                <ImageBrush ImageSource="pack://application:,,,/SMDisLabSys.Style;component/ExperimentPicture/A.png" Stretch="Uniform" />
+            </Button.Background>
+        </Button>
+        <Button Grid.Row="2" Grid.Column="0" Height="50" Width="100" Style="{StaticResource BtnInfoShowStyle}" Command="{Binding WLCommand}" VerticalAlignment="Bottom"
+Margin="10,0,10,10" HorizontalAlignment="Left" >
+            <Button.Background>
+                <ImageBrush ImageSource="pack://application:,,,/SMDisLabSys.Style;component/ExperimentPicture/C.png" Stretch="Uniform" />
+            </Button.Background>
+        </Button>
+        <Button Grid.Row="3" Grid.Column="0" Height="50" Width="100" Style="{StaticResource BtnInfoShowStyle}" Command="{Binding WLCommand}" VerticalAlignment="Bottom"
+Margin="10,0,10,10" HorizontalAlignment="Left" >
+            <Button.Background>
+                <ImageBrush ImageSource="pack://application:,,,/SMDisLabSys.Style;component/ExperimentPicture/E.png" Stretch="Uniform" />
+            </Button.Background>
+        </Button>
+        <Button Grid.Row="4" Grid.Column="0" Height="50" Width="100" Style="{StaticResource BtnInfoShowStyle}" Command="{Binding WLCommand}" VerticalAlignment="Bottom"
+Margin="10,0,10,10" HorizontalAlignment="Left" >
+            <Button.Background>
+                <ImageBrush ImageSource="pack://application:,,,/SMDisLabSys.Style;component/ExperimentPicture/G.png" Stretch="Uniform" />
+            </Button.Background>
+        </Button>
+        <Button Grid.Row="5" Grid.Column="0" Height="50" Width="100" Style="{StaticResource BtnInfoShowStyle}" Command="{Binding WLCommand}" VerticalAlignment="Bottom"
+Margin="10,0,10,10" HorizontalAlignment="Left" >
+            <Button.Background>
+                <ImageBrush ImageSource="pack://application:,,,/SMDisLabSys.Style;component/ExperimentPicture/I.png" Stretch="Uniform" />
+            </Button.Background>
+        </Button>
+        <Button Grid.Row="6" Grid.Column="0" Height="50" Width="100" Style="{StaticResource BtnInfoShowStyle}" Command="{Binding WLCommand}" VerticalAlignment="Bottom"
+Margin="10,0,10,10" HorizontalAlignment="Left" >
+            <Button.Background>
+                <ImageBrush ImageSource="pack://application:,,,/SMDisLabSys.Style;component/ExperimentPicture/K.png" Stretch="Uniform" />
+            </Button.Background>
+        </Button>
+        <Button Grid.Row="7" Grid.Column="0" Height="50" Width="100" Style="{StaticResource BtnInfoShowStyle}" Command="{Binding WLCommand}" VerticalAlignment="Bottom"
+Margin="10,0,10,10" HorizontalAlignment="Left" >
+            <Button.Background>
+                <ImageBrush ImageSource="pack://application:,,,/SMDisLabSys.Style;component/ExperimentPicture/M.png" Stretch="Uniform" />
+            </Button.Background>
+        </Button>
+        <Button Grid.Row="8" Grid.Column="0" Height="50" Width="100" Style="{StaticResource BtnInfoShowStyle}" Command="{Binding WLCommand}" VerticalAlignment="Bottom"
+Margin="10,0,10,10" HorizontalAlignment="Left" >
+            <Button.Background>
+                <ImageBrush ImageSource="pack://application:,,,/SMDisLabSys.Style;component/ExperimentPicture/O.png" Stretch="Uniform" />
+            </Button.Background>
+        </Button>
+        <Button Grid.Row="9" Grid.Column="0" Height="50" Width="100" Style="{StaticResource BtnInfoShowStyle}" Command="{Binding WLCommand}" VerticalAlignment="Bottom"
+Margin="10,0,10,10" HorizontalAlignment="Left" >
+            <Button.Background>
+                <ImageBrush ImageSource="pack://application:,,,/SMDisLabSys.Style;component/ExperimentPicture/Q.png" Stretch="Uniform" />
+            </Button.Background>
+        </Button>
+        <Button Grid.Row="10" Grid.Column="0" Height="50" Width="100" Style="{StaticResource BtnInfoShowStyle}" Command="{Binding WLCommand}" VerticalAlignment="Bottom"
+Margin="10,0,10,10" HorizontalAlignment="Left" >
+            <Button.Background>
+                <ImageBrush ImageSource="pack://application:,,,/SMDisLabSys.Style;component/ExperimentPicture/S.png" Stretch="Uniform" />
+            </Button.Background>
+        </Button>
+        <Button Grid.Row="11" Grid.Column="0" Height="50" Width="100" Style="{StaticResource BtnInfoShowStyle}" Command="{Binding WLCommand}" VerticalAlignment="Bottom"
+Margin="10,0,10,10" HorizontalAlignment="Left" >
+            <Button.Background>
+                <ImageBrush ImageSource="pack://application:,,,/SMDisLabSys.Style;component/ExperimentPicture/U.png" Stretch="Uniform" />
+            </Button.Background>
+        </Button>
+        <Button Grid.Row="12" Grid.Column="0" Height="50" Width="100" Style="{StaticResource BtnInfoShowStyle}" Command="{Binding WLCommand}" VerticalAlignment="Bottom"
+Margin="10,0,10,10" HorizontalAlignment="Left" >
+            <Button.Background>
+                <ImageBrush ImageSource="pack://application:,,,/SMDisLabSys.Style;component/ExperimentPicture/W.png" Stretch="Uniform" />
+            </Button.Background>
+        </Button>
+        <Button Grid.Row="13" Grid.Column="0" Height="50" Width="100" Style="{StaticResource BtnInfoShowStyle}" Command="{Binding WLCommand}" VerticalAlignment="Bottom"
+Margin="10,0,10,10" HorizontalAlignment="Left" >
+            <Button.Background>
+                <ImageBrush ImageSource="pack://application:,,,/SMDisLabSys.Style;component/ExperimentPicture/Y.png" Stretch="Uniform" />
+            </Button.Background>
+        </Button>
+        <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="5" Background="LightGray" Margin="3,3,10,3"/>
+        <Viewbox Grid.Row="1" Grid.Column="1" Height="21" HorizontalAlignment="Left" Margin="0,0,0,0">
+            <RadioButton GroupName="TypeIndentity" Command="{Binding APLCommand}" Content="安培力研究" Style="{StaticResource RadioButton_Defaut}" Margin="10,0,0,0"></RadioButton>
+        </Viewbox>
+        <Viewbox Height="21" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left" Margin="0,0,0,0">
+            <RadioButton GroupName="TypeIndentity" Command="{Binding Command}" Content="半导体温差发电片特性" Style="{StaticResource RadioButton_Defaut}" Margin="10,0,0,0"></RadioButton>
+        </Viewbox>
+        
+        <Grid Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="5" Background="#f0f0f0" Margin="3,3,10,3"/>
+        <Viewbox Height="21" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" Margin="0,0,0,0">
+            <RadioButton GroupName="TypeIndentity" Command="{Binding Command}" Content="测量导体的电阻" Style="{StaticResource RadioButton_Defaut}" Margin="10,0,0,0"></RadioButton>
+        </Viewbox>
+        <Viewbox Height="21" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Left" Margin="0,0,0,0">
+            <RadioButton GroupName="TypeIndentity" Command="{Binding Command}" Content="测量溶液ph值或电导率" Style="{StaticResource RadioButton_Defaut}" Margin="10,0,0,0"></RadioButton>
+        </Viewbox>
+        <Viewbox Height="21" Grid.Row="2" Grid.Column="3" HorizontalAlignment="Left" Margin="10,0,0,0">
+            <RadioButton GroupName="TypeIndentity" Command="{Binding DanBaiCommand}" Content="单摆运动规律演示器" Style="{StaticResource RadioButton_Defaut}" Margin="10,0,0,0"></RadioButton>
+        </Viewbox>
+        
+        <Grid Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="5" Background="LightGray" Margin="3,3,10,3"/>
+
+        <Grid Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="5" Background="#f0f0f0" Margin="3,3,10,3"/>
+        <Viewbox Height="21" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" Margin="0,0,0,0">
+            <RadioButton GroupName="TypeIndentity" Command="{Binding Command}" Content="光的双缝干涉" Style="{StaticResource RadioButton_Defaut}" Margin="10,0,0,0"></RadioButton>
+        </Viewbox>
+        <Viewbox Height="21" Grid.Row="4" Grid.Column="2" HorizontalAlignment="Left" Margin="0,0,0,0">
+            <RadioButton GroupName="TypeIndentity" Command="{Binding Command}" Content="光的干涉与衍射" Style="{StaticResource RadioButton_Defaut}" Margin="10,0,0,0"></RadioButton>
+        </Viewbox>
+        <Viewbox Height="21" Grid.Row="4" Grid.Column="3" HorizontalAlignment="Left" Margin="10,0,0,0">
+            <RadioButton GroupName="TypeIndentity" Command="{Binding Command}" Content="光电门测重力加速度" Style="{StaticResource RadioButton_Defaut}" Margin="10,0,0,0"></RadioButton>
+        </Viewbox>
+        
+        <Grid Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="5" Background="LightGray" Margin="3,3,10,3"/>
+        <Viewbox Height="21" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" Margin="0,0,0,0">
+            <RadioButton GroupName="TypeIndentity" Command="{Binding Command}" Content="检测物质的放射性" Style="{StaticResource RadioButton_Defaut}" Margin="10,0,0,0"></RadioButton>
+        </Viewbox>
+        <Viewbox Height="21" Grid.Row="5" Grid.Column="2" HorizontalAlignment="Left" Margin="0,0,0,0">
+            <RadioButton GroupName="TypeIndentity" Command="{Binding Command}" Content="机械能守恒定律" Style="{StaticResource RadioButton_Defaut}" Margin="10,0,0,0"></RadioButton>
+        </Viewbox>
+        <Viewbox Height="21" Grid.Row="5" Grid.Column="3" HorizontalAlignment="Left" Margin="10,0,0,0">
+            <RadioButton GroupName="TypeIndentity" Command="{Binding Command}" Content="晶体的溶解与凝固" Style="{StaticResource RadioButton_Defaut}" Margin="10,0,0,0"></RadioButton>
+        </Viewbox>
+        
+        <Grid Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="5" Background="#f0f0f0" Margin="3,3,10,3"/>
+        <Viewbox Height="21" Grid.Row="6" Grid.Column="1" HorizontalAlignment="Left" Margin="0,0,0,0">
+            <RadioButton GroupName="TypeIndentity" Command="{Binding Command}" Content="力的合成与分解" Style="{StaticResource RadioButton_Defaut}" Margin="10,0,0,0"></RadioButton>
+        </Viewbox>
+        
+        <Grid Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="5" Background="LightGray" Margin="3,3,10,3"/>
+        <Viewbox Height="21" Grid.Row="7" Grid.Column="1" HorizontalAlignment="Left" Margin="0,0,0,0">
+            <RadioButton GroupName="TypeIndentity" Command="{Binding Command}" Content="摩擦生热" Style="{StaticResource RadioButton_Defaut}" Margin="10,0,0,0"></RadioButton>
+        </Viewbox>
+        <Viewbox Height="21" Grid.Row="7" Grid.Column="2" HorizontalAlignment="Left" Margin="0,0,0,0">
+            <RadioButton GroupName="TypeIndentity" Command="{Binding Command}" Content="牛顿第二定律" Style="{StaticResource RadioButton_Defaut}" Margin="10,0,0,0"></RadioButton>
+        </Viewbox>
+        <Viewbox Height="21" Grid.Row="7" Grid.Column="3" HorizontalAlignment="Left" Margin="10,0,0,0">
+            <RadioButton GroupName="TypeIndentity" Command="{Binding Command}" Content="牛顿第三定律" Style="{StaticResource RadioButton_Defaut}" Margin="10,0,0,0"></RadioButton>
+        </Viewbox>
+        
+        <Grid Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="5" Background="#f0f0f0" Margin="3,3,10,3"/>
+        <Viewbox Height="21" Grid.Row="8" Grid.Column="1" HorizontalAlignment="Left" Margin="0,0,0,0">
+            <RadioButton GroupName="TypeIndentity" Command="{Binding Command}" Content="欧姆定律" Style="{StaticResource RadioButton_Defaut}" Margin="10,0,0,0"></RadioButton>
+        </Viewbox>
+        <Viewbox Height="21" Grid.Row="8" Grid.Column="2" HorizontalAlignment="Left" Margin="0,0,0,0">
+            <RadioButton GroupName="TypeIndentity" Command="{Binding Command}" Content="平抛运动" Style="{StaticResource RadioButton_Defaut}" Margin="10,0,0,0"></RadioButton>
+        </Viewbox>
+        
+        <Grid Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="5" Background="LightGray" Margin="3,3,10,3"/>
+        <Viewbox Height="21" Grid.Row="9" Grid.Column="1" HorizontalAlignment="Left" Margin="0,0,0,0">
+            <RadioButton GroupName="TypeIndentity" Command="{Binding Command}" Content="气体压强与体积的关系" Style="{StaticResource RadioButton_Defaut}" Margin="10,0,0,0"></RadioButton>
+        </Viewbox>
+        <Viewbox Height="21" Grid.Row="9" Grid.Column="2" HorizontalAlignment="Left" Margin="0,0,0,0">
+            <RadioButton GroupName="TypeIndentity" Command="{Binding Command}" Content="溶解的热效应" Style="{StaticResource RadioButton_Defaut}" Margin="10,0,0,0"></RadioButton>
+        </Viewbox>
+        
+        <Grid Grid.Row="10" Grid.Column="1" Grid.ColumnSpan="5" Background="#f0f0f0" Margin="3,3,10,3"/>
+        <Viewbox Height="21" Grid.Row="10" Grid.Column="1" HorizontalAlignment="Left" Margin="0,0,0,0">
+            <RadioButton GroupName="TypeIndentity" Command="{Binding Command}" Content="s__t图求加速度" Style="{StaticResource RadioButton_Defaut}" Margin="10,0,0,0"></RadioButton>
+        </Viewbox>
+        <Viewbox Height="21" Grid.Row="10" Grid.Column="2" HorizontalAlignment="Left" Margin="0,0,0,0">
+            <RadioButton GroupName="TypeIndentity" Command="{Binding Command}" Content="数码轨道实验" Style="{StaticResource RadioButton_Defaut}" Margin="10,0,0,0"></RadioButton>
+        </Viewbox>
+        <Viewbox Height="21" Grid.Row="10" Grid.Column="3" HorizontalAlignment="Left" Margin="10,0,0,0">
+            <RadioButton GroupName="TypeIndentity" Command="{Binding Command}" Content="声波的振动图像及声强级的测量" Style="{StaticResource RadioButton_Defaut}" Margin="10,0,0,0"></RadioButton>
+        </Viewbox>
+        
+        <Grid Grid.Row="11" Grid.Column="1" Grid.ColumnSpan="5" Background="LightGray" Margin="3,3,10,3"/>
+
+        <Grid Grid.Row="12" Grid.Column="1" Grid.ColumnSpan="5" Background="#f0f0f0" Margin="3,3,10,3"/>
+        <Viewbox Height="21" Grid.Row="12" Grid.Column="1" HorizontalAlignment="Left" Margin="0,0,0,0">
+            <RadioButton GroupName="TypeIndentity" Command="{Binding Command}" Content="微电压的测定" Style="{StaticResource RadioButton_Defaut}" Margin="10,0,0,0"></RadioButton>
+        </Viewbox>
+        <Viewbox Height="21" Grid.Row="12" Grid.Column="2" HorizontalAlignment="Left" Margin="0,0,0,0">
+            <RadioButton GroupName="TypeIndentity" Command="{Binding Command}" Content="物体动能的大小" Style="{StaticResource RadioButton_Defaut}" Margin="10,0,0,0"></RadioButton>
+        </Viewbox>
+        <Viewbox Height="21" Grid.Row="12" Grid.Column="3" HorizontalAlignment="Left" Margin="10,0,0,0">
+            <RadioButton GroupName="TypeIndentity" Command="{Binding Command}" Content="新向心力" Style="{StaticResource RadioButton_Defaut}" Margin="10,0,0,0"></RadioButton>
+        </Viewbox>
+        
+        <Grid Grid.Row="13" Grid.Column="1" Grid.ColumnSpan="5" Background="LightGray" Margin="3,3,10,3"/>
+        <Viewbox Height="21" Grid.Row="13" Grid.Column="1" HorizontalAlignment="Left" Margin="0,0,0,0">
+            <RadioButton GroupName="TypeIndentity" Command="{Binding Command}" Content="中和滴定" Style="{StaticResource RadioButton_Defaut}" Margin="10,0,0,0"></RadioButton>
+        </Viewbox>
+        <Viewbox Height="21" Grid.Row="13" Grid.Column="2" HorizontalAlignment="Left" Margin="0,0,0,0">
+            <RadioButton GroupName="TypeIndentity" Command="{Binding Command}" Content="智能力盘" Style="{StaticResource RadioButton_Defaut}" Margin="10,0,0,0"></RadioButton>
+        </Viewbox>
+        
+        
+        <Button Grid.Row="1" Grid.Column="6" Height="50" Width="80" Style="{StaticResource BtnInfoStyle}" Command="{Binding WLCommand}" VerticalAlignment="Bottom"
+Margin="10,0,10,10" HorizontalAlignment="Left" >
+            <Button.Background>
+                <ImageBrush ImageSource="pack://application:,,,/SMDisLabSys.Style;component/ExperimentPicture/More.png" Stretch="Uniform" />
+            </Button.Background>
+        </Button>
+        <Button Grid.Row="2" Grid.Column="6" Height="50" Width="80" Style="{StaticResource BtnInfoStyle}" Command="{Binding WLCommand}" VerticalAlignment="Bottom"
+Margin="10,0,10,10" HorizontalAlignment="Left" >
+            <Button.Background>
+                <ImageBrush ImageSource="pack://application:,,,/SMDisLabSys.Style;component/ExperimentPicture/More.png" Stretch="Uniform" />
+            </Button.Background>
+        </Button>
+        <Button Grid.Row="3" Grid.Column="6" Height="50" Width="80" Style="{StaticResource BtnInfoStyle}" Command="{Binding WLCommand}" VerticalAlignment="Bottom"
+Margin="10,0,10,10" HorizontalAlignment="Left" >
+            <Button.Background>
+                <ImageBrush ImageSource="pack://application:,,,/SMDisLabSys.Style;component/ExperimentPicture/More.png" Stretch="Uniform" />
+            </Button.Background>
+        </Button>
+        <Button Grid.Row="4" Grid.Column="6" Height="50" Width="80" Style="{StaticResource BtnInfoStyle}" Command="{Binding WLCommand}" VerticalAlignment="Bottom"
+Margin="10,0,10,10" HorizontalAlignment="Left" >
+            <Button.Background>
+                <ImageBrush ImageSource="pack://application:,,,/SMDisLabSys.Style;component/ExperimentPicture/More.png" Stretch="Uniform" />
+            </Button.Background>
+        </Button>
+        <Button Grid.Row="5" Grid.Column="6" Height="50" Width="80" Style="{StaticResource BtnInfoStyle}" Command="{Binding WLCommand}" VerticalAlignment="Bottom"
+Margin="10,0,10,10" HorizontalAlignment="Left" >
+            <Button.Background>
+                <ImageBrush ImageSource="pack://application:,,,/SMDisLabSys.Style;component/ExperimentPicture/More.png" Stretch="Uniform" />
+            </Button.Background>
+        </Button>
+        <Button Grid.Row="6" Grid.Column="6" Height="50" Width="80" Style="{StaticResource BtnInfoStyle}" Command="{Binding WLCommand}" VerticalAlignment="Bottom"
+Margin="10,0,10,10" HorizontalAlignment="Left" >
+            <Button.Background>
+                <ImageBrush ImageSource="pack://application:,,,/SMDisLabSys.Style;component/ExperimentPicture/More.png" Stretch="Uniform" />
+            </Button.Background>
+        </Button>
+        <Button Grid.Row="7" Grid.Column="6" Height="50" Width="80" Style="{StaticResource BtnInfoStyle}" Command="{Binding WLCommand}" VerticalAlignment="Bottom"
+Margin="10,0,10,10" HorizontalAlignment="Left" >
+            <Button.Background>
+                <ImageBrush ImageSource="pack://application:,,,/SMDisLabSys.Style;component/ExperimentPicture/More.png" Stretch="Uniform" />
+            </Button.Background>
+        </Button>
+        <Button Grid.Row="8" Grid.Column="6" Height="50" Width="80" Style="{StaticResource BtnInfoStyle}" Command="{Binding WLCommand}" VerticalAlignment="Bottom"
+Margin="10,0,10,10" HorizontalAlignment="Left" >
+            <Button.Background>
+                <ImageBrush ImageSource="pack://application:,,,/SMDisLabSys.Style;component/ExperimentPicture/More.png" Stretch="Uniform" />
+            </Button.Background>
+        </Button>
+        <Button Grid.Row="9" Grid.Column="6" Height="50" Width="80" Style="{StaticResource BtnInfoStyle}" Command="{Binding WLCommand}" VerticalAlignment="Bottom"
+Margin="10,0,10,10" HorizontalAlignment="Left" >
+            <Button.Background>
+                <ImageBrush ImageSource="pack://application:,,,/SMDisLabSys.Style;component/ExperimentPicture/More.png" Stretch="Uniform" />
+            </Button.Background>
+        </Button>
+        <Button Grid.Row="10" Grid.Column="6" Height="50" Width="80" Style="{StaticResource BtnInfoStyle}" Command="{Binding WLCommand}" VerticalAlignment="Bottom"
+Margin="10,0,10,10" HorizontalAlignment="Left" >
+            <Button.Background>
+                <ImageBrush ImageSource="pack://application:,,,/SMDisLabSys.Style;component/ExperimentPicture/More.png" Stretch="Uniform" />
+            </Button.Background>
+        </Button>
+        <Button Grid.Row="11" Grid.Column="6" Height="50" Width="80" Style="{StaticResource BtnInfoStyle}" Command="{Binding WLCommand}" VerticalAlignment="Bottom"
+Margin="10,0,10,10" HorizontalAlignment="Left" >
+            <Button.Background>
+                <ImageBrush ImageSource="pack://application:,,,/SMDisLabSys.Style;component/ExperimentPicture/More.png" Stretch="Uniform" />
+            </Button.Background>
+        </Button>
+        <Button Grid.Row="12" Grid.Column="6" Height="50" Width="80" Style="{StaticResource BtnInfoStyle}" Command="{Binding WLCommand}" VerticalAlignment="Bottom"
+Margin="10,0,10,10" HorizontalAlignment="Left" >
+            <Button.Background>
+                <ImageBrush ImageSource="pack://application:,,,/SMDisLabSys.Style;component/ExperimentPicture/More.png" Stretch="Uniform" />
+            </Button.Background>
+        </Button>
+        <Button Grid.Row="13" Grid.Column="6" Height="50" Width="80" Style="{StaticResource BtnInfoStyle}" Command="{Binding WLCommand}" VerticalAlignment="Bottom"
+Margin="10,0,10,10" HorizontalAlignment="Left" >
+            <Button.Background>
+                <ImageBrush ImageSource="pack://application:,,,/SMDisLabSys.Style;component/ExperimentPicture/More.png" Stretch="Uniform" />
+            </Button.Background>
+        </Button>
+    </Grid>
+</UserControl>

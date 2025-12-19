@@ -1,0 +1,124 @@
+﻿<Window x:Class="SMDisLabSys.Pages.UcWinSize"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        WindowState="Maximized"  WindowStyle="None" 
+        WindowStartupLocation="CenterScreen"
+        Title="{Binding Title}"  FontWeight="UltraBold" FontStyle="Normal"  Height="{Binding Height}" Width="{Binding Width, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+    <Window.Resources>
+        <!--  画刷  -->
+        <SolidColorBrush x:Key="DialogBackgroundColor" Color="#040D14" />
+        <SolidColorBrush x:Key="DialogBorderBrushColor" Color="#6C83A4" />
+        <SolidColorBrush x:Key="DialogTitleColor" Color="#00aaa4" />
+        <!--<ImageBrush x:Key="DialogTitleImageBrush" ImageSource="pack://application:,,,/DeviceSimulator.Style;component/Images/dialog_heder_bg.png" />-->
+        <ImageBrush x:Key="DialogTitleImageBrush" ImageSource="pack://application:,,,/SMDisLabSys.Style;component/Images/MainTitle.png" />
+        <LinearGradientBrush x:Key="TitleTextGradientColor" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Offset="1" Color="#A5BCF3" />
+            <GradientStop Offset="0" Color="White" />
+        </LinearGradientBrush>
+
+        <!--  对话框标题样式  -->
+        <Style x:Key="SystemTitleStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="TextAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="30" />
+            <Setter Property="Foreground" Value="{StaticResource TitleTextGradientColor}" />
+        </Style>
+
+        <!--  按钮样式  -->
+        <Style x:Key="IconButtonBaseStyle" TargetType="Button">
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <TextBlock
+                        x:Name="icon"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontSize="{TemplateBinding FontSize}"
+                        Foreground="{TemplateBinding Foreground}"
+                        Text="{TemplateBinding Content}" />
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="icon" Property="Foreground" Value="#90CFFF" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Window.Style>
+        <Style TargetType="{x:Type Window}">
+            <Setter Property="ShowInTaskbar" Value="True" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Window}">
+                        <Border
+                        Background="{StaticResource DialogBackgroundColor}"
+                        BorderBrush="{StaticResource DialogBorderBrushColor}"
+                        BorderThickness="2">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="70" />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+
+                                <Border Background="{StaticResource DialogTitleImageBrush}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition />
+                                            <ColumnDefinition />
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="1"
+                                        Margin="10,0,0,0"
+                                        HorizontalAlignment="Center"
+                                        Foreground="{StaticResource DialogTitleColor}"
+                                        Style="{StaticResource SystemTitleStyle}"
+                                        Text="{TemplateBinding Title}" />
+                                        <StackPanel
+                                        Grid.Column="2"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Center"
+                                        Orientation="Horizontal"
+                                        WindowChrome.IsHitTestVisibleInChrome="True">
+                                            <Button
+                                            Margin="0,0,20,0"
+                                            Command="ApplicationCommands.Properties"
+                                            Content="—"
+                                            Cursor="Hand"
+                                            FontSize="20"
+                                            FontWeight="Bold"
+                                            Foreground="Black"
+                                            Style="{StaticResource IconButtonBaseStyle}" />
+                                            <Button
+                                            Margin="0,0,20,0"
+                                            Command="ApplicationCommands.Close"
+                                            Content="x"
+                                            Cursor="Hand"
+                                            FontSize="35"
+                                            FontWeight="Medium"
+                                            Foreground="Black"
+                                            Style="{StaticResource IconButtonBaseStyle}" />
+                                        </StackPanel>
+                                    </Grid>
+                                </Border>
+                                <ContentPresenter Grid.Row="1" Content="{TemplateBinding Content}" />
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Style>
+    <!--<WindowChrome.WindowChrome>
+        <WindowChrome
+            CaptionHeight="60"
+            CornerRadius="0"
+            GlassFrameThickness="0" />
+    </WindowChrome.WindowChrome>-->
+</Window>

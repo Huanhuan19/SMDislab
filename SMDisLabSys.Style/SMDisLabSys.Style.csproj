@@ -1,0 +1,87 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0-windows10.0.19041.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="ExperimentPicture\A.png" />
+    <None Remove="ExperimentPicture\C.png" />
+    <None Remove="ExperimentPicture\E.png" />
+    <None Remove="ExperimentPicture\G.png" />
+    <None Remove="ExperimentPicture\I.png" />
+    <None Remove="ExperimentPicture\K.png" />
+    <None Remove="ExperimentPicture\M.png" />
+    <None Remove="ExperimentPicture\More.png" />
+    <None Remove="ExperimentPicture\O.png" />
+    <None Remove="ExperimentPicture\Q.png" />
+    <None Remove="ExperimentPicture\S.png" />
+    <None Remove="ExperimentPicture\U.png" />
+    <None Remove="ExperimentPicture\W.png" />
+    <None Remove="ExperimentPicture\Y.png" />
+    <None Remove="Images\bj1.jpg" />
+    <None Remove="Images\bj2.png" />
+    <None Remove="Images\bj3.jpg" />
+    <None Remove="Images\blueBack.png" />
+    <None Remove="Images\close.png" />
+    <None Remove="Images\conf_02.png" />
+    <None Remove="Images\conf_03.png" />
+    <None Remove="Images\conf_04.png" />
+    <None Remove="Images\conf_07.png" />
+    <None Remove="Images\dialog_heder_bg.png" />
+    <None Remove="Images\exit.png" />
+    <None Remove="Images\HX.png" />
+    <None Remove="Images\ico_4_新建文件.png" />
+    <None Remove="Images\ico_4_新建文件夹.png" />
+    <None Remove="Images\ico_4_运行开.png" />
+    <None Remove="Images\loding.gif" />
+    <None Remove="Images\MainTitle.png" />
+    <None Remove="Images\other_04.png" />
+    <None Remove="Images\start.png" />
+    <None Remove="Images\stop.png" />
+    <None Remove="Images\SW.png" />
+    <None Remove="Images\WL.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="ExperimentPicture\A.png" />
+    <Resource Include="ExperimentPicture\C.png" />
+    <Resource Include="ExperimentPicture\E.png" />
+    <Resource Include="ExperimentPicture\G.png" />
+    <Resource Include="ExperimentPicture\I.png" />
+    <Resource Include="ExperimentPicture\K.png" />
+    <Resource Include="ExperimentPicture\M.png" />
+    <Resource Include="ExperimentPicture\More.png" />
+    <Resource Include="ExperimentPicture\O.png" />
+    <Resource Include="ExperimentPicture\Q.png" />
+    <Resource Include="ExperimentPicture\S.png" />
+    <Resource Include="ExperimentPicture\U.png" />
+    <Resource Include="ExperimentPicture\W.png" />
+    <Resource Include="ExperimentPicture\Y.png" />
+    <Resource Include="Images\bj1.jpg" />
+    <Resource Include="Images\bj2.png" />
+    <Resource Include="Images\bj3.jpg" />
+    <Resource Include="Images\blueBack.png" />
+    <Resource Include="Images\close.png" />
+    <Resource Include="Images\conf_02.png" />
+    <Resource Include="Images\conf_03.png" />
+    <Resource Include="Images\conf_04.png" />
+    <Resource Include="Images\conf_07.png" />
+    <Resource Include="Images\dialog_heder_bg.png" />
+    <Resource Include="Images\exit.png" />
+    <Resource Include="Images\HX.png" />
+    <Resource Include="Images\ico_4_新建文件.png" />
+    <Resource Include="Images\ico_4_新建文件夹.png" />
+    <Resource Include="Images\ico_4_运行开.png" />
+    <Resource Include="Images\loding.gif" />
+    <Resource Include="Images\MainTitle.png" />
+    <Resource Include="Images\start.png" />
+    <Resource Include="Images\stop.png" />
+    <Resource Include="Images\SW.png" />
+    <Resource Include="Images\WL.png" />
+  </ItemGroup>
+
+</Project>
