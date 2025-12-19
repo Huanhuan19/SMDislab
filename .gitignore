@@ -1,0 +1,14 @@
+﻿################################################################################
+# 此 .gitignore 文件已由 Microsoft(R) Visual Studio 自动创建。
+################################################################################
+
+/SMDisLabSys/obj
+/.vs/SMDisLabSys/FileContentIndex
+/SMDisLabSys.BLL/obj
+/SMDisLabSys.Common/obj
+/SMDisLabSys.Style/obj
+/.vs/SMDisLabSys/v17
+/SMDisLabSys/bin/Debug/net6.0-windows10.0.19041.0
+/SMDisLabSys.BLL/bin/Debug/net6.0-windows10.0.19041.0
+/SMDisLabSys.Common/bin/Debug/net6.0-windows10.0.19041.0
+/SMDisLabSys.Style/bin/Debug/net6.0-windows10.0.19041.0
