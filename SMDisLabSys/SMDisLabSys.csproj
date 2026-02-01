@@ -34,6 +34,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Pages\WL\AG\Views\DanBaiNew.xaml.cs">
+	    <SubType>Code</SubType>
+	  </Compile>
 	  <Compile Update="Pages\WL\Views\ShiLi.xaml.cs">
 	    <SubType>Code</SubType>
 	  </Compile>

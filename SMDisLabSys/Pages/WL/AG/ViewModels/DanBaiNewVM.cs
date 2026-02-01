@@ -26,7 +26,7 @@ using SMDisLabSys.UIServer.Dot;
 
 namespace SMDisLabSys.Pages.WL.AG.ViewModels
 {
-    class DanBaiVM : BindableBase, IDialogAware
+    class DanBaiNewVM : BindableBase, IDialogAware
     {
         public DelegateCommand RecordDataCommand { get; private set; }
         public DelegateCommand ClearSelectCommand { get; private set; }
@@ -132,7 +132,7 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
             set { SetProperty(ref chartTitle, value); }
         }
         #endregion
-        public DanBaiVM()
+        public DanBaiNewVM()
         {
             XFormatter = XFormatters;
             YFormatter = YFormatters;
@@ -482,4 +482,5 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
         }
         #endregion
     }
+
 }

@@ -57,6 +57,7 @@ namespace SMDisLabSys
         {
             containerRegistry.RegisterForNavigation<WLMain, WLMainVM>();
             containerRegistry.RegisterForNavigation<DanBai, DanBaiVM>();
+            containerRegistry.RegisterForNavigation<DanBaiNew, DanBaiNewVM>();
 
             containerRegistry.Register<IDialogWindow, UcWinSize>(nameof(UcWinSize));
         }

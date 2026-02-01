@@ -36,7 +36,7 @@ namespace SMDisLabSys.Pages.WL.ViewModels
         }
         void DanBaiCommandMethod()
         {
-            dialogService.Show(nameof(DanBai), null, callback =>
+            dialogService.Show(nameof(DanBaiNew), null, callback =>
             {
             }, nameof(UcWinSize));
         }
