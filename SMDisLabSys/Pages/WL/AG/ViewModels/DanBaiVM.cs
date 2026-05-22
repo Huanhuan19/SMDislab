@@ -158,12 +158,12 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
 
         private void Instance_BLEDataUpdated(object? sender, EventArgs e)
         {
-            DataParseBLEEventArgs args = (DataParseBLEEventArgs)e;
-            if (args.ParamList.Count >= 2)
-            {
-                Circle = args.ParamList[0];
-                Angle = args.ParamList[1];
-            }
+            DataParseEventArgs args = (DataParseEventArgs)e;
+            //if (args.ParamList.Count >= 2)
+            //{
+            //    Circle = args.ParamList[0];
+            //    Angle = args.ParamList[1];
+            //}
         }
 
         void InitLine()

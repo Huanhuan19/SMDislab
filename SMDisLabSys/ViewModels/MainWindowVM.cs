@@ -20,6 +20,10 @@ using SMDisLabSys.BLL;
 using SMDisLabSys.Pages;
 using Prism.Services.Dialogs;
 using SMDisLabSys.Pages.WL.Views;
+using SMDisLabSys.BLL.SensorOper;
+using System.IO;
+using System.Windows.Forms;
+using Application = System.Windows.Forms.Application;
 
 
 namespace SMDisLabSys.ViewModels
@@ -66,6 +70,14 @@ namespace SMDisLabSys.ViewModels
         {
             main = mainWindow;
             SystemInit.Instance.Init();
+            SensorCollection.Instance.LoadSensor(DefaultSensorDefineFileName);
+        }
+        string DefaultSensorDefineFileName
+        {
+            get
+            {
+                return Application.StartupPath + "\\sensors.set";
+            }
         }
     }
 }

@@ -23,6 +23,7 @@ using MessageBox = System.Windows.MessageBox;
 using SMDisLabSys.BLL.Formulas;
 using SMDisLabSys.UIServer.Caculator;
 using SMDisLabSys.UIServer.Dot;
+using SMDisLabSys.Model;
 
 namespace SMDisLabSys.Pages.WL.AG.ViewModels
 {
@@ -39,6 +40,7 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
         public DelegateCommand GToLCommand { get; private set; }
 
         int recordIndex = 0;
+        bool haveUSBData = false;
 
         ChartValues<ObservablePoint> Points = new ChartValues<ObservablePoint>();
         ChartValues<ObservablePoint> Points2 = new ChartValues<ObservablePoint>();
@@ -158,11 +160,21 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
 
         private void Instance_BLEDataUpdated(object? sender, EventArgs e)
         {
-            DataParseBLEEventArgs args = (DataParseBLEEventArgs)e;
-            if (args.ParamList.Count >= 2)
+            DataParseEventArgs args = (DataParseEventArgs)e;
+            List<double> value = new List<double>();
+            args.ParamListDic.TryGetValue(20, out value);//传感器编号
+            if (value != null && value.Count > 0)
             {
-                Circle = args.ParamList[0];
-                Angle = args.ParamList[1];
+                Circle = value[0];
+            }
+            args.ParamListDic.TryGetValue(21, out value);
+            if (value != null && value.Count > 0)
+            {
+                Angle = value[0];
+            }
+            if (args.ConnectType==ConnectTypeEnum.USB)
+            {
+                haveUSBData = true;
             }
         }
 
@@ -208,6 +220,11 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
 
         void ConnectDevice()
         {
+            Thread.Sleep(500);//等有无USB数据
+            if (haveUSBData)
+            {
+                return;
+            }
             Task.Run(() =>
             {
                 int loop = 100;

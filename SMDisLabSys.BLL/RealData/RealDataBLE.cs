@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
+using SMDisLabSys.Model;
 
 namespace SMDisLabSys.BLL.RealData
 {
@@ -12,7 +14,7 @@ namespace SMDisLabSys.BLL.RealData
 
         //接收消息页面回调事件
         public event EventHandler BLEDataUpdated;
-        public void UpdataBLEData(DataParseBLEEventArgs arg)
+        public void UpdataBLEData(DataParseEventArgs arg)
         {
             if (BLEDataUpdated != null)
             {
@@ -20,13 +22,14 @@ namespace SMDisLabSys.BLL.RealData
             }
         }
 
-        public class DataParseBLEEventArgs : EventArgs
+        public class DataParseEventArgs : EventArgs
         {
             public string BLEAddress { get; set; }
-            public List<double> ParamList;
-            public DataParseBLEEventArgs()
+            public ConnectTypeEnum ConnectType { get; set; }
+            public Dictionary<int, List<double>> ParamListDic;
+            public DataParseEventArgs()
             {
-                ParamList = new List<double>();
+                ParamListDic = new Dictionary<int, List<double>>();
             }
         }
     }

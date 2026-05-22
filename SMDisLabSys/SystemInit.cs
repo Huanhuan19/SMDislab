@@ -33,6 +33,7 @@ namespace SMDisLabSys
         public void Init()
         {
             SMDataSource.Instance.BLEStart();
+            SMDataSource.Instance.HidStart();
         }
     }
 

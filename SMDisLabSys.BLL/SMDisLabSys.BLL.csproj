@@ -33,6 +33,7 @@
 			<ProductName>.NET Framework 3.5 SP1</ProductName>
 			<Install>false</Install>
 		</BootstrapperPackage>
+		<PackageReference Include="hidlibrary" Version="3.3.40" />
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
@@ -40,5 +41,6 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <ProjectReference Include="..\SMDisLabSys.Common\SMDisLabSys.Common.csproj" />
+	  <ProjectReference Include="..\SMDisLabSys.Model\SMDisLabSys.Model.csproj" />
 	</ItemGroup>
 </Project>

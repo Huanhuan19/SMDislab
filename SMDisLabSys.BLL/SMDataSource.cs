@@ -6,9 +6,13 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Markup;
+using SMDisLabSys.BLL.Connect;
+using SMDisLabSys.BLL.Protocol;
 using SMDisLabSys.BLL.RealData;
 using SMDisLabSys.Common;
 using SMDisLabSys.Common.DataConvert;
+using SMDisLabSys.Model;
+using Windows.Storage.Streams;
 using static SMDisLabSys.BLL.RealData.RealDataBLE;
 
 namespace SMDisLabSys.BLL
@@ -16,6 +20,9 @@ namespace SMDisLabSys.BLL
     public class SMDataSource
     {
         public static SMDataSource Instance = new SMDataSource();
+
+        #region 蓝牙
+
 
         BLEDeviceConnect ble;
         BLEDeviceConnect ble1;
@@ -36,7 +43,7 @@ namespace SMDisLabSys.BLL
             InitBLE();
             IsStartBLE = true;
         }
-        public void InitBLE()
+        void InitBLE()
         {
             Thread.Sleep(500);
             ble = new BLEDeviceConnect(0, "", "", "");
@@ -142,14 +149,9 @@ namespace SMDisLabSys.BLL
         private void Ble1_DeceiveValueChanged(object sender, DeceiveDataArgs e)
         {
             var buffer = e.ReportBuff;
-            var value1 = BufferConvertHelper.BytesToInt(buffer.Skip(10).Take(2).Reverse().ToArray());
-            var value2 = BufferConvertHelper.BytesToInt(buffer.Skip(12).Take(2).Reverse().ToArray());
-
-            DataParseBLEEventArgs dataParseBLE = new DataParseBLEEventArgs();
-            dataParseBLE.BLEAddress = ble1.BLEAdresse;
-            dataParseBLE.ParamList = new List<double>() { Math.Round(value1 * 0.01, 2), Math.Round(value2 * 0.1, 1) };
-            RealDataBLE.Instance.UpdataBLEData(dataParseBLE);
+            ParseHelper.Instance.Parse(buffer, ConnectTypeEnum.BLE, ble1.BLEAdresse);
         }
+
 
         //public void InitBlePara()
         //{
@@ -178,5 +180,20 @@ namespace SMDisLabSys.BLL
         //        }
         //    }
         //}
+        #endregion
+
+        #region USB
+        Hid hid1 = new Hid();
+        public void HidStart()
+        {
+            hid1.CreatHid(0x0483, 0x5710);
+            hid1.DeceiveValueChanged += Hid1_DeceiveValueChanged;
+        }
+
+        private void Hid1_DeceiveValueChanged(object sender, DeceiveDataArgs e)
+        {
+            ParseHelper.Instance.Parse(e.ReportBuff, ConnectTypeEnum.USB);
+        }
+        #endregion
     }
 }
