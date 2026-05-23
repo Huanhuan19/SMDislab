@@ -17,6 +17,7 @@ namespace SMDisLabSys.Pages.WL.ViewModels
         private readonly IDialogService dialogService;
         public DelegateCommand APLCommand { get; private set; }//安培力
         public DelegateCommand DanBaiCommand { get; private set; }//单摆
+        public DelegateCommand FaLaDiCommand { get; private set; }//法拉第电磁实验
 
         public WLMainVM(IDialogService pdialogService)
         {
@@ -27,6 +28,7 @@ namespace SMDisLabSys.Pages.WL.ViewModels
         {
             APLCommand = new DelegateCommand(APLCommandMethod);
             DanBaiCommand = new DelegateCommand(DanBaiCommandMethod);
+            FaLaDiCommand = new DelegateCommand(FaLaDiCommandMethod);
         }
 
         #region A-H
@@ -37,6 +39,12 @@ namespace SMDisLabSys.Pages.WL.ViewModels
         void DanBaiCommandMethod()
         {
             dialogService.Show(nameof(DanBaiNew), null, callback =>
+            {
+            }, nameof(UcWinSize));
+        }
+        void FaLaDiCommandMethod()
+        {
+            dialogService.ShowDialog(nameof(FaLaDi), null, callback =>
             {
             }, nameof(UcWinSize));
         }

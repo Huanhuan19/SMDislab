@@ -186,7 +186,8 @@ namespace SMDisLabSys.BLL
         Hid hid1 = new Hid();
         public void HidStart()
         {
-            hid1.CreatHid(0x0483, 0x5710);
+            //hid1.CreatHid(0x0483, 0x5710);
+            hid1.CreatHid(0x1FC9, 0xB);//VID 1FC9;PID 000B
             hid1.DeceiveValueChanged += Hid1_DeceiveValueChanged;
         }
 
