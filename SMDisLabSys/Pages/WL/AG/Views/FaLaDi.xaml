@@ -27,10 +27,10 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="10"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.Row="1" Grid.Column="1" Text="当前电压" Style="{StaticResource TextBlock_Default}" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
-        <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource TextBox_DefaultRadius}" Margin="15,5,5,5" Width="260" Text="{Binding Circle}"  FontSize="65" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Center" />
-        <!--<TextBlock Grid.Row="1" Grid.Column="2" Text="当前单摆角度(°)" Style="{StaticResource TextBlock_Default}" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
-        <TextBox Grid.Row="2" Grid.Column="2" Style="{StaticResource TextBox_DefaultRadius}" Margin="15,5,5,5" Width="260" Text="{Binding Angle}"  FontSize="65" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  HorizontalAlignment="Center" />-->
+        <TextBlock Grid.Row="1" Grid.Column="1" Text="当前速度" Style="{StaticResource TextBlock_Default}" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+        <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource TextBox_DefaultRadius}" Margin="15,5,5,5" Width="260" Text="{Binding Spead}"  FontSize="65" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Center" />
+        <TextBlock Grid.Row="1" Grid.Column="2" Text="当前电压" Style="{StaticResource TextBlock_Default}" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+        <TextBox Grid.Row="2" Grid.Column="2" Style="{StaticResource TextBox_DefaultRadius}" Margin="15,5,5,5" Width="260" Text="{Binding Voltage}"  FontSize="65" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  HorizontalAlignment="Center" />
         <Grid Grid.Row="0" Grid.ColumnSpan="4">
             <Grid.RowDefinitions>
                 <RowDefinition Height="40"></RowDefinition>

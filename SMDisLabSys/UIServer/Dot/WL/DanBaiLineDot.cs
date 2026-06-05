@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Prism.Mvvm;
 
-namespace SMDisLabSys.UIServer.Dot
+namespace SMDisLabSys.UIServer.Dot.WL
 {
-    public class LineDataDOT : BindableBase
+    public class DanBaiLineDot : BindableBase
     {
         public int Index { get; set; }
         string danBaiLinelong;

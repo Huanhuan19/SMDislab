@@ -22,8 +22,8 @@ using static SMDisLabSys.BLL.RealData.RealDataBLE;
 using MessageBox = System.Windows.MessageBox;
 using SMDisLabSys.BLL.Formulas;
 using SMDisLabSys.UIServer.Caculator;
-using SMDisLabSys.UIServer.Dot;
 using SMDisLabSys.Model;
+using SMDisLabSys.UIServer.Dot.WL;
 
 namespace SMDisLabSys.Pages.WL.AG.ViewModels
 {
@@ -81,14 +81,14 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
         }
 
 
-        private ObservableCollection<LineDataDOT> lineDataSource;
-        public ObservableCollection<LineDataDOT> LineDataSource
+        private ObservableCollection<DanBaiLineDot> lineDataSource;
+        public ObservableCollection<DanBaiLineDot> LineDataSource
         {
             get { return lineDataSource; }
             set { SetProperty(ref lineDataSource, value); }
         }
-        private LineDataDOT lineDataSelect;
-        public LineDataDOT LineDataSelect
+        private DanBaiLineDot lineDataSelect;
+        public DanBaiLineDot LineDataSelect
         {
             get { return lineDataSelect; }
             set { SetProperty(ref lineDataSelect, value); }
@@ -209,10 +209,10 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
         }
         void InitDataGrid()
         {
-            LineDataSource = new ObservableCollection<LineDataDOT>();
+            LineDataSource = new ObservableCollection<DanBaiLineDot>();
             for (int i = 0; i < 4; i++)
             {
-                LineDataDOT lineData = new LineDataDOT();
+                DanBaiLineDot lineData = new DanBaiLineDot();
                 lineData.Index = i;
                 LineDataSource.Add(lineData);
             }
@@ -335,7 +335,7 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
             }
             recordIndex = LineDataSelect.Index;
         }
-        void ClearLToGGridData(LineDataDOT lineDataDOT)
+        void ClearLToGGridData(DanBaiLineDot lineDataDOT)
         {
             if (lineDataDOT != null)
             {
@@ -344,7 +344,7 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
                 lineDataDOT.DanBaiCircle2 = "";
             }
         }
-        void ClearGToLGridData(LineDataDOT lineDataDOT)
+        void ClearGToLGridData(DanBaiLineDot lineDataDOT)
         {
             if (lineDataDOT != null)
             {
