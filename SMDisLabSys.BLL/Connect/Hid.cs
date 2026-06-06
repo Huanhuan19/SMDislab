@@ -19,7 +19,7 @@ namespace SMDisLabSys.BLL.Connect
         async void Creet(UInt16 vID, UInt16 pID)
         {
             // 获取所有连接的HID设备
-            var devices = HidDevices.Enumerate(0x0483, 0x5710);
+            var devices = HidDevices.Enumerate(vID, pID);
             if (devices.Any())
             {
                 _device = devices.First();
