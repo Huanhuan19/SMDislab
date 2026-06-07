@@ -110,34 +110,40 @@ namespace SMDisLabSys.UIServer
 
             lineIndex++;
         }
-        public void CreatLinePoint(string title)
+        public void CreatLinePoint(string title = "")
         {
-            LineSeries line = new LineSeries();
-            //line.DataLabels = true;
-            line.Title = title;
-            line.PointGeometry = null;
-            line.LineSmoothness = 0;
-            line.StrokeThickness = 2;
-            line.Stroke = new SolidColorBrush((Color)ColorConverter.ConvertFromString(m_colors[lineIndex]));
+            System.Windows.Application.Current.Dispatcher.Invoke(() =>
+            {
+                Diclinevalues.Add(0, new ChartValues<ObservablePoint>());
+                LineSeries line = new LineSeries();
+                //line.DataLabels = true;
+                line.Title = title;
+                line.PointGeometry = null;
+                line.LineSmoothness = 0;
+                line.StrokeThickness = 2;
+                line.Stroke = new SolidColorBrush((Color)ColorConverter.ConvertFromString(m_colors[lineIndex]));
 
-            ChartValues<ObservablePoint> linevalue;
-            Diclinevalues.TryGetValue(lineIndex, out linevalue);
-            line.Values = linevalue;
-            SeriesDic.Add(line);
+                ChartValues<ObservablePoint> linevalue;
+                Diclinevalues.TryGetValue(lineIndex, out linevalue);
+                line.Values = linevalue;
+                SeriesDic.Add(line);
 
-            lineIndex++;
+                lineIndex++;
+            });
         }
 
         public void AddPoint(double x, double y, int lineIndex)
         {
-            ObservablePoint point = new ObservablePoint();
-            point.X = x;
-            point.Y = y;
+            System.Windows.Application.Current.Dispatcher.Invoke(() =>
+            {
+                ObservablePoint point = new ObservablePoint();
+                point.X = x;
+                point.Y = y;
 
-            ChartValues<ObservablePoint> linevalue;
-            Diclinevalues.TryGetValue(lineIndex, out linevalue);
-            linevalue.Add(point);
-
+                ChartValues<ObservablePoint> linevalue;
+                Diclinevalues.TryGetValue(lineIndex, out linevalue);
+                linevalue.Add(point);
+            });
         }
     }
 }

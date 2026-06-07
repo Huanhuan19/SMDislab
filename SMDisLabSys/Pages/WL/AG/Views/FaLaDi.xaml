@@ -27,10 +27,12 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="10"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.Row="1" Grid.Column="1" Text="当前速度" Style="{StaticResource TextBlock_Default}" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
-        <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource TextBox_DefaultRadius}" Margin="15,5,5,5" Width="260" Text="{Binding Spead}"  FontSize="65" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Center" />
-        <TextBlock Grid.Row="1" Grid.Column="2" Text="当前电压" Style="{StaticResource TextBlock_Default}" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
-        <TextBox Grid.Row="2" Grid.Column="2" Style="{StaticResource TextBox_DefaultRadius}" Margin="15,5,5,5" Width="260" Text="{Binding Voltage}"  FontSize="65" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  HorizontalAlignment="Center" />
+        <TextBlock Grid.Row="1" Grid.Column="1" Text="中间电压" Style="{StaticResource TextBlock_Default}" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+        <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource TextBox_DefaultRadius}" Margin="15,5,5,5" Width="260" Text="{Binding Index}"  FontSize="65" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Center" />
+        <TextBlock Grid.Row="1" Grid.Column="2" Text="当前序号" Style="{StaticResource TextBlock_Default}" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+        <TextBox Grid.Row="2" Grid.Column="2" Style="{StaticResource TextBox_DefaultRadius}" Margin="15,5,5,5" Width="260" Text="{Binding Spead}"  FontSize="65" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Center" />
+        <TextBlock Grid.Row="1" Grid.Column="3" Text="当前电压" Style="{StaticResource TextBlock_Default}" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+        <TextBox Grid.Row="2" Grid.Column="3" Style="{StaticResource TextBox_DefaultRadius}" Margin="15,5,5,5" Width="260" Text="{Binding Voltage}"  FontSize="65" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  HorizontalAlignment="Center" />
         <Grid Grid.Row="0" Grid.ColumnSpan="4">
             <Grid.RowDefinitions>
                 <RowDefinition Height="40"></RowDefinition>
@@ -40,7 +42,7 @@
             <lvc:CartesianChart Grid.Row="1" Grid.Column="3" Grid.RowSpan="5" Margin="10 5 5 0" Hoverable="False" DisableAnimations="True" DataTooltip="{x:Null}" Foreground="White"
             Series="{Binding SeriesDic}" Zoom="None" Background="#FFf7f1" LegendLocation="None">
                 <lvc:CartesianChart.AxisX>
-                    <lvc:Axis LabelFormatter="{Binding XFormatter}" MinValue="{Binding Min}" MaxValue="{Binding Max}"
+                    <lvc:Axis LabelFormatter="{Binding XFormatter}" 
                           DisableAnimations="True" Title="L(m)" FontSize="20" 
           Foreground="{DynamicResource SolidColorBrush_8}">
                         <lvc:Axis.Separator>

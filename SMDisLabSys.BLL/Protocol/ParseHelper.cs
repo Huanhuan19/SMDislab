@@ -34,20 +34,25 @@ namespace SMDisLabSys.BLL.Protocol
                     short win = 0x3;
                     for (byte i = 0; i < sensors; i++)
                     {
-                        placeSensorData = (short)(placeSensorData >> (i * 2));
+                        if (i!=0)//第一次不移位
+                        {
+                            placeSensorData = (short)(placeSensorData >> (2));
+                        }
                         sensorPlaceholder[i] = (byte)((placeSensorData & win) + 1);
 
                         sensorValue.Add(new List<double>());//初始化数据维度
                     }
                     var oneDataLen = sensorPlaceholder.Sum(b => (int)b);
 
+                    int bufferskip = 0;
                     for (int i = 13; i < buffer.Length; i += oneDataLen)
                     {
                         for (int j = 0; j < sensorPlaceholder.Length; j++)
                         {
                             var K = GetSensorK(sensorId + j);
                             var skipj = j == 0 ? 0 : sensorPlaceholder[j - 1];//第一个数据没有 组内skip
-                            var data = buffer.Skip(i + skipj).Take(sensorPlaceholder[j]).Reverse().ToArray();
+                            bufferskip += skipj;
+                            var data = buffer.Skip(i + bufferskip).Take(sensorPlaceholder[j]).Reverse().ToArray();
                             var value = BufferConvertHelper.BytesToInt(data);
                             if (K != 0)
                             {
@@ -64,7 +69,7 @@ namespace SMDisLabSys.BLL.Protocol
                     RealDataBLE.Instance.UpdataBLEData(dataParseArgs);
                 }
             }
-            catch (Exception)
+            catch (Exception exc)
             {
 
             }

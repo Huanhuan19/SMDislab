@@ -1,4 +1,18 @@
-﻿using System;
+﻿using LiveCharts;
+using LiveCharts.Defaults;
+using LiveCharts.Wpf;
+using NPOI.SS.Formula;
+using Prism.Commands;
+using Prism.Mvvm;
+using Prism.Services.Dialogs;
+using SMDisLabSys.BLL;
+using SMDisLabSys.BLL.Formulas;
+using SMDisLabSys.BLL.RealData;
+using SMDisLabSys.Model;
+using SMDisLabSys.UIServer;
+using SMDisLabSys.UIServer.Caculator;
+using SMDisLabSys.UIServer.Dot.WL;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -8,29 +22,25 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Media;
-using LiveCharts;
-using LiveCharts.Defaults;
-using LiveCharts.Wpf;
-using NPOI.SS.Formula;
-using Prism.Commands;
-using Prism.Mvvm;
-using Prism.Services.Dialogs;
-using SMDisLabSys.BLL;
-using SMDisLabSys.BLL.RealData;
+using System.Windows.Threading;
 using Windows.UI.Input.Inking;
 using static SMDisLabSys.BLL.RealData.RealDataBLE;
 using MessageBox = System.Windows.MessageBox;
-using SMDisLabSys.BLL.Formulas;
-using SMDisLabSys.UIServer.Caculator;
-using SMDisLabSys.Model;
-using SMDisLabSys.UIServer.Dot.WL;
-using SMDisLabSys.UIServer;
 
 namespace SMDisLabSys.Pages.WL.AG.ViewModels
 {
     class FaLaDiVM : UIChartBase, IDialogAware
     {
+        DateTime dtCreat;
+        int lineIndex = 0;
+        double xAxis = 0;
         #region 属性
+        double index;
+        public double Index
+        {
+            get { return index; }
+            set { SetProperty(ref index, value); }
+        }
         double spead;
         public double Spead
         {
@@ -63,25 +73,41 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
         {
             DataParseEventArgs args = (DataParseEventArgs)e;
             List<double> value = new List<double>();
-            args.ParamListDic.TryGetValue(20, out value);//传感器编号
+            args.ParamListDic.TryGetValue(0x200, out value);//传感器编号
+            if (value != null && value.Count > 0)
+            {
+                xAxis = value[0];
+                Index = value[0];
+
+            }
+            args.ParamListDic.TryGetValue(0x201, out value);
             if (value != null && value.Count > 0)
             {
                 Spead = value[0];
             }
-            args.ParamListDic.TryGetValue(21, out value);
+            args.ParamListDic.TryGetValue(0x202, out value);
             if (value != null && value.Count > 0)
             {
                 Voltage = value[0];
             }
-            if (args.ConnectType==ConnectTypeEnum.USB)
+            if (args.ConnectType == ConnectTypeEnum.USB)
             {
                 haveUSBData = true;
             }
+
+            if (lineIndex == 0)//首次创建图像
+            {
+                CreatLinePoint();
+                lineIndex++;
+            }
+
+            AddPoint(Spead, Voltage, lineIndex - 1);
+
         }
 
         void InitLine()
         {
-            
+
         }
 
         void ConnectDevice()
@@ -144,7 +170,7 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
             //{
             //    Title = (parameters.GetValue<string>("Title"));
             //}
-            Title = "单摆运动规律演示器";
+            Title = "法拉第电磁感应";
             Width = 1350;
             Height = 820;
         }
