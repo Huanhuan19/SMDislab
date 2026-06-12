@@ -32,8 +32,10 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
     class FaLaDiVM : UIChartBase, IDialogAware
     {
         DateTime dtCreat;
-        int lineIndex = 0;
         double xAxis = 0;
+
+        public DelegateCommand ClearSelectCommand { get; private set; }
+
         #region 属性
         double index;
         public double Index
@@ -61,12 +63,15 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
             YFormatter = YFormatters;
 
             InitCommand();
-            InitLine();
             ConnectDevice();
+
+            CreatMidLine();
         }
         void InitCommand()
         {
             RealDataBLE.Instance.BLEDataUpdated += Instance_BLEDataUpdated;
+
+            ClearSelectCommand = new DelegateCommand(ClearSelectCommandMethod);
         }
 
         private void Instance_BLEDataUpdated(object? sender, EventArgs e)
@@ -95,19 +100,17 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
                 haveUSBData = true;
             }
 
-            if (lineIndex == 0)//首次创建图像
+            if (lineIndex == 1)//首次创建图像
             {
                 CreatLinePoint();
-                lineIndex++;
+            }
+            else if ((DateTime.Now - dtCreat).TotalSeconds > 3)
+            {
+                CreatLinePoint();
             }
 
             AddPoint(Spead, Voltage, lineIndex - 1);
-
-        }
-
-        void InitLine()
-        {
-
+            dtCreat = DateTime.Now;
         }
 
         void ConnectDevice()
@@ -134,6 +137,18 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
                     loop--;
                 }
             });
+        }
+
+        void CreatMidLine()
+        {
+            //创建中线
+            CreatDashLinePoint();
+            AddPoint(0, 1834, lineIndex - 1);
+            AddPoint(132, 1834, lineIndex - 1);
+        }
+        void ClearSelectCommandMethod()
+        {
+            CreatMidLine();
         }
 
         #region IDialogAware接口实现

@@ -9,6 +9,7 @@ using LiveCharts.Defaults;
 using LiveCharts.Wpf;
 using Prism.Commands;
 using Prism.Mvvm;
+using SMDisLabSys.UIServer.Caculator;
 
 namespace SMDisLabSys.UIServer
 {
@@ -74,23 +75,32 @@ namespace SMDisLabSys.UIServer
         }
         #endregion
 
-        private List<string> m_colors = new List<string>() { "#02c0fa", "#FFB751", "#00a759", "#88a700", "#e95e00", "#ff00cc", "#cc00ff", "#00FFFF" };
 
-        private int lineIndex = 0;
+        private List<string> m_colors = new List<string>() { "#02c0fa", "#FFB751", "#00a759", "#88a700", "#e95e00", "#ff00cc", "#cc00ff", "#00FFFF" };
+        public UIChartBase()
+        {
+            ExplainCommand = new DelegateCommand(ExplainCommandMethod);
+        }
+        public int lineIndex = 0;
 
         Dictionary<int, ChartValues<ObservablePoint>> Diclinevalues = new Dictionary<int, ChartValues<ObservablePoint>>();
 
         public bool haveUSBData = false;
 
-        public UIChartBase()
-        {
-            ExplainCommand = new DelegateCommand(ExplainCommandMethod);
-        }
+
         void ExplainCommandMethod()
         {
 
         }
 
+        #region 画线
+
+        /// <summary>
+        /// 点曲线
+        /// </summary>
+        /// <param name="pointGeometry"></param>
+        /// <param name="pointGeometrySize"></param>
+        /// <param name="strokeThickness"></param>
         public void CreatLinePointGeometry(Geometry pointGeometry, double pointGeometrySize = 12, double strokeThickness = 2)
         {
             LineSeries line = new LineSeries();
@@ -110,7 +120,37 @@ namespace SMDisLabSys.UIServer
 
             lineIndex++;
         }
+        /// <summary>
+        /// 线
+        /// </summary>
+        /// <param name="title"></param>
         public void CreatLinePoint(string title = "")
+        {
+            System.Windows.Application.Current.Dispatcher.Invoke(() =>
+            {
+                Diclinevalues.Add(lineIndex, new ChartValues<ObservablePoint>());
+                LineSeries line = new LineSeries();
+                //line.DataLabels = true;
+                line.Title = title;
+                line.PointGeometry = null;
+                line.LineSmoothness = 0;
+                line.StrokeThickness = 2;
+                line.Stroke = new SolidColorBrush((Color)ColorConverter.ConvertFromString(m_colors[lineIndex]));
+                line.Fill = new SolidColorBrush(Colors.Transparent);
+
+                ChartValues<ObservablePoint> linevalue;
+                Diclinevalues.TryGetValue(lineIndex, out linevalue);
+                line.Values = linevalue;
+                SeriesDic.Add(line);
+
+                lineIndex++;
+            });
+        }
+        /// <summary>
+        /// 虚线
+        /// </summary>
+        /// <param name="title"></param>
+        public void CreatDashLinePoint(string title = "")
         {
             System.Windows.Application.Current.Dispatcher.Invoke(() =>
             {
@@ -121,7 +161,9 @@ namespace SMDisLabSys.UIServer
                 line.PointGeometry = null;
                 line.LineSmoothness = 0;
                 line.StrokeThickness = 2;
+                line.StrokeDashArray = new DoubleCollection { 6, 4 };
                 line.Stroke = new SolidColorBrush((Color)ColorConverter.ConvertFromString(m_colors[lineIndex]));
+                line.Fill = new SolidColorBrush(Colors.Transparent);
 
                 ChartValues<ObservablePoint> linevalue;
                 Diclinevalues.TryGetValue(lineIndex, out linevalue);
@@ -143,7 +185,19 @@ namespace SMDisLabSys.UIServer
                 ChartValues<ObservablePoint> linevalue;
                 Diclinevalues.TryGetValue(lineIndex, out linevalue);
                 linevalue.Add(point);
+
+                Max = LineRange.Instance.GetLineMax(linevalue);
+                Min = LineRange.Instance.GetLineMin(linevalue);
             });
         }
+
+        void ClearLine()
+        {
+            SeriesDic.Clear();
+            lineIndex = 0;
+        }
+
+        #endregion
+
     }
 }

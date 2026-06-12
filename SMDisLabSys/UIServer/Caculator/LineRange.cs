@@ -12,30 +12,36 @@ namespace SMDisLabSys.UIServer.Caculator
     public class LineRange
     {
         public static LineRange Instance = new LineRange();
-        public double GetLineMax(ChartValues<ObservablePoint> points, double maxCoe = 1.1)
-        {
-            var values = (from o in points select o.X).ToList();
-            var max = values.Max();
-            if (max > 0)
-            {
-                return max * maxCoe;
-            }
-            else
-            {
-                return max * (1 - (maxCoe - 1));
-            }
-        }
-        public double GetLineMin(ChartValues<ObservablePoint> points, double minCoe = 0.9)
+        public double GetLineMax(ChartValues<ObservablePoint> points, double maxCoe = 0.03)
         {
             var values = (from o in points select o.X).ToList();
             var min = values.Min();
-            if (min > 0)
+            var max = values.Max();
+            var range = max - min;
+            if (range == 0)//仅一个点时  
             {
-                return min * minCoe;
+                return max + 0.1;
             }
             else
             {
-                return min * (1 - (minCoe - 1));
+                var distance = range * maxCoe;
+                return max + distance;
+            }
+        }
+        public double GetLineMin(ChartValues<ObservablePoint> points, double minCoe = 0.03)
+        {
+            var values = (from o in points select o.X).ToList();
+            var min = values.Min();
+            var max = values.Max();
+            var range = max - min;
+            if (range == 0)//仅一个点时  
+            {
+                return min - 0.1;
+            }
+            else
+            {
+                var distance = range * minCoe;
+                return min - distance;
             }
         }
     }
