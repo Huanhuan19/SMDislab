@@ -148,6 +148,7 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
         }
         void ClearSelectCommandMethod()
         {
+            ClearLine();
             CreatMidLine();
         }
 

@@ -191,7 +191,7 @@ namespace SMDisLabSys.UIServer
             });
         }
 
-        void ClearLine()
+        public void ClearLine()
         {
             SeriesDic.Clear();
             lineIndex = 0;
