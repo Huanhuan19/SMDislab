@@ -76,7 +76,7 @@ namespace SMDisLabSys.UIServer
         #endregion
 
 
-        private List<string> m_colors = new List<string>() { "#02c0fa", "#FFB751", "#00a759", "#88a700", "#e95e00", "#ff00cc", "#cc00ff", "#00FFFF" };
+        private List<string> m_colors = new List<string>() { "#02c0fa", "#FFB751", "#00a759", "#e95e00", "#ff00cc", "#00FFFF", "#cc00ff", "#88a700" };
         public UIChartBase()
         {
             ExplainCommand = new DelegateCommand(ExplainCommandMethod);
