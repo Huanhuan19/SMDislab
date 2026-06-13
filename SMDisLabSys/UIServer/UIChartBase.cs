@@ -154,7 +154,7 @@ namespace SMDisLabSys.UIServer
         {
             System.Windows.Application.Current.Dispatcher.Invoke(() =>
             {
-                Diclinevalues.Add(0, new ChartValues<ObservablePoint>());
+                Diclinevalues.Add(lineIndex, new ChartValues<ObservablePoint>());
                 LineSeries line = new LineSeries();
                 //line.DataLabels = true;
                 line.Title = title;
@@ -186,8 +186,16 @@ namespace SMDisLabSys.UIServer
                 Diclinevalues.TryGetValue(lineIndex, out linevalue);
                 linevalue.Add(point);
 
-                Max = LineRange.Instance.GetLineMax(linevalue);
-                Min = LineRange.Instance.GetLineMin(linevalue);
+                var max = LineRange.Instance.GetLineMax(linevalue);
+                if (max > Max)
+                {
+                    Max = max;
+                }
+                var min = LineRange.Instance.GetLineMin(linevalue);
+                if (Min < min)
+                {
+                    Min = min;
+                }
             });
         }
 
@@ -195,6 +203,8 @@ namespace SMDisLabSys.UIServer
         {
             SeriesDic.Clear();
             lineIndex = 0;
+
+            Diclinevalues.Clear();
         }
 
         #endregion

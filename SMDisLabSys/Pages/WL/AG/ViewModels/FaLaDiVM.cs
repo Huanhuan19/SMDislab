@@ -144,7 +144,7 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
             //创建中线
             CreatDashLinePoint();
             AddPoint(0, 1834, lineIndex - 1);
-            AddPoint(132, 1834, lineIndex - 1);
+            AddPoint(430, 1834, lineIndex - 1);
         }
         void ClearSelectCommandMethod()
         {
