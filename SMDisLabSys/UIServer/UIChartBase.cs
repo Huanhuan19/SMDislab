@@ -261,8 +261,8 @@ namespace SMDisLabSys.UIServer
 
         public void CreatTestLine()
         {
-            CreatLinePoint();
             CheckBoxItems.Add(new CheckBoxViewModel { Text = lineIndex.ToString(), IsChecked = true, Index = lineIndex.ToString() });
+            CreatLinePoint();
             Task.Run(() =>
             {
                 for (int i = 0; i < 50; i++)

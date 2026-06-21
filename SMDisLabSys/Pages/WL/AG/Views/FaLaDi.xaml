@@ -62,7 +62,7 @@
             </Grid.RowDefinitions>
             <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding ChartTitle}" Style="{StaticResource TextBlock_Default}" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
             <lvc:CartesianChart Grid.Row="1" Grid.Column="3" Grid.RowSpan="5" Margin="10 5 5 0" Hoverable="False" DisableAnimations="True" DataTooltip="{x:Null}" Foreground="White"
-            Series="{Binding SeriesDic}" Zoom="None" Background="#FFf7f1" LegendLocation="None">
+            Series="{Binding SeriesDic}" Zoom="X" Pan="Xy" Background="#FFf7f1" LegendLocation="None">
                 <lvc:CartesianChart.AxisX>
                     <lvc:Axis LabelFormatter="{Binding XFormatter}" MinValue="{Binding Min}" MaxValue="{Binding Max}"
                           DisableAnimations="True" Title="" FontSize="20" 
