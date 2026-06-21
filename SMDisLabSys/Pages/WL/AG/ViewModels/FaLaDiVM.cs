@@ -106,12 +106,12 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
             if (lineIndex == 1)//首次创建图像
             {
                 CreatLinePoint();
-                CheckBoxItems.Add(new CheckBoxViewModel { Text = lineIndex.ToString(), IsChecked = true, Index = lineIndex.ToString() });
+                AddCheckBoxItem(lineIndex.ToString());
             }
             else if ((DateTime.Now - dtCreat).TotalSeconds > 3)
             {
                 CreatLinePoint();
-                CheckBoxItems.Add(new CheckBoxViewModel { Text = lineIndex.ToString(), IsChecked = true, Index = lineIndex.ToString() });
+                AddCheckBoxItem(lineIndex.ToString());
             }
 
             AddPoint(Spead, Voltage, lineIndex - 1);
@@ -149,7 +149,7 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
             //创建中线
             CreatDashLinePoint();
             AddPoint(0, 1834, lineIndex - 1);
-            AddPoint(430, 1834, lineIndex - 1);
+            AddPoint(600, 1834, lineIndex - 1);
         }
         void ClearSelectCommandMethod()
         {

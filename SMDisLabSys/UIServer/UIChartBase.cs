@@ -216,6 +216,7 @@ namespace SMDisLabSys.UIServer
         {
             SeriesDic.Clear();
             lineIndex = 0;
+            CheckBoxItems.Clear();
 
             Diclinevalues.Clear();
         }
@@ -243,6 +244,17 @@ namespace SMDisLabSys.UIServer
             {
             }
         }
+        /// <summary>
+        /// 添加曲线复选框
+        /// </summary>
+        /// <param name="text"></param>
+        public void AddCheckBoxItem(string text)
+        {
+            System.Windows.Application.Current.Dispatcher.Invoke(() => 
+            {
+                CheckBoxItems.Add(new CheckBoxViewModel { Text = text, IsChecked = true, Index = lineIndex.ToString() });
+            }); 
+        }
         #endregion
 
         #region 曲线测试
@@ -260,6 +272,7 @@ namespace SMDisLabSys.UIServer
                 }
             });
         }
+
         #endregion
 
     }
