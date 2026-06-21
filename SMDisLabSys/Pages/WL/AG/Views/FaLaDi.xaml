@@ -8,7 +8,7 @@
              xmlns:convert="clr-namespace:SMDisLabSys.UIServer.DataConvert"
              xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              mc:Ignorable="d" 
-             d:DesignHeight="850" d:DesignWidth="1500">
+             d:DesignHeight="850" d:DesignWidth="1800">
     <UserControl.Resources>
         <convert:VisibleToHidden x:Key="visibleToHidden"></convert:VisibleToHidden>
     </UserControl.Resources>
@@ -16,14 +16,15 @@
         <Grid.RowDefinitions>
             
             <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="60"></RowDefinition>
             <RowDefinition Height="220"></RowDefinition>
             <RowDefinition Height="80"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10"></ColumnDefinition>
             <ColumnDefinition Width="300"></ColumnDefinition>
-            <ColumnDefinition Width="400"></ColumnDefinition>
+            <ColumnDefinition Width="300"></ColumnDefinition>
+            <ColumnDefinition Width="300"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="10"></ColumnDefinition>
         </Grid.ColumnDefinitions>
@@ -33,9 +34,30 @@
         <TextBox Grid.Row="2" Grid.Column="2" Style="{StaticResource TextBox_DefaultRadius}" Margin="15,5,5,5" Width="260" Text="{Binding Spead}"  FontSize="65" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Center" />
         <TextBlock Grid.Row="1" Grid.Column="3" Text="当前电压" Style="{StaticResource TextBlock_Default}" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
         <TextBox Grid.Row="2" Grid.Column="3" Style="{StaticResource TextBox_DefaultRadius}" Margin="15,5,5,5" Width="260" Text="{Binding Voltage}"  FontSize="65" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  HorizontalAlignment="Center" />
-        <Grid Grid.Row="0" Grid.ColumnSpan="4">
+        <ItemsControl ItemsSource="{Binding CheckBoxItems}" Grid.Row="1" Grid.Column="4">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <CheckBox Style="{StaticResource CheckBoxStyle}" Content="{Binding Text}" IsChecked="{Binding IsChecked}" Foreground="White">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Checked">
+                                <i:InvokeCommandAction Command="{Binding DataContext.SelectChecked,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=UserControl}, UpdateSourceTrigger=PropertyChanged}" CommandParameter="{Binding Index}" />
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="Unchecked">
+                                <i:InvokeCommandAction Command="{Binding DataContext.SelectUnchecked,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=UserControl}, UpdateSourceTrigger=PropertyChanged}" CommandParameter="{Binding Index}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </CheckBox>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <Grid Grid.Row="0" Grid.ColumnSpan="5">
             <Grid.RowDefinitions>
-                <RowDefinition Height="40"></RowDefinition>
+                <RowDefinition Height="20"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
             <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding ChartTitle}" Style="{StaticResource TextBlock_Default}" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
@@ -43,7 +65,7 @@
             Series="{Binding SeriesDic}" Zoom="None" Background="#FFf7f1" LegendLocation="None">
                 <lvc:CartesianChart.AxisX>
                     <lvc:Axis LabelFormatter="{Binding XFormatter}" MinValue="{Binding Min}" MaxValue="{Binding Max}"
-                          DisableAnimations="True" Title="L(m)" FontSize="20" 
+                          DisableAnimations="True" Title="" FontSize="20" 
           Foreground="{DynamicResource SolidColorBrush_8}">
                         <lvc:Axis.Separator>
                             <lvc:Separator Visibility="Visible" Stroke="#aFB751" StrokeThickness="1" StrokeDashArray="3,10"/>
@@ -77,5 +99,6 @@ Margin="10,0,0,0" Content="清屏" Width="160"></Button>-->
             <Button Style="{StaticResource BtnInfoStyle2}" Command="{Binding ExplainCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}}}" VerticalAlignment="Center"
 Margin="10,0,0,0" Content="实验说明" Width="200"></Button>
         </StackPanel>
+   
     </Grid>
 </UserControl>

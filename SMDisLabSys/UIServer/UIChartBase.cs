@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Documents;
 using System.Windows.Media;
 using LiveCharts;
 using LiveCharts.Defaults;
@@ -10,12 +14,14 @@ using LiveCharts.Wpf;
 using Prism.Commands;
 using Prism.Mvvm;
 using SMDisLabSys.UIServer.Caculator;
+using SMDisLabSys.UIServer.Dot;
 
 namespace SMDisLabSys.UIServer
 {
     public class UIChartBase : BindableBase
     {
-        public DelegateCommand ExplainCommand { get; private set; }
+        public DelegateCommand<string> SelectChecked { get; set; }
+        public DelegateCommand<string> SelectUnchecked { get; set; }
 
         #region 属性
 
@@ -73,13 +79,25 @@ namespace SMDisLabSys.UIServer
             get { return max; }
             set { SetProperty(ref max, value); }
         }
+
+        private ObservableCollection<CheckBoxViewModel> checkBoxItems = new ObservableCollection<CheckBoxViewModel>();
+        public ObservableCollection<CheckBoxViewModel> CheckBoxItems
+        {
+            get { return checkBoxItems; }
+            set
+            {
+                SetProperty(ref checkBoxItems, value);
+            }
+        }
         #endregion
 
 
         private List<string> m_colors = new List<string>() { "#02c0fa", "#FFB751", "#00a759", "#e95e00", "#ff00cc", "#00FFFF", "#cc00ff", "#88a700" };
         public UIChartBase()
         {
-            ExplainCommand = new DelegateCommand(ExplainCommandMethod);
+
+            SelectChecked = new DelegateCommand<string>(SelectCheckedMethod);
+            SelectUnchecked = new DelegateCommand<string>(SelectUncheckedMethod);
         }
         public int lineIndex = 0;
 
@@ -87,11 +105,6 @@ namespace SMDisLabSys.UIServer
 
         public bool haveUSBData = false;
 
-
-        void ExplainCommandMethod()
-        {
-
-        }
 
         #region 画线
 
@@ -207,6 +220,46 @@ namespace SMDisLabSys.UIServer
             Diclinevalues.Clear();
         }
 
+        #endregion
+
+        #region 曲线选取
+        void SelectCheckedMethod(string index)
+        {
+            try
+            {
+                (SeriesDic[Convert.ToInt16(index)] as LineSeries).Visibility = Visibility.Visible;
+            }
+            catch (Exception)
+            {
+            }
+        }
+        void SelectUncheckedMethod(string index)
+        {
+            try
+            {
+                (SeriesDic[Convert.ToInt16(index)] as LineSeries).Visibility = Visibility.Collapsed;
+            }
+            catch (Exception)
+            {
+            }
+        }
+        #endregion
+
+        #region 曲线测试
+
+        public void CreatTestLine()
+        {
+            CreatLinePoint();
+            CheckBoxItems.Add(new CheckBoxViewModel { Text = lineIndex.ToString(), IsChecked = true, Index = lineIndex.ToString() });
+            Task.Run(() =>
+            {
+                for (int i = 0; i < 50; i++)
+                {
+                    AddPoint(i, i * i, lineIndex - 1);
+                    Thread.Sleep(100);
+                }
+            });
+        }
         #endregion
 
     }

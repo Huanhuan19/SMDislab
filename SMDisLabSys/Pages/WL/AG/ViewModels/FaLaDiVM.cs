@@ -11,6 +11,7 @@ using SMDisLabSys.BLL.RealData;
 using SMDisLabSys.Model;
 using SMDisLabSys.UIServer;
 using SMDisLabSys.UIServer.Caculator;
+using SMDisLabSys.UIServer.Dot;
 using SMDisLabSys.UIServer.Dot.WL;
 using System;
 using System.Collections.Generic;
@@ -55,6 +56,8 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
             get { return voltage; }
             set { SetProperty(ref voltage, value); }
         }
+
+
 
         #endregion
         public FaLaDiVM()
@@ -103,10 +106,12 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
             if (lineIndex == 1)//首次创建图像
             {
                 CreatLinePoint();
+                CheckBoxItems.Add(new CheckBoxViewModel { Text = lineIndex.ToString(), IsChecked = true, Index = lineIndex.ToString() });
             }
             else if ((DateTime.Now - dtCreat).TotalSeconds > 3)
             {
                 CreatLinePoint();
+                CheckBoxItems.Add(new CheckBoxViewModel { Text = lineIndex.ToString(), IsChecked = true, Index = lineIndex.ToString() });
             }
 
             AddPoint(Spead, Voltage, lineIndex - 1);
