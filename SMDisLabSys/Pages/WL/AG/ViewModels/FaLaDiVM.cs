@@ -105,13 +105,15 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
 
             if (lineIndex == 1)//首次创建图像
             {
-                CreatLinePoint();
                 AddCheckBoxItem(lineIndex.ToString());
+                CreatLinePoint();
+
             }
             else if ((DateTime.Now - dtCreat).TotalSeconds > 3)
             {
-                CreatLinePoint();
                 AddCheckBoxItem(lineIndex.ToString());
+                CreatLinePoint();
+
             }
 
             AddPoint(Spead, Voltage, lineIndex - 1);
