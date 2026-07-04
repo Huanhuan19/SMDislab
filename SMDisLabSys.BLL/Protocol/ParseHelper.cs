@@ -82,7 +82,7 @@ namespace SMDisLabSys.BLL.Protocol
             {
                 return sensor.K;
             }
-            return 0;
+            return 1;
         }
     }
 }
