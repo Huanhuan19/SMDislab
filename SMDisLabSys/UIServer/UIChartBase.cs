@@ -151,7 +151,7 @@ namespace SMDisLabSys.UIServer
                 line.StrokeThickness = 2;
                 line.Stroke = new SolidColorBrush((Color)ColorConverter.ConvertFromString(m_colors[lineIndex]));
                 line.Fill = new SolidColorBrush(Colors.Transparent);
-                line.LineSmoothness = 1;
+                line.LineSmoothness = 0.2;
 
                 ChartValues<ObservablePoint> linevalue;
                 Diclinevalues.TryGetValue(lineIndex, out linevalue);
