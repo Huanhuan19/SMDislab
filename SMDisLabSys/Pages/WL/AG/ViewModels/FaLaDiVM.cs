@@ -69,6 +69,7 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
             ConnectDevice();
 
             CreatMidLine();
+           
         }
         void InitCommand()
         {
@@ -105,13 +106,25 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
 
             if (lineIndex == 1)//首次创建图像
             {
-                AddCheckBoxItem(lineIndex.ToString());
+                string title = "";
+                args.ParamListDic.TryGetValue(0x203, out value);
+                if (value != null && value.Count > 0)
+                {
+                    title = value[0].ToString();
+                }
+                AddCheckBoxItem(title);
                 CreatLinePoint();
 
             }
             else if ((DateTime.Now - dtCreat).TotalSeconds > 3)
             {
-                AddCheckBoxItem(lineIndex.ToString());
+                string title = "";
+                args.ParamListDic.TryGetValue(0x203, out value);
+                if (value != null && value.Count > 0)
+                {
+                    title = value[0].ToString();
+                }
+                AddCheckBoxItem(title);
                 CreatLinePoint();
 
             }

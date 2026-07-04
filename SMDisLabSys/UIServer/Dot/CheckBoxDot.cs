@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 using Prism.Mvvm;
 
 namespace SMDisLabSys.UIServer.Dot
@@ -44,6 +45,15 @@ namespace SMDisLabSys.UIServer.Dot
             {
                 SetProperty(ref iChecked, value);
             }
+        }
+        /// <summary>
+        /// 颜色
+        /// </summary>
+        private Brush foreground;
+        public Brush Foreground
+        {
+            get { return foreground; }
+            set { SetProperty(ref foreground, value); }
         }
     }
 }

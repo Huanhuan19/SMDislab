@@ -815,7 +815,7 @@ Value="1">
                                 <Path SnapsToDevicePixels="False" StrokeThickness="3" Data="M8,17 L20,4" Stroke="White"/>
                             </Grid>
                         </Grid>
-                        <TextBlock Grid.Column="1" Text="{Binding Content,RelativeSource={RelativeSource TemplatedParent}}" FontSize="16" Foreground="{DynamicResource SolidColorBrush_22}" VerticalAlignment="Center" Margin="10,0,15,0"/>
+                        <TextBlock Grid.Column="1" Text="{Binding Content,RelativeSource={RelativeSource TemplatedParent}}" FontSize="16" VerticalAlignment="Center" Margin="10,0,15,0"/>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="True">
