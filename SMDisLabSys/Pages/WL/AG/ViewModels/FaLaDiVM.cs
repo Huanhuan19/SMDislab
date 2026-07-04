@@ -38,17 +38,17 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
         public DelegateCommand ClearSelectCommand { get; private set; }
 
         #region 属性
+        double middleVol;
+        public double MiddleVol
+        {
+            get { return middleVol; }
+            set { SetProperty(ref middleVol, value); }
+        }
         double index;
         public double Index
         {
             get { return index; }
             set { SetProperty(ref index, value); }
-        }
-        double spead;
-        public double Spead
-        {
-            get { return spead; }
-            set { SetProperty(ref spead, value); }
         }
         double voltage = 0;
         public double Voltage
@@ -69,7 +69,6 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
             ConnectDevice();
 
             CreatMidLine();
-
         }
         void InitCommand()
         {
@@ -86,13 +85,12 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
             if (value != null && value.Count > 0)
             {
                 xAxis = value[0];
-                Index = value[0];
-
+                MiddleVol = value[0];
             }
             args.ParamListDic.TryGetValue(0x201, out value);
             if (value != null && value.Count > 0)
             {
-                Spead = value[0];
+                Index = value[0];
             }
             args.ParamListDic.TryGetValue(0x202, out value);
             if (value != null && value.Count > 0)
@@ -106,6 +104,7 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
 
             if (lineIndex == 1)//首次创建图像
             {
+
                 string title = "";
                 args.ParamListDic.TryGetValue(0x203, out value);
                 if (value != null && value.Count > 0)
@@ -129,14 +128,14 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
 
             }
 
-            AddPoint(Spead, Voltage, lineIndex - 1);
+            AddPoint(Index, Voltage- MiddleVol, lineIndex - 1);
             dtCreat = DateTime.Now;
         }
 
         void ConnectDevice()
         {
             Thread.Sleep(500);//等有无USB数据
-            if (SMDataSource.Instance.hid1._device.IsConnected)
+            if (SMDataSource.Instance.HidConnected())
             {
                 return;
             }
@@ -163,8 +162,8 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
         {
             //创建中线
             CreatDashLinePoint();
-            AddPoint(0, 1834, lineIndex - 1);
-            AddPoint(450, 1834, lineIndex - 1);
+            AddPoint(0, 0, lineIndex - 1);
+            AddPoint(350, 0, lineIndex - 1);
         }
         void ClearSelectCommandMethod()
         {

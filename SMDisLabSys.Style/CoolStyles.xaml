@@ -796,7 +796,6 @@ Value="1">
         <Setter Property="SnapsToDevicePixels" Value="true" />
         <Setter Property="OverridesDefaultStyle" Value="False" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-        <Setter Property="Height" Value="20"/>
         <Setter Property="IsChecked" Value="False"/>
         <Setter Property="Margin" Value="0,10"/>
         <Setter Property="Template">
@@ -815,7 +814,7 @@ Value="1">
                                 <Path SnapsToDevicePixels="False" StrokeThickness="3" Data="M8,17 L20,4" Stroke="White"/>
                             </Grid>
                         </Grid>
-                        <TextBlock Grid.Column="1" Text="{Binding Content,RelativeSource={RelativeSource TemplatedParent}}" FontSize="16" VerticalAlignment="Center" Margin="10,0,15,0"/>
+                        <TextBlock Grid.Column="1" Text="{Binding Content,RelativeSource={RelativeSource TemplatedParent}}" FontSize="26" VerticalAlignment="Center" Margin="10,0,15,0"/>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="True">

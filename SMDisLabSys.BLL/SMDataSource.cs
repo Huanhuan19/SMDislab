@@ -188,12 +188,26 @@ namespace SMDisLabSys.BLL
         {
             //hid1.CreatHid(0x0483, 0x5710);
             hid1.CreatHid(0x1FC9, 0xB);//VID 1FC9;PID 000B
-            if (hid1._device.IsConnected)
+            if (hid1._device != null)
             {
-                hid1.DeceiveValueChanged += Hid1_DeceiveValueChanged;
+                if (hid1._device.IsConnected)
+                {
+                    hid1.DeceiveValueChanged += Hid1_DeceiveValueChanged;
+                }
             }
         }
 
+        public bool HidConnected()
+        {
+            if (hid1._device != null)
+            {
+                return hid1._device.IsConnected;
+            }
+            else
+            {
+                return false;
+            }
+        }
         private void Hid1_DeceiveValueChanged(object sender, DeceiveDataArgs e)
         {
             ParseHelper.Instance.Parse(e.ReportBuff, ConnectTypeEnum.USB);

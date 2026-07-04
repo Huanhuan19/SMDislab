@@ -16,8 +16,8 @@
         <Grid.RowDefinitions>
             
             <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="60"></RowDefinition>
-            <RowDefinition Height="220"></RowDefinition>
+            <RowDefinition Height="120"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
             <RowDefinition Height="80"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -28,13 +28,13 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="10"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.Row="1" Grid.Column="1" Text="中间电压" Style="{StaticResource TextBlock_Default}" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+        <!--<TextBlock Grid.Row="1" Grid.Column="1" Text="中间电压" Style="{StaticResource TextBlock_Default}" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
         <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource TextBox_DefaultRadius}" Margin="15,5,5,5" Width="260" Text="{Binding Index}"  FontSize="65" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Center" />
         <TextBlock Grid.Row="1" Grid.Column="2" Text="当前序号" Style="{StaticResource TextBlock_Default}" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
         <TextBox Grid.Row="2" Grid.Column="2" Style="{StaticResource TextBox_DefaultRadius}" Margin="15,5,5,5" Width="260" Text="{Binding Spead}"  FontSize="65" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Center" />
         <TextBlock Grid.Row="1" Grid.Column="3" Text="当前电压" Style="{StaticResource TextBlock_Default}" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
-        <TextBox Grid.Row="2" Grid.Column="3" Style="{StaticResource TextBox_DefaultRadius}" Margin="15,5,5,5" Width="260" Text="{Binding Voltage}"  FontSize="65" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  HorizontalAlignment="Center" />
-        <ItemsControl ItemsSource="{Binding CheckBoxItems}" Grid.Row="1" Grid.Column="4">
+        <TextBox Grid.Row="2" Grid.Column="3" Style="{StaticResource TextBox_DefaultRadius}" Margin="15,5,5,5" Width="260" Text="{Binding Voltage}"  FontSize="65" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  HorizontalAlignment="Center" />-->
+        <ItemsControl ItemsSource="{Binding CheckBoxItems}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="4">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Orientation="Horizontal" />
@@ -42,7 +42,7 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <CheckBox Style="{StaticResource CheckBoxStyle}" Content="{Binding Text}" IsChecked="{Binding IsChecked}" Foreground="{Binding Foreground}">
+                    <CheckBox Style="{StaticResource CheckBoxStyle}" Height="30" Content="{Binding Text}" IsChecked="{Binding IsChecked}" Foreground="{Binding Foreground}">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="Checked">
                                 <i:InvokeCommandAction Command="{Binding DataContext.SelectChecked,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=UserControl}, UpdateSourceTrigger=PropertyChanged}" CommandParameter="{Binding Index}" />
@@ -65,7 +65,7 @@
             Series="{Binding SeriesDic}" Zoom="X" Pan="Xy" Background="#FFf7f1" LegendLocation="None">
                 <lvc:CartesianChart.AxisX>
                     <lvc:Axis LabelFormatter="{Binding XFormatter}" MinValue="{Binding Min}" MaxValue="{Binding Max}"
-                          DisableAnimations="True" Title="" FontSize="20" 
+                          DisableAnimations="True" Title="(s)" FontSize="20"
           Foreground="{DynamicResource SolidColorBrush_8}">
                         <lvc:Axis.Separator>
                             <lvc:Separator Visibility="Visible" Stroke="#aFB751" StrokeThickness="1" StrokeDashArray="3,10"/>
@@ -75,7 +75,7 @@
                 </lvc:CartesianChart.AxisX>
 
                 <lvc:CartesianChart.AxisY>
-                    <lvc:Axis LabelFormatter="{Binding YFormatter}"  DisableAnimations="True" Title="{Binding YLineTitle}" FontSize="20"
+                    <lvc:Axis LabelFormatter="{Binding YFormatter}" DisableAnimations="True" Title="{Binding YLineTitle}" FontSize="20"
       Foreground="{DynamicResource SolidColorBrush_8}">
                         <lvc:Axis.Separator>
                             <lvc:Separator Visibility="Visible" Step="{Binding YStep}" Stroke="#aFB751"  StrokeThickness="1" StrokeDashArray="3,10"/>
