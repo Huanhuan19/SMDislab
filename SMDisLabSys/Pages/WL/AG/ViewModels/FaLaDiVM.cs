@@ -69,7 +69,7 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
             ConnectDevice();
 
             CreatMidLine();
-           
+
         }
         void InitCommand()
         {
@@ -112,7 +112,7 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
                 {
                     title = value[0].ToString();
                 }
-                AddCheckBoxItem(title);
+                AddCheckBoxItem("速度" + title);
                 CreatLinePoint();
 
             }
@@ -124,7 +124,7 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
                 {
                     title = value[0].ToString();
                 }
-                AddCheckBoxItem(title);
+                AddCheckBoxItem("速度" + title);
                 CreatLinePoint();
 
             }
