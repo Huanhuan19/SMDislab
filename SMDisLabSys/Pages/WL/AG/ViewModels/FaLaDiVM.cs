@@ -136,7 +136,7 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
         void ConnectDevice()
         {
             Thread.Sleep(500);//等有无USB数据
-            if (haveUSBData)
+            if (SMDataSource.Instance.hid1._device.IsConnected)
             {
                 return;
             }

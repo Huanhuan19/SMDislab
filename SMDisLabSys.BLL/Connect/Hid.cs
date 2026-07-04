@@ -11,7 +11,7 @@ namespace SMDisLabSys.BLL.Connect
     public class Hid
     {
         private static bool _keepReading = true;
-        HidLibrary.HidDevice _device;
+        public HidLibrary.HidDevice _device;
         public void CreatHid(UInt16 vID, UInt16 pID)
         {
             Creet(vID, pID);

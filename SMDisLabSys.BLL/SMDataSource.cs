@@ -183,12 +183,15 @@ namespace SMDisLabSys.BLL
         #endregion
 
         #region USB
-        Hid hid1 = new Hid();
+        public Hid hid1 = new Hid();
         public void HidStart()
         {
             //hid1.CreatHid(0x0483, 0x5710);
             hid1.CreatHid(0x1FC9, 0xB);//VID 1FC9;PID 000B
-            hid1.DeceiveValueChanged += Hid1_DeceiveValueChanged;
+            if (hid1._device.IsConnected)
+            {
+                hid1.DeceiveValueChanged += Hid1_DeceiveValueChanged;
+            }
         }
 
         private void Hid1_DeceiveValueChanged(object sender, DeceiveDataArgs e)
