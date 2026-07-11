@@ -69,6 +69,8 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
             ConnectDevice();
 
             CreatMidLine();
+
+
         }
         void InitCommand()
         {
@@ -162,8 +164,10 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
         {
             //创建中线
             CreatDashLinePoint();
-            AddPoint(0, 0, lineIndex - 1);
-            AddPoint(350, 0, lineIndex - 1);
+            AddNoZoomPoint(-100, 0, lineIndex - 1);
+            AddNoZoomPoint(1000, 0, lineIndex - 1);
+            Min = -5;
+            Max = 40;
         }
         void ClearSelectCommandMethod()
         {

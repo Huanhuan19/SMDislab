@@ -61,11 +61,11 @@
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
             <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding ChartTitle}" Style="{StaticResource TextBlock_Default}" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
-            <lvc:CartesianChart Grid.Row="1" Grid.Column="3" Grid.RowSpan="5" Margin="10 5 5 0" Hoverable="False" DisableAnimations="True" DataTooltip="{x:Null}" Foreground="White"
+            <lvc:CartesianChart x:Name="Chart" Grid.Row="1" Grid.Column="3" Grid.RowSpan="5" Margin="10 5 5 0" Hoverable="False" DisableAnimations="True" DataTooltip="{x:Null}" Foreground="White"
             Series="{Binding SeriesDic}" Zoom="X" Pan="Xy" Background="#FFf7f1" LegendLocation="None">
                 <lvc:CartesianChart.AxisX>
                     <lvc:Axis LabelFormatter="{Binding XFormatter}" MinValue="{Binding Min}" MaxValue="{Binding Max}"
-                          DisableAnimations="True" Title="(s)" FontSize="20"
+                          DisableAnimations="True" Title="" FontSize="20" ShowLabels="False"
           Foreground="{DynamicResource SolidColorBrush_8}">
                         <lvc:Axis.Separator>
                             <lvc:Separator Visibility="Visible" Stroke="#aFB751" StrokeThickness="1" StrokeDashArray="3,10"/>
@@ -83,7 +83,6 @@
                     </lvc:Axis>
                 </lvc:CartesianChart.AxisY>
             </lvc:CartesianChart>
-
         </Grid>
         <StackPanel Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="3" Style="{StaticResource StackPanel_Center}"  Margin="0,0,0,0" Height="60">
             <!--<Button Style="{StaticResource BtnInfoStyle2}" Command="{Binding RecordDataCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}}}" VerticalAlignment="Center"

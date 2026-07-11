@@ -24,6 +24,8 @@ namespace SMDisLabSys.UIServer
         public DelegateCommand<string> SelectChecked { get; set; }
         public DelegateCommand<string> SelectUnchecked { get; set; }
 
+        public DelegateCommand ExplainCommand { get; private set; }
+
         #region 属性
 
         private SeriesCollection seriesDic = new SeriesCollection();
@@ -99,6 +101,8 @@ namespace SMDisLabSys.UIServer
 
             SelectChecked = new DelegateCommand<string>(SelectCheckedMethod);
             SelectUnchecked = new DelegateCommand<string>(SelectUncheckedMethod);
+
+            ExplainCommand = new DelegateCommand(ExplainCommandMethod);
         }
         public int lineIndex = 0;
 
@@ -179,7 +183,7 @@ namespace SMDisLabSys.UIServer
                 line.StrokeDashArray = new DoubleCollection { 6, 4 };
                 line.Stroke = new SolidColorBrush((Color)ColorConverter.ConvertFromString(m_colors[lineIndex]));
                 line.Fill = new SolidColorBrush(Colors.Transparent);
-                
+
 
                 ChartValues<ObservablePoint> linevalue;
                 Diclinevalues.TryGetValue(lineIndex, out linevalue);
@@ -212,6 +216,19 @@ namespace SMDisLabSys.UIServer
                 {
                     Min = min;
                 }
+            });
+        }
+        public void AddNoZoomPoint(double x, double y, int lineIndex)
+        {
+            System.Windows.Application.Current.Dispatcher.Invoke(() =>
+            {
+                ObservablePoint point = new ObservablePoint();
+                point.X = x;
+                point.Y = y;
+
+                ChartValues<ObservablePoint> linevalue;
+                Diclinevalues.TryGetValue(lineIndex, out linevalue);
+                linevalue.Add(point);
             });
         }
 
@@ -253,10 +270,10 @@ namespace SMDisLabSys.UIServer
         /// <param name="text"></param>
         public void AddCheckBoxItem(string text)
         {
-            System.Windows.Application.Current.Dispatcher.Invoke(() => 
+            System.Windows.Application.Current.Dispatcher.Invoke(() =>
             {
                 CheckBoxItems.Add(new CheckBoxViewModel { Text = text, IsChecked = true, Index = lineIndex.ToString(), Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString(m_colors[lineIndex])) });
-            }); 
+            });
         }
         #endregion
 
@@ -264,32 +281,37 @@ namespace SMDisLabSys.UIServer
 
         public void CreatTestLine()
         {
-            CheckBoxItems.Add(new CheckBoxViewModel { Text ="速度"+ lineIndex.ToString(), IsChecked = true, Index = lineIndex.ToString(), Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString(m_colors[lineIndex])) });
+            CheckBoxItems.Add(new CheckBoxViewModel { Text = "速度" + lineIndex.ToString(), IsChecked = true, Index = lineIndex.ToString(), Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString(m_colors[lineIndex])) });
             CreatLinePoint();
             Task.Run(() =>
             {
-                //for (int i = 0; i < 50; i++)
-                //{
-                //    AddPoint(i, i * i, lineIndex - 1);
-                //    Thread.Sleep(100);
-                //}
-
-                List<int> yValue = new List<int>() 
-                { 
-                    1811,1813,1815,1819,1828,1835,1843,1850,1857,1863,1857,1913,1920,1923,1966,
-                    1956,1965,1941,1902,1855,1815,1764,1727,1684,1667,1640,1654,1667,1679,1697,
-                    1716
-                };
-
-
-                for (int i = 0; i < 30; i++)
+                for (int i = 0; i < 300; i++)
                 {
-                    AddPoint(i*5, yValue[i], lineIndex - 1);
+                    AddPoint(i, 13 * Math.Sin(0.3 * i), lineIndex - 1);
+                    Thread.Sleep(50);
                 }
+
+                //List<int> yValue = new List<int>() 
+                //{ 
+                //    1811,1813,1815,1819,1828,1835,1843,1850,1857,1863,1857,1913,1920,1923,1966,
+                //    1956,1965,1941,1902,1855,1815,1764,1727,1684,1667,1640,1654,1667,1679,1697,
+                //    1716
+                //};
+
+
+                //for (int i = 0; i < 30; i++)
+                //{
+                //    AddPoint(i*5, yValue[i], lineIndex - 1);
+                //}
             });
         }
 
         #endregion
+
+        void ExplainCommandMethod()
+        {
+            CreatTestLine();
+        }
 
     }
 }
