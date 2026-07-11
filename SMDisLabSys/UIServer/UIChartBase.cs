@@ -212,7 +212,7 @@ namespace SMDisLabSys.UIServer
                     Max = max;
                 }
                 var min = LineRange.Instance.GetLineMin(linevalue);
-                if (Min < min)
+                if (min < Min)
                 {
                     Min = min;
                 }
@@ -285,9 +285,9 @@ namespace SMDisLabSys.UIServer
             CreatLinePoint();
             Task.Run(() =>
             {
-                for (int i = 0; i < 300; i++)
+                for (int i = 0; i < 150; i++)
                 {
-                    AddPoint(i, 13 * Math.Sin(0.3 * i), lineIndex - 1);
+                    AddPoint(0.3 * i, 430 * Math.Sin(0.1 * i), lineIndex - 1);
                     Thread.Sleep(50);
                 }
 

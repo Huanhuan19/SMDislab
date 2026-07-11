@@ -164,10 +164,10 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
         {
             //创建中线
             CreatDashLinePoint();
-            AddNoZoomPoint(-100, 0, lineIndex - 1);
-            AddNoZoomPoint(1000, 0, lineIndex - 1);
-            Min = -5;
-            Max = 40;
+            AddPoint(0, 0, lineIndex - 1);
+            AddPoint(35, 0, lineIndex - 1);
+            //Min = -5;
+            //Max = 40;
         }
         void ClearSelectCommandMethod()
         {

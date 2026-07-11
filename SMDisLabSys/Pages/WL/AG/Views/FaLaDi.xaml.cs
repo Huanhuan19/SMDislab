@@ -27,9 +27,9 @@ namespace SMDisLabSys.Pages.WL.AG.Views
             InitializeComponent();
 
             // ---------- 在 Y=0 线上画 X 轴刻度 ----------
-            double xMin = 0, xMax = 40;     // X 数据范围
+            double xMin = 0, xMax = 36;     // X 数据范围
             double tickStep = 5;           // X 轴刻度步长
-            double yLine = -1;             // 中间X轴所在 Y 值
+            double yLine = -0;             // 中间X轴所在 Y 值
 
             for (double x = xMin; x <= xMax + 0.001; x += tickStep)
             {
@@ -39,7 +39,7 @@ namespace SMDisLabSys.Pages.WL.AG.Views
                     X = x,
                     Y = yLine,
                     HorizontalAlignment = HorizontalAlignment.Center,
-                    VerticalAlignment = VerticalAlignment.Top,
+                    VerticalAlignment = VerticalAlignment.Bottom,
                     UIElement = new TextBlock
                     {
                         Text = x.ToString("0") + "s",
