@@ -21,6 +21,8 @@ using SMDisLabSys.Pages;
 using SMDisLabSys.Pages.WL.AG.Views;
 using SMDisLabSys.Pages.WL;
 using SMDisLabSys.Pages.WL.AG.ViewModels;
+using SMDisLabSys.Pages.WL.YZ.Views;
+using SMDisLabSys.Pages.WL.YZ.ViewModels;
 
 
 namespace SMDisLabSys
@@ -55,10 +57,11 @@ namespace SMDisLabSys
         }
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterForNavigation<WLMain, WLMainVM>();
-            containerRegistry.RegisterForNavigation<DanBai, DanBaiVM>();
-            containerRegistry.RegisterForNavigation<DanBaiNew, DanBaiNewVM>();
+            containerRegistry.RegisterDialog<WLMain, WLMainVM>();
+            containerRegistry.RegisterDialog<DanBai, DanBaiVM>();
+            containerRegistry.RegisterDialog<DanBaiNew, DanBaiNewVM>();
             containerRegistry.RegisterDialog<FaLaDi, FaLaDiVM>();
+            containerRegistry.RegisterDialog<DataTest, DataTestVM>();
 
             containerRegistry.Register<IDialogWindow, UcWinSize>(nameof(UcWinSize));
         }

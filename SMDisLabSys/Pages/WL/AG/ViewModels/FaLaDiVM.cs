@@ -36,7 +36,7 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
         double xAxis = 0;
 
         public DelegateCommand ClearSelectCommand { get; private set; }
-        string BLEName = "SHM:200";
+        public string BLEName = "SHM:200";
 
         #region 属性
         double middleVol;
@@ -67,11 +67,9 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
             YFormatter = YFormatters;
 
             InitCommand();
-            ConnectDevice();
-
             CreatMidLine();
 
-
+            ConnectDevice(BLEName);
         }
         void InitCommand()
         {
@@ -135,36 +133,7 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
             dtCreat = DateTime.Now;
         }
 
-        void ConnectDevice()
-        {
-            Thread.Sleep(500);//等有无USB数据
-            if (SMDataSource.Instance.HidConnected())
-            {
-                return;
-            }
-            Task.Run(() =>
-            {
-                int loop = 100;
-                while (loop > 0)//
-                {
-                    if (SMDataSource.Instance.BluetoothList.Count > 0)
-                    {
-                        var bluetooth = SMDataSource.Instance.BluetoothList.Where(o => o.Adresse.Contains(BLEName)).FirstOrDefault();
-                        if (bluetooth != null)
-                        {
-                            List<BluetoothInfo> selectList = new List<BluetoothInfo>();
-                            selectList.Add(bluetooth);
-                            SMDataSource.Instance.BluetoothConnect(selectList);
-                            break;
-                        }
-                        
-                    }
-                    Thread.Sleep(500);//50s
-
-                    loop--;
-                }
-            });
-        }
+        
 
         void CreatMidLine()
         {

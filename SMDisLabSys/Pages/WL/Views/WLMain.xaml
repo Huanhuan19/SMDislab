@@ -127,12 +127,12 @@ Margin="10,0,10,10" HorizontalAlignment="Left" >
             <RadioButton GroupName="TypeIndentity" Command="{Binding Command}" Content="测量溶液ph值或电导率" Style="{StaticResource RadioButton_Defaut}" Margin="10,0,0,0"></RadioButton>
         </Viewbox>
         <Viewbox Height="21" Grid.Row="2" Grid.Column="3" HorizontalAlignment="Left" Margin="10,0,0,0">
-            <RadioButton GroupName="TypeIndentity" Command="{Binding DanBaiCommand}" Content="单摆运动规律演示器" Style="{StaticResource RadioButton_Defaut}" Margin="10,0,0,0"></RadioButton>
+            <RadioButton GroupName="TypeIndentity" Command="{Binding ExpCommand}" CommandParameter="DanBaiNew" Content="单摆运动规律演示器" Style="{StaticResource RadioButton_Defaut}" Margin="10,0,0,0"></RadioButton>
         </Viewbox>
         
         <Grid Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="5" Background="LightGray" Margin="3,3,10,3"/>
         <Viewbox Height="21" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" Margin="0">
-            <RadioButton GroupName="TypeIndentity" Command="{Binding FaLaDiCommand}" Content="法拉第电磁感应" Style="{StaticResource RadioButton_Defaut}" Margin="10,0,0,0"></RadioButton>
+            <RadioButton GroupName="TypeIndentity" Command="{Binding ExpCommand}" CommandParameter="FaLaDi" Content="法拉第电磁感应" Style="{StaticResource RadioButton_Defaut}" Margin="10,0,0,0"></RadioButton>
         </Viewbox>
         <Grid Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="5" Background="#f0f0f0" Margin="3,3,10,3"/>
         <Viewbox Height="21" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" Margin="0,0,0,0">
@@ -219,8 +219,11 @@ Margin="10,0,10,10" HorizontalAlignment="Left" >
         <Viewbox Height="21" Grid.Row="13" Grid.Column="2" HorizontalAlignment="Left" Margin="0,0,0,0">
             <RadioButton GroupName="TypeIndentity" Command="{Binding Command}" Content="智能力盘" Style="{StaticResource RadioButton_Defaut}" Margin="10,0,0,0"></RadioButton>
         </Viewbox>
-        
-        
+        <Viewbox Height="21" Grid.Row="13" Grid.Column="3" HorizontalAlignment="Left" Margin="0,0,0,0">
+            <RadioButton GroupName="TypeIndentity" Command="{Binding ExpCommand}" CommandParameter="DataTest" Content="智能数测" Style="{StaticResource RadioButton_Defaut}" Margin="10,0,0,0"></RadioButton>
+        </Viewbox>
+
+
         <Button Grid.Row="1" Grid.Column="6" Height="50" Width="80" Style="{StaticResource BtnInfoStyle}" Command="{Binding WLCommand}" VerticalAlignment="Bottom"
 Margin="10,0,10,10" HorizontalAlignment="Left" >
             <Button.Background>

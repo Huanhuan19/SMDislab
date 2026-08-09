@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.Devices.HumanInterfaceDevice;
 using HidLibrary;
+using NPOI.SS.Formula.Functions;
 
 namespace SMDisLabSys.BLL.Connect
 {
@@ -87,6 +88,18 @@ namespace SMDisLabSys.BLL.Connect
             if (DeceiveValueChanged != null)
             {
                 DeceiveValueChanged(this, e);
+            }
+        }
+
+        public void SendBuffer(byte[] sendBuffer)
+        {
+            if (_device.IsConnected)
+            {
+                HidReport report = new HidReport(sendBuffer.Length)
+                {
+                    Data = sendBuffer
+                };
+                _device.WriteReport(report);
             }
         }
     }

@@ -44,7 +44,7 @@ namespace SMDisLabSys.Pages.WL.AG.Views
                     {
                         Text = x.ToString("0") + "s",
                         Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#008aff")),
-                        FontSize = 16,
+                        FontSize = 26,
                         Margin = new Thickness(0, 2, 0, 0)
                     }
                 });

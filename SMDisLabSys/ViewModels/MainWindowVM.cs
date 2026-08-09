@@ -52,7 +52,7 @@ namespace SMDisLabSys.ViewModels
             //selectList.Add(new BluetoothInfo() { MAC = "BluetoothLE#BluetoothLE8c:e9:ee:9d:4d:37-c8:47:80:37:c6:3f", Adresse = "SHM:020_C63F" });
             //SMDataSource.Instance.BluetoothConnect(selectList);
 
-            dialogService.Show(nameof(WLMain), null, callback =>
+            dialogService.ShowDialog(nameof(WLMain), null, callback =>
             {
             }, nameof(UcWinSize));
         }

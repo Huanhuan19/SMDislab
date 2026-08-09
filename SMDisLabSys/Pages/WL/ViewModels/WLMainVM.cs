@@ -15,9 +15,7 @@ namespace SMDisLabSys.Pages.WL.ViewModels
     public class WLMainVM : BindableBase, IDialogAware
     {
         private readonly IDialogService dialogService;
-        public DelegateCommand APLCommand { get; private set; }//安培力
-        public DelegateCommand DanBaiCommand { get; private set; }//单摆
-        public DelegateCommand FaLaDiCommand { get; private set; }//法拉第电磁实验
+        public DelegateCommand<string> ExpCommand { get; private set; }//单摆//法拉第电磁实验
 
         public WLMainVM(IDialogService pdialogService)
         {
@@ -26,19 +24,11 @@ namespace SMDisLabSys.Pages.WL.ViewModels
         }
         void HMACMD()
         {
-            APLCommand = new DelegateCommand(APLCommandMethod);
-            DanBaiCommand = new DelegateCommand(DanBaiCommandMethod);
-            FaLaDiCommand = new DelegateCommand(FaLaDiCommandMethod);
+            ExpCommand = new DelegateCommand<string>(ExpCommandMethod);
         }
-
-        #region A-H
-        void APLCommandMethod()
+        void ExpCommandMethod(string expName)
         {
-            
-        }
-        void DanBaiCommandMethod()
-        {
-            dialogService.Show(nameof(DanBaiNew), null, callback =>
+            dialogService.Show(expName, null, callback =>
             {
             }, nameof(UcWinSize));
         }
@@ -48,7 +38,6 @@ namespace SMDisLabSys.Pages.WL.ViewModels
             {
             }, nameof(UcWinSize));
         }
-        #endregion
 
         #region IDialogAware接口实现
         string title;

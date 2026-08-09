@@ -14,6 +14,7 @@ using LiveCharts.Defaults;
 using LiveCharts.Wpf;
 using Prism.Commands;
 using Prism.Mvvm;
+using SMDisLabSys.BLL;
 using SMDisLabSys.UIServer.Caculator;
 using SMDisLabSys.UIServer.Dot;
 
@@ -94,7 +95,6 @@ namespace SMDisLabSys.UIServer
         }
         #endregion
 
-
         private List<string> m_colors = new List<string>() { "#02c0fa", "#FFB751", "#00a759", "#e95e00", "#ff00cc", "#00FFFF", "#cc00ff", "#88a700" };
         public UIChartBase()
         {
@@ -102,8 +102,40 @@ namespace SMDisLabSys.UIServer
             SelectChecked = new DelegateCommand<string>(SelectCheckedMethod);
             SelectUnchecked = new DelegateCommand<string>(SelectUncheckedMethod);
 
-            ExplainCommand = new DelegateCommand(ExplainCommandMethod);
+            ExplainCommand = new DelegateCommand(ExplainCommandMethod);         
         }
+        #region 蓝牙连接
+        public void ConnectDevice(string bleName)
+        {
+            Thread.Sleep(500);//等有无USB数据
+            if (SMDataSource.Instance.HidConnected())
+            {
+                return;
+            }
+            Task.Run(() =>
+            {
+                int loop = 100;
+                while (loop > 0)//
+                {
+                    if (SMDataSource.Instance.BluetoothList.Count > 0)
+                    {
+                        var bluetooth = SMDataSource.Instance.BluetoothList.Where(o => o.Adresse.Contains(bleName)).FirstOrDefault();
+                        if (bluetooth != null)
+                        {
+                            List<BluetoothInfo> selectList = new List<BluetoothInfo>();
+                            selectList.Add(bluetooth);
+                            SMDataSource.Instance.BluetoothConnect(selectList);
+                            break;
+                        }
+
+                    }
+                    Thread.Sleep(500);//50s
+
+                    loop--;
+                }
+            });
+        }
+        #endregion
         public int lineIndex = 0;
 
         Dictionary<int, ChartValues<ObservablePoint>> Diclinevalues = new Dictionary<int, ChartValues<ObservablePoint>>();
@@ -152,7 +184,7 @@ namespace SMDisLabSys.UIServer
                 line.Title = title;
                 line.PointGeometry = null;
                 line.LineSmoothness = 0;
-                line.StrokeThickness = 2;
+                line.StrokeThickness = 5;
                 line.Stroke = new SolidColorBrush((Color)ColorConverter.ConvertFromString(m_colors[lineIndex]));
                 line.Fill = new SolidColorBrush(Colors.Transparent);
                 line.LineSmoothness = 0.2;

@@ -186,15 +186,28 @@ namespace SMDisLabSys.BLL
         public Hid hid1 = new Hid();
         public void HidStart()
         {
-            //hid1.CreatHid(0x0483, 0x5710);
-            hid1.CreatHid(0x1FC9, 0xB);//VID 1FC9;PID 000B
-            if (hid1._device != null)
+            foreach (var item in PublicStaticInfo.Instance.VIDPIDList)
             {
-                if (hid1._device.IsConnected)
+                var vidpid = item.Split(":");
+                hid1.CreatHid(Convert.ToUInt16(vidpid[0],16), Convert.ToUInt16(vidpid[1],16));//VID 1FC9;PID 000B
+                if (hid1._device != null)
                 {
-                    hid1.DeceiveValueChanged += Hid1_DeceiveValueChanged;
+                    if (hid1._device.IsConnected)
+                    {
+                        hid1.DeceiveValueChanged += Hid1_DeceiveValueChanged;
+                        break;
+                    }
                 }
             }
+            //hid1.CreatHid(0x0483, 0x5710);
+            //hid1.CreatHid(0x1FC9, 0xB);//VID 1FC9;PID 000B
+            //if (hid1._device != null)
+            //{
+            //    if (hid1._device.IsConnected)
+            //    {
+            //        hid1.DeceiveValueChanged += Hid1_DeceiveValueChanged;
+            //    }
+            //}
         }
 
         public bool HidConnected()

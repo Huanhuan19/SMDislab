@@ -32,6 +32,7 @@ namespace SMDisLabSys
         public static readonly SystemInit Instance = new SystemInit();
         public void Init()
         {
+            PublicStaticInfo.Instance.Init();
             SMDataSource.Instance.BLEStart();
             SMDataSource.Instance.HidStart();
         }
