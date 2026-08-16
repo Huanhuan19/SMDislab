@@ -98,10 +98,6 @@ namespace SMDisLabSys.BLL
                         break;
                 }
             }
-            //ble1 = null;
-            //ble2 = null;
-            //ble3 = null;
-            //ble4 = null;
         }
 
         public void BluetoothConnect(List<BluetoothInfo> btList)
@@ -152,34 +148,12 @@ namespace SMDisLabSys.BLL
             ParseHelper.Instance.Parse(buffer, ConnectTypeEnum.BLE, ble1.BLEAdresse);
         }
 
+        public void SendCommandBle(byte[] sendBuffer)
+        {
+            ble1.SendCommand(sendBuffer);
+        }
 
-        //public void InitBlePara()
-        //{
-        //    IsRecordBle1 = true;
-        //    Ble1DataCount = 0;
-        //    readDataIndex = 0;
-        //    BleSkipPoint = 0;
-
-        //    IsRecordBle2 = true;
-        //    Ble2DataCount = 0;
-        //    readDataIndex2 = 0;
-        //    Ble2SkipPoint = 0;
-
-        //    int sleepCount = 40;
-        //    while (sleepCount > 0)
-        //    {
-        //        if (ble1 != null && ble1.bluetooth.IsConnected && ble1.IsNewSensor)
-        //        {
-        //            ble1.SendCommand(NewCommandType.GetDeviceInfo());//新协议下发命令  旧的传感器收到命令就卡住了
-        //            break;
-        //        }
-        //        else
-        //        {
-        //            sleepCount--;
-        //            Thread.Sleep(500);
-        //        }
-        //    }
-        //}
+       
         #endregion
 
         #region USB
@@ -224,6 +198,10 @@ namespace SMDisLabSys.BLL
         private void Hid1_DeceiveValueChanged(object sender, DeceiveDataArgs e)
         {
             ParseHelper.Instance.Parse(e.ReportBuff, ConnectTypeEnum.USB);
+        }
+        public void SendCommand(byte[] buffer)
+        {
+            hid1.SendBuffer(buffer);
         }
         #endregion
     }

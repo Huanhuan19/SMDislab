@@ -26,6 +26,7 @@ namespace SMDisLabSys.BLL
         {
             VIDPIDList.Add("0x0483:0x5710");
             VIDPIDList.Add("0x1FC9:0xB");
+            VIDPIDList.Add("0x17EF:0x60FF");
         }
     }
 }

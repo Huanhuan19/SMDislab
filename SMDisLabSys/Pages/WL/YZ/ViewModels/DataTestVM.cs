@@ -2,12 +2,14 @@
 using LiveCharts.Defaults;
 using LiveCharts.Wpf;
 using NPOI.SS.Formula;
+using NPOI.SS.Formula.Functions;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
 using SMDisLabSys.BLL;
 using SMDisLabSys.BLL.Formulas;
 using SMDisLabSys.BLL.RealData;
+using SMDisLabSys.Common.DataConvert;
 using SMDisLabSys.Model;
 using SMDisLabSys.UIServer;
 using SMDisLabSys.UIServer.Caculator;
@@ -97,12 +99,49 @@ namespace SMDisLabSys.Pages.WL.YZ.ViewModels
 
             ClearSelectCommand = new DelegateCommand(ClearSelectCommandMethod);
             SendCommand = new DelegateCommand(SendCommandMethod);
+
+            //Dictionary<int, List<double>> ParamListDic = new Dictionary<int, List<double>>();
+            //ParamListDic.Add(300, new List<double>() { 1 });
+            //ParamListDic.Add(301, new List<double>() { 2 });
+            //ParamListDic.Add(302, new List<double>() { 3 });
+            //ParamListDic.Add(303, new List<double>() { 4 });
+            //ParamListDic.Add(304, new List<double>() { 5 });
+            //ParamListDic.Add(305, new List<double>() { 6 });
+            //int index = 0;
+
+            //foreach (var item in ParamListDic)
+            //{
+            //    if (index == 0)
+            //    {
+            //        Data1 = item.Value[0];
+            //    }
+            //    if (index == 1)
+            //    {
+            //        Data2 = item.Value[0];
+            //    }
+            //    if (index == 2)
+            //    {
+            //        Data3 = item.Value[0];
+            //    }
+            //    if (index == 3)
+            //    {
+            //        Data4 = item.Value[0];
+            //    }
+            //    if (index == 4)
+            //    {
+            //        Data5 = item.Value[0];
+            //    }
+            //    if (index == 5)
+            //    {
+            //        Data6 = item.Value[0];
+            //    }
+            //    index++;
+            //}
         }
 
         private void Instance_BLEDataUpdated(object? sender, EventArgs e)
         {
             DataParseEventArgs args = (DataParseEventArgs)e;
-            List<double> value = new List<double>();
             int index = 0;
             foreach (var item in args.ParamListDic)
             {
@@ -165,24 +204,31 @@ namespace SMDisLabSys.Pages.WL.YZ.ViewModels
                 }
             });
         }
-
-        void CreatMidLine()
-        {
-            //创建中线
-            CreatDashLinePoint();
-            AddPoint(0, 0, lineIndex - 1);
-            AddPoint(35, 0, lineIndex - 1);
-            //Min = -5;
-            //Max = 40;
-        }
+        
         void ClearSelectCommandMethod()
         {
-
+            Data1 = 0;
+            Data2 = 0;
+            Data3 = 0;
+            Data4 = 0;
+            Data5 = 0;
+            Data6 = 0;
         }
 
         void SendCommandMethod()
         {
-
+            var buffer = BufferConvertHelper.HexStringToByteArray(SendStr.Replace(" ", ""));
+            if (SMDataSource.Instance.HidConnected())
+            {
+                SMDataSource.Instance.hid1.SendBuffer(buffer);
+            }
+            else
+            {
+                if (SMDataSource.Instance.BluetoothList.Count > 0)
+                {
+                    SMDataSource.Instance.SendCommandBle(buffer);
+                }
+            }
         }
 
         #region IDialogAware接口实现
