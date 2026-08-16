@@ -36,6 +36,10 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
         double xAxis = 0;
 
         public DelegateCommand ClearSelectCommand { get; private set; }
+        public DelegateCommand UpCommand { get; private set; }
+        public DelegateCommand DownCommand { get; private set; }
+        public DelegateCommand StopCommand { get; private set; }
+        public DelegateCommand SetSpeedCommand { get; private set; }
         public string BLEName = "SHM:200";
 
         #region 属性
@@ -57,8 +61,24 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
             get { return voltage; }
             set { SetProperty(ref voltage, value); }
         }
-
-
+        private List<byte> speedSource = new List<byte>() { 30, 40, 50, 60, 70, 80, 90 };
+        /// <summary>
+        /// 卫星类型
+        /// </summary>
+        public List<byte> SpeedSource
+        {
+            get { return speedSource; }
+            set
+            {
+                SetProperty(ref speedSource, value);
+            }
+        }
+        byte speed = 30;
+        public byte Speed
+        {
+            get { return speed; }
+            set { SetProperty(ref speed, value); }
+        }
 
         #endregion
         public FaLaDiVM()
@@ -70,12 +90,18 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
             CreatMidLine();
 
             ConnectDevice(BLEName);
+
         }
         void InitCommand()
         {
             RealDataBLE.Instance.BLEDataUpdated += Instance_BLEDataUpdated;
 
             ClearSelectCommand = new DelegateCommand(ClearSelectCommandMethod);
+
+            UpCommand = new DelegateCommand(UpCommandMethod);
+            DownCommand = new DelegateCommand(DownCommandMethod);
+            StopCommand = new DelegateCommand(StopCommandMethod);
+            SetSpeedCommand = new DelegateCommand(SetSpeedCommandMethod);
         }
 
         private void Instance_BLEDataUpdated(object? sender, EventArgs e)
@@ -133,7 +159,7 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
             dtCreat = DateTime.Now;
         }
 
-        
+
 
         void CreatMidLine()
         {
@@ -148,6 +174,54 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
         {
             ClearLine();
             CreatMidLine();
+        }
+        void UpCommandMethod()
+        {
+            List<byte> data = new List<byte>();
+            data.Add(0xCE);
+            data.Add(0xCB);
+            data.Add(0x02);
+            data.Add(0x00);
+            data.Add(0x01);
+            data.Add(0x00);
+            data.Add(0x01);
+            SendMethod(data.ToArray());
+        }
+        void DownCommandMethod()
+        {
+            List<byte> data = new List<byte>();
+            data.Add(0xCE);
+            data.Add(0xCB);
+            data.Add(0x02);
+            data.Add(0x00);
+            data.Add(0x01);
+            data.Add(0x00);
+            data.Add(0x02);
+            SendMethod(data.ToArray());
+        }
+        void StopCommandMethod()
+        {
+            List<byte> data = new List<byte>();
+            data.Add(0xCE);
+            data.Add(0xCB);
+            data.Add(0x02);
+            data.Add(0x00);
+            data.Add(0x01);
+            data.Add(0x00);
+            data.Add(0x00);
+            SendMethod(data.ToArray());
+        }
+        void SetSpeedCommandMethod()
+        {
+            List<byte> data = new List<byte>();
+            data.Add(0xCE);
+            data.Add(0xCB);
+            data.Add(0x02);
+            data.Add(0x00);
+            data.Add(0x02);
+            data.Add(0x00);
+            data.Add(Speed);
+            SendMethod(data.ToArray());
         }
 
         #region IDialogAware接口实现

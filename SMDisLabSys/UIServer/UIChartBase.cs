@@ -102,8 +102,15 @@ namespace SMDisLabSys.UIServer
             SelectChecked = new DelegateCommand<string>(SelectCheckedMethod);
             SelectUnchecked = new DelegateCommand<string>(SelectUncheckedMethod);
 
-            ExplainCommand = new DelegateCommand(ExplainCommandMethod);         
+            ExplainCommand = new DelegateCommand(ExplainCommandMethod);
         }
+
+        public int lineIndex = 0;
+
+        Dictionary<int, ChartValues<ObservablePoint>> Diclinevalues = new Dictionary<int, ChartValues<ObservablePoint>>();
+
+        public bool haveUSBData = false;
+
         #region 蓝牙连接
         public void ConnectDevice(string bleName)
         {
@@ -136,12 +143,6 @@ namespace SMDisLabSys.UIServer
             });
         }
         #endregion
-        public int lineIndex = 0;
-
-        Dictionary<int, ChartValues<ObservablePoint>> Diclinevalues = new Dictionary<int, ChartValues<ObservablePoint>>();
-
-        public bool haveUSBData = false;
-
 
         #region 画线
 
@@ -345,5 +346,21 @@ namespace SMDisLabSys.UIServer
             CreatTestLine();
         }
 
+        #region MyRegion
+        public void SendMethod(byte[] buffer)
+        {
+            if (SMDataSource.Instance.HidConnected())
+            {
+                SMDataSource.Instance.hid1.SendBuffer(buffer);
+            }
+            else
+            {
+                if (SMDataSource.Instance.BluetoothList.Count > 0)
+                {
+                    SMDataSource.Instance.SendCommandBle(buffer);
+                }
+            }
+        }
+        #endregion
     }
 }

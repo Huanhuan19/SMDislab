@@ -84,19 +84,25 @@
                 </lvc:CartesianChart.AxisY>
             </lvc:CartesianChart>
         </Grid>
-        <StackPanel Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="3" Style="{StaticResource StackPanel_Center}"  Margin="0,0,0,0" Height="60">
+        <StackPanel Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="4" Style="{StaticResource StackPanel_Center}"  Margin="0,0,0,0" Height="60">
             <!--<Button Style="{StaticResource BtnInfoStyle2}" Command="{Binding RecordDataCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}}}" VerticalAlignment="Center"
 Margin="10,0,0,0" Content="记录数据" Width="160"></Button>-->
+            
+            <Button Style="{StaticResource BtnInfoStyle2}" Command="{Binding UpCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}}}" VerticalAlignment="Center"
+Margin="10,0,0,0" Content="上升" Width="160"></Button>
+            <Button Style="{StaticResource BtnInfoStyle2}" Command="{Binding DownCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}}}" VerticalAlignment="Center"
+Margin="10,0,0,0" Content="下降" Width="160"></Button>
+            <Button Style="{StaticResource BtnInfoStyle2}" Command="{Binding StopCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}}}" VerticalAlignment="Center"
+Margin="10,0,0,0" Content="停止" Width="160"></Button>
+            <TextBlock Grid.Row="0" Text="选择速度" FontSize="23" Style="{StaticResource TextBlock_Default}" Margin="20,0,10,0"></TextBlock>
+            <ComboBox  Margin="1,0,10,0" Style="{StaticResource DefaultComboBoxStyle}" FontSize="18" Width="100" ItemsSource="{Binding SpeedSource}" SelectedValue="{Binding Speed}"></ComboBox>
+            <Button Style="{StaticResource BtnInfoStyle2}" Command="{Binding SetSpeedCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}}}" VerticalAlignment="Center"
+Margin="10,0,0,0" Content="设置速度" Width="160"></Button>
             <Button Style="{StaticResource BtnInfoStyle2}" Command="{Binding ClearSelectCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}}}" VerticalAlignment="Center"
 Margin="10,0,0,0" Content="清除数据" Width="180"></Button>
-            <!--<Button Style="{StaticResource BtnInfoStyle2}" Command="{Binding TAndLCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}}}" VerticalAlignment="Center"
-Margin="10,0,0,0" Content="T和L" Width="160"></Button>
-            <Button Style="{StaticResource BtnInfoStyle2}" Command="{Binding TTAndLCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}}}" VerticalAlignment="Center"
-Margin="10,0,0,0" Content="T²和L" Width="160"></Button>-->
-            <!--<Button Style="{StaticResource BtnInfoStyle2}" Command="{Binding ClearCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}}}" VerticalAlignment="Center"
-Margin="10,0,0,0" Content="清屏" Width="160"></Button>-->
             <Button Style="{StaticResource BtnInfoStyle2}" Command="{Binding ExplainCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}}}" VerticalAlignment="Center"
 Margin="10,0,0,0" Content="实验说明" Width="200"></Button>
+            
         </StackPanel>
    
     </Grid>
