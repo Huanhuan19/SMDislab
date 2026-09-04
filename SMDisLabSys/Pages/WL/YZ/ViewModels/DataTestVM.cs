@@ -32,14 +32,13 @@ using MessageBox = System.Windows.MessageBox;
 
 namespace SMDisLabSys.Pages.WL.YZ.ViewModels
 {
-    class DataTestVM : UIChartBase, IDialogAware
+    class DataTestVM : UIBase, IDialogAware
     {
         DateTime dtCreat;
         double xAxis = 0;
 
         public DelegateCommand ClearSelectCommand { get; private set; }
         public DelegateCommand SendCommand { get; private set; }
-        string BLEName = "SHM:200";
 
         #region 属性
         double data1;

@@ -41,6 +41,7 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
         public DelegateCommand StopCommand { get; private set; }
         public DelegateCommand SetSpeedCommand { get; private set; }
         public string BLEName = "SHM:200";
+        
 
         #region 属性
         double middleVol;
@@ -91,6 +92,7 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
 
             ConnectDevice(BLEName);
 
+            ExpDes = @"ExpDes\WL\FLD.docx";
         }
         void InitCommand()
         {
@@ -155,7 +157,7 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
 
             }
 
-            AddPoint(Index, Voltage - MiddleVol, lineIndex - 1);
+            AddPointSameMaxMin(Index, Voltage - MiddleVol, lineIndex - 1);
             dtCreat = DateTime.Now;
         }
 
@@ -166,7 +168,7 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
             //创建中线
             CreatDashLinePoint();
             AddPoint(0, 0, lineIndex - 1);
-            AddPoint(35, 0, lineIndex - 1);
+            AddPoint(30, 0, lineIndex - 1);
             //Min = -5;
             //Max = 40;
         }

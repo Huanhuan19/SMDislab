@@ -20,12 +20,10 @@ using SMDisLabSys.UIServer.Dot;
 
 namespace SMDisLabSys.UIServer
 {
-    public class UIChartBase : BindableBase
+    public class UIChartBase : UIBase
     {
         public DelegateCommand<string> SelectChecked { get; set; }
         public DelegateCommand<string> SelectUnchecked { get; set; }
-
-        public DelegateCommand ExplainCommand { get; private set; }
 
         #region 属性
 
@@ -102,7 +100,6 @@ namespace SMDisLabSys.UIServer
             SelectChecked = new DelegateCommand<string>(SelectCheckedMethod);
             SelectUnchecked = new DelegateCommand<string>(SelectUncheckedMethod);
 
-            ExplainCommand = new DelegateCommand(ExplainCommandMethod);
         }
 
         public int lineIndex = 0;
@@ -110,39 +107,6 @@ namespace SMDisLabSys.UIServer
         Dictionary<int, ChartValues<ObservablePoint>> Diclinevalues = new Dictionary<int, ChartValues<ObservablePoint>>();
 
         public bool haveUSBData = false;
-
-        #region 蓝牙连接
-        public void ConnectDevice(string bleName)
-        {
-            Thread.Sleep(500);//等有无USB数据
-            if (SMDataSource.Instance.HidConnected())
-            {
-                return;
-            }
-            Task.Run(() =>
-            {
-                int loop = 100;
-                while (loop > 0)//
-                {
-                    if (SMDataSource.Instance.BluetoothList.Count > 0)
-                    {
-                        var bluetooth = SMDataSource.Instance.BluetoothList.Where(o => o.Adresse.Contains(bleName)).FirstOrDefault();
-                        if (bluetooth != null)
-                        {
-                            List<BluetoothInfo> selectList = new List<BluetoothInfo>();
-                            selectList.Add(bluetooth);
-                            SMDataSource.Instance.BluetoothConnect(selectList);
-                            break;
-                        }
-
-                    }
-                    Thread.Sleep(500);//50s
-
-                    loop--;
-                }
-            });
-        }
-        #endregion
 
         #region 画线
 
@@ -251,6 +215,29 @@ namespace SMDisLabSys.UIServer
                 }
             });
         }
+        public void AddPointSameMaxMin(double x, double y, int lineIndex)
+        {
+            System.Windows.Application.Current.Dispatcher.Invoke(() =>
+            {
+                ObservablePoint point = new ObservablePoint();
+                point.X = x;
+                point.Y = y;
+
+                ChartValues<ObservablePoint> linevalue;
+                Diclinevalues.TryGetValue(lineIndex, out linevalue);
+                linevalue.Add(point);
+
+                var max = LineRange.Instance.GetLineMax(linevalue);
+                var min = LineRange.Instance.GetLineMin(linevalue);
+                if (max > Max|| min < Min)
+                {
+                    var setValue = Math.Abs(max) > Math.Abs(min) ? Math.Abs(max) : Math.Abs(min);
+                    Max = setValue;
+                    Min = -1 * setValue;
+                }
+            });
+        }
+
         public void AddNoZoomPoint(double x, double y, int lineIndex)
         {
             System.Windows.Application.Current.Dispatcher.Invoke(() =>
@@ -341,26 +328,5 @@ namespace SMDisLabSys.UIServer
 
         #endregion
 
-        void ExplainCommandMethod()
-        {
-            CreatTestLine();
-        }
-
-        #region MyRegion
-        public void SendMethod(byte[] buffer)
-        {
-            if (SMDataSource.Instance.HidConnected())
-            {
-                SMDataSource.Instance.hid1.SendBuffer(buffer);
-            }
-            else
-            {
-                if (SMDataSource.Instance.BluetoothList.Count > 0)
-                {
-                    SMDataSource.Instance.SendCommandBle(buffer);
-                }
-            }
-        }
-        #endregion
     }
 }
