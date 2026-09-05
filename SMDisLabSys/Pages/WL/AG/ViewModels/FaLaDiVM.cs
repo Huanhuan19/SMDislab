@@ -41,7 +41,7 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
         public DelegateCommand StopCommand { get; private set; }
         public DelegateCommand SetSpeedCommand { get; private set; }
         public string BLEName = "SHM:200";
-        
+
 
         #region 属性
         double middleVol;
@@ -93,7 +93,7 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
         {
             XFormatter = XFormatters;
             YFormatter = YFormatters;
-
+            InitAxis();
             InitCommand();
             CreatMidLine();
 
@@ -101,16 +101,18 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
 
             ExpDes = @"ExpDes\WL\FLD.docx";
 
-            //CreatLinePointAddCheckBoxItem("速度" + title);
+            //Task.Run(() =>
+            //{
+            //    CreatLinePointAddCheckBoxItem("速度" + title);
 
-            //AddPointSameMaxYMinY(1, 33, lineIndex - 1);
-            //AddPointSameMaxYMinY(2, 88, lineIndex - 1);
-            //AddPointSameMaxYMinY(3, 188, lineIndex - 1);
-            //CreatLinePointAddCheckBoxItem("速度" + title);
+            //    for (int i = 0; i < 100; i++)
+            //    {
+            //        AddPointSameMaxYMinY(i, 3.3*i, lineIndex - 1);
+            //        Thread.Sleep(100);
+            //    }
 
-            //AddPointSameMaxYMinY(1, 133, lineIndex - 1);
-            //AddPointSameMaxYMinY(2, 188, lineIndex - 1);
-            //AddPointSameMaxYMinY(3, 138, lineIndex - 1);
+            //});
+
         }
         void InitCommand()
         {
@@ -122,6 +124,11 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
             DownCommand = new DelegateCommand(DownCommandMethod);
             StopCommand = new DelegateCommand(StopCommandMethod);
             SetSpeedCommand = new DelegateCommand(SetSpeedCommandMethod);
+        }
+        void InitAxis()
+        {
+            MaxY = 2;
+            MinY = -2;
         }
 
         private void Instance_BLEDataUpdated(object? sender, EventArgs e)
@@ -182,7 +189,7 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
             //创建中线
             CreatDashLinePoint();
             AddPoint(0, 0, lineIndex - 1);
-            AddPoint(30, 0, lineIndex - 1);
+            AddPoint(35, 0, lineIndex - 1);
             //Min = -5;
             //Max = 40;
         }
@@ -216,7 +223,7 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
             data.Add(0x00);
             data.Add(0x02);
             SendMethod(data.ToArray());
-            CMDState = "已操作  下升";
+            CMDState = "已操作  下降";
         }
         void StopCommandMethod()
         {
