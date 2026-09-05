@@ -87,7 +87,7 @@
         <StackPanel Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="4" Style="{StaticResource StackPanel_Center}"  Margin="0,0,0,0" Height="60">
             <!--<Button Style="{StaticResource BtnInfoStyle2}" Command="{Binding RecordDataCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}}}" VerticalAlignment="Center"
 Margin="10,0,0,0" Content="记录数据" Width="160"></Button>-->
-            
+
             <Button Style="{StaticResource BtnInfoStyle2}" Command="{Binding UpCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}}}" VerticalAlignment="Center"
 Margin="10,0,0,0" Content="上升" Width="160"></Button>
             <Button Style="{StaticResource BtnInfoStyle2}" Command="{Binding DownCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}}}" VerticalAlignment="Center"
@@ -102,7 +102,7 @@ Margin="10,0,0,0" Content="设置速度" Width="160"></Button>
 Margin="10,0,0,0" Content="清除数据" Width="180"></Button>
             <Button Style="{StaticResource BtnInfoStyle2}" Command="{Binding ExplainCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}}}" VerticalAlignment="Center"
 Margin="10,0,0,0" Content="实验说明" Width="200"></Button>
-            
+            <TextBlock Grid.Row="0" Text="{Binding CMDState}"  FontSize="23" Style="{StaticResource TextBlock_Default}" Margin="20,0,10,0"></TextBlock>
         </StackPanel>
    
     </Grid>

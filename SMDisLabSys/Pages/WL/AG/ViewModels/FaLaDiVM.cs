@@ -81,6 +81,13 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
             set { SetProperty(ref speed, value); }
         }
 
+        string cmdState = "";
+        public string CMDState
+        {
+            get { return cmdState; }
+            set { SetProperty(ref cmdState, value); }
+        }
+
         #endregion
         public FaLaDiVM()
         {
@@ -188,6 +195,8 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
             data.Add(0x00);
             data.Add(0x01);
             SendMethod(data.ToArray());
+
+            CMDState = "已操作  上升";
         }
         void DownCommandMethod()
         {
@@ -200,6 +209,7 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
             data.Add(0x00);
             data.Add(0x02);
             SendMethod(data.ToArray());
+            CMDState = "已操作  下升";
         }
         void StopCommandMethod()
         {
@@ -212,6 +222,7 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
             data.Add(0x00);
             data.Add(0x00);
             SendMethod(data.ToArray());
+            CMDState = "已操作  停止";
         }
         void SetSpeedCommandMethod()
         {
