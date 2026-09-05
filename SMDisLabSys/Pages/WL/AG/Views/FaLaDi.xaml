@@ -75,7 +75,7 @@
                 </lvc:CartesianChart.AxisX>
 
                 <lvc:CartesianChart.AxisY>
-                    <lvc:Axis LabelFormatter="{Binding YFormatter}" DisableAnimations="True" Title="{Binding YLineTitle}" FontSize="20"
+                    <lvc:Axis LabelFormatter="{Binding YFormatter}" MinValue="{Binding MinY}" MaxValue="{Binding MaxY}" DisableAnimations="True" Title="{Binding YLineTitle}" FontSize="20"
       Foreground="{DynamicResource SolidColorBrush_8}">
                         <lvc:Axis.Separator>
                             <lvc:Separator Visibility="Visible" Step="{Binding YStep}" Stroke="#aFB751"  StrokeThickness="1" StrokeDashArray="3,10"/>

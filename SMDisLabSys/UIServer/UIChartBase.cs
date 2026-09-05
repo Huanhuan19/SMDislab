@@ -81,6 +81,18 @@ namespace SMDisLabSys.UIServer
             get { return max; }
             set { SetProperty(ref max, value); }
         }
+        double miny = 0;
+        public double MinY
+        {
+            get { return miny; }
+            set { SetProperty(ref miny, value); }
+        }
+        double maxy = 1;
+        public double MaxY
+        {
+            get { return maxy; }
+            set { SetProperty(ref maxy, value); }
+        }
 
         private ObservableCollection<CheckBoxViewModel> checkBoxItems = new ObservableCollection<CheckBoxViewModel>();
         public ObservableCollection<CheckBoxViewModel> CheckBoxItems
@@ -215,7 +227,7 @@ namespace SMDisLabSys.UIServer
                 }
             });
         }
-        public void AddPointSameMaxMin(double x, double y, int lineIndex)
+        public void AddPointSameMaxYMinY(double x, double y, int lineIndex)
         {
             System.Windows.Application.Current.Dispatcher.Invoke(() =>
             {
@@ -227,13 +239,13 @@ namespace SMDisLabSys.UIServer
                 Diclinevalues.TryGetValue(lineIndex, out linevalue);
                 linevalue.Add(point);
 
-                var max = LineRange.Instance.GetLineMax(linevalue);
-                var min = LineRange.Instance.GetLineMin(linevalue);
-                if (max > Max|| min < Min)
+                var max = LineRange.Instance.GetLineMaxY(linevalue);
+                var min = LineRange.Instance.GetLineMinY(linevalue);
+                if (max > Max || min < Min)
                 {
                     var setValue = Math.Abs(max) > Math.Abs(min) ? Math.Abs(max) : Math.Abs(min);
-                    Max = setValue;
-                    Min = -1 * setValue;
+                    MaxY = setValue;
+                    MinY = -1 * setValue;
                 }
             });
         }
@@ -250,6 +262,12 @@ namespace SMDisLabSys.UIServer
                 Diclinevalues.TryGetValue(lineIndex, out linevalue);
                 linevalue.Add(point);
             });
+        }
+
+        public void CreatLinePointAddCheckBoxItem(string checkBoxTitle)
+        {
+            AddCheckBoxItem(checkBoxTitle);
+            CreatLinePoint();
         }
 
         public void ClearLine()

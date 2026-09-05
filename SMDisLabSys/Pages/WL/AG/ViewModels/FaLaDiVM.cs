@@ -100,6 +100,17 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
             ConnectDevice(BLEName);
 
             ExpDes = @"ExpDes\WL\FLD.docx";
+
+            //CreatLinePointAddCheckBoxItem("速度" + title);
+
+            //AddPointSameMaxYMinY(1, 33, lineIndex - 1);
+            //AddPointSameMaxYMinY(2, 88, lineIndex - 1);
+            //AddPointSameMaxYMinY(3, 188, lineIndex - 1);
+            //CreatLinePointAddCheckBoxItem("速度" + title);
+
+            //AddPointSameMaxYMinY(1, 133, lineIndex - 1);
+            //AddPointSameMaxYMinY(2, 188, lineIndex - 1);
+            //AddPointSameMaxYMinY(3, 138, lineIndex - 1);
         }
         void InitCommand()
         {
@@ -147,11 +158,9 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
                 {
                     title = value[0].ToString();
                 }
-                AddCheckBoxItem("速度" + title);
-                CreatLinePoint();
-
+                CreatLinePointAddCheckBoxItem("速度" + title);
             }
-            else if ((DateTime.Now - dtCreat).TotalSeconds > 3)
+            else if ((DateTime.Now - dtCreat).TotalSeconds > 2)
             {
                 string title = "";
                 args.ParamListDic.TryGetValue(0x203, out value);
@@ -159,12 +168,10 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
                 {
                     title = value[0].ToString();
                 }
-                AddCheckBoxItem("速度" + title);
-                CreatLinePoint();
-
+                CreatLinePointAddCheckBoxItem("速度" + title);
             }
 
-            AddPointSameMaxMin(Index, Voltage - MiddleVol, lineIndex - 1);
+            AddPointSameMaxYMinY(Index, Voltage - MiddleVol, lineIndex - 1);
             dtCreat = DateTime.Now;
         }
 
