@@ -38,6 +38,7 @@ namespace SMDisLabSys.UIServer
             Thread.Sleep(500);//等有无USB数据
             if (SMDataSource.Instance.HidConnected())
             {
+                ConnectItem = "USB 已连接";
                 return;
             }
             Task.Run(() =>
@@ -53,6 +54,8 @@ namespace SMDisLabSys.UIServer
                             List<BluetoothInfo> selectList = new List<BluetoothInfo>();
                             selectList.Add(bluetooth);
                             SMDataSource.Instance.BluetoothConnect(selectList);
+
+                            ConnectItem = "蓝牙 已连接";
                             break;
                         }
 
