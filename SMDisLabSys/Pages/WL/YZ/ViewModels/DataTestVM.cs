@@ -193,6 +193,7 @@ namespace SMDisLabSys.Pages.WL.YZ.ViewModels
                             List<BluetoothInfo> selectList = new List<BluetoothInfo>();
                             selectList.Add(bluetooth);
                             SMDataSource.Instance.BluetoothConnect(selectList);
+                            ConnectItem = $"蓝牙{bluetooth.Adresse} 已连接";
                             break;
                         }
                         
