@@ -19,6 +19,13 @@ namespace SMDisLabSys.UIServer
 
         public string ExpDes = "";
 
+        string connectItem = "未连接";
+        public string ConnectItem
+        {
+            get { return connectItem; }
+            set { SetProperty(ref connectItem, value); }
+        }
+
         public UIBase()
         {
             ExplainCommand = new DelegateCommand(ExplainCommandMethod);

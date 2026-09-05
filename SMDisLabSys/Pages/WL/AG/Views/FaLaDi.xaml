@@ -104,6 +104,6 @@ Margin="10,0,0,0" Content="清除数据" Width="180"></Button>
 Margin="10,0,0,0" Content="实验说明" Width="200"></Button>
             <TextBlock Grid.Row="0" Text="{Binding CMDState}"  FontSize="23" Style="{StaticResource TextBlock_Default}" Margin="20,0,10,0"></TextBlock>
         </StackPanel>
-   
+        <TextBlock  Grid.Row="6" Grid.Column="4" Text="{Binding ConnectItem}"  FontSize="23" Style="{StaticResource TextBlock_Default}" HorizontalAlignment="Right" Margin="20,0,10,0"></TextBlock>
     </Grid>
 </UserControl>

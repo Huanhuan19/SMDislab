@@ -241,7 +241,7 @@ namespace SMDisLabSys.UIServer
 
                 var max = LineRange.Instance.GetLineMaxY(linevalue);
                 var min = LineRange.Instance.GetLineMinY(linevalue);
-                if (max > Max || min < Min)
+                if (max > MaxY || min < MinY)
                 {
                     var setValue = Math.Abs(max) > Math.Abs(min) ? Math.Abs(max) : Math.Abs(min);
                     MaxY = setValue;
