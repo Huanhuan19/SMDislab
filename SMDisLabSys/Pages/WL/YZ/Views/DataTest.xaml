@@ -58,5 +58,6 @@ Margin="20,0,0,0" Content="清除显示" Width="160"></Button>
         <TextBox Grid.Row="5" Grid.ColumnSpan="6" Grid.Column="1" Style="{StaticResource TextBox_DefaultRadius}" Margin="15,5,5,5" Width="1120" Text="{Binding SendStr}"  FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" HorizontalAlignment="Center" />
         <Button Grid.Row="5" Grid.Column="7" Style="{StaticResource BtnInfoStyle2}" Command="{Binding SendCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}}}" VerticalAlignment="Center"
 Margin="0,0,0,0" Content="发送" Width="160"></Button>
+        <TextBlock  Grid.Row="0" Grid.Column="9" Text="{Binding ConnectItem}"  FontSize="23" Style="{StaticResource TextBlock_Default}" HorizontalAlignment="Right" Margin="20,0,10,0"></TextBlock>
     </Grid>
 </UserControl>

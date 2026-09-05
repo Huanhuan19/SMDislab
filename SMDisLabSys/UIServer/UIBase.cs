@@ -55,7 +55,7 @@ namespace SMDisLabSys.UIServer
                             selectList.Add(bluetooth);
                             SMDataSource.Instance.BluetoothConnect(selectList);
 
-                            ConnectItem = "蓝牙 已连接";
+                            ConnectItem = $"蓝牙{bluetooth.Adresse} 已连接";
                             break;
                         }
 

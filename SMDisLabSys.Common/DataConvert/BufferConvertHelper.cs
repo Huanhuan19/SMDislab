@@ -30,7 +30,16 @@ namespace SMDisLabSys.Common.DataConvert
                     break;
                 case 2:
                     {
-                        valueZX = BitConverter.ToInt16(dataBuffer, 0);//有无符号 直接转化;
+                        if (dataBuffer[1] >= 0x80)//负数
+                        {
+                            dataBuffer[1] = (byte)(dataBuffer[1] & 0x7f);
+                            valueZX = BitConverter.ToInt16(dataBuffer, 0);//有无符号 直接转化;
+                            valueZX = -1 * valueZX;
+                        }
+                        else
+                        {
+                            valueZX = BitConverter.ToInt16(dataBuffer, 0);//有无符号 直接转化;
+                        }
                     }
                     break;
                 case 3:
