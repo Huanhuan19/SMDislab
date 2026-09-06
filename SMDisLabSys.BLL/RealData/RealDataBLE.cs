@@ -25,6 +25,7 @@ namespace SMDisLabSys.BLL.RealData
         public class DataParseEventArgs : EventArgs
         {
             public string BLEAddress { get; set; }
+            public byte Channel { get; set; } = 1;
             public ConnectTypeEnum ConnectType { get; set; }
             public Dictionary<int, List<double>> ParamListDic;
             public DataParseEventArgs()

@@ -130,6 +130,14 @@ namespace SMDisLabSys.BLL
                     case 0:
                         ble1 = new BLEDeviceConnect(usbCount, btList[i].MAC, $"ble1", btList[i].Adresse);
                         ble1.DeceiveValueChanged += Ble1_DeceiveValueChanged;
+
+                        //ble1.BleDeleteChanged += Ble1_BleDeleteChanged;
+                        //ble1.AddSensorDataChanged += AddSensorDataChanged;
+                        //Thread.Sleep(100000);
+                        break;
+                    case 1:
+                        ble2 = new BLEDeviceConnect((byte)(usbCount + 1), btList[i].MAC, $"ble2", btList[i].Adresse);
+                        ble2.DeceiveValueChanged += Ble2_DeceiveValueChanged;
                         //ble1.BleDeleteChanged += Ble1_BleDeleteChanged;
                         //ble1.AddSensorDataChanged += AddSensorDataChanged;
                         //Thread.Sleep(100000);
@@ -145,7 +153,12 @@ namespace SMDisLabSys.BLL
         private void Ble1_DeceiveValueChanged(object sender, DeceiveDataArgs e)
         {
             var buffer = e.ReportBuff;
-            ParseHelper.Instance.Parse(buffer, ConnectTypeEnum.BLE, ble1.BLEAdresse);
+            ParseHelper.Instance.Parse(buffer, ConnectTypeEnum.BLE, 1, ble1.BLEAdresse);
+        }
+        private void Ble2_DeceiveValueChanged(object sender, DeceiveDataArgs e)
+        {
+            var buffer = e.ReportBuff;
+            ParseHelper.Instance.Parse(buffer, ConnectTypeEnum.BLE, 2, ble1.BLEAdresse);
         }
 
         public void SendCommandBle(byte[] sendBuffer)
@@ -153,22 +166,36 @@ namespace SMDisLabSys.BLL
             ble1.SendCommand(sendBuffer);
         }
 
-       
+
         #endregion
 
         #region USB
         public Hid hid1 = new Hid();
+        public Hid hid2 = new Hid();
         public void HidStart()
         {
             foreach (var item in PublicStaticInfo.Instance.VIDPIDList)
             {
                 var vidpid = item.Split(":");
-                hid1.CreatHid(Convert.ToUInt16(vidpid[0],16), Convert.ToUInt16(vidpid[1],16));//VID 1FC9;PID 000B
+                hid1.CreatHid(Convert.ToUInt16(vidpid[0], 16), Convert.ToUInt16(vidpid[1], 16), 1);//VID 1FC9;PID 000B
                 if (hid1._device != null)
                 {
                     if (hid1._device.IsConnected)
                     {
                         hid1.DeceiveValueChanged += Hid1_DeceiveValueChanged;
+                        break;
+                    }
+                }
+            }
+            foreach (var item in PublicStaticInfo.Instance.VIDPIDList)
+            {
+                var vidpid = item.Split(":");
+                hid2.CreatHid(Convert.ToUInt16(vidpid[0], 16), Convert.ToUInt16(vidpid[1], 16), 2);//VID 1FC9;PID 000B
+                if (hid2._device != null)
+                {
+                    if (hid2._device.IsConnected)
+                    {
+                        hid2.DeceiveValueChanged += Hid2_DeceiveValueChanged;
                         break;
                     }
                 }
@@ -197,7 +224,11 @@ namespace SMDisLabSys.BLL
         }
         private void Hid1_DeceiveValueChanged(object sender, DeceiveDataArgs e)
         {
-            ParseHelper.Instance.Parse(e.ReportBuff, ConnectTypeEnum.USB);
+            ParseHelper.Instance.Parse(e.ReportBuff, ConnectTypeEnum.USB, 1);
+        }
+        private void Hid2_DeceiveValueChanged(object sender, DeceiveDataArgs e)
+        {
+            ParseHelper.Instance.Parse(e.ReportBuff, ConnectTypeEnum.USB, 2);
         }
         public void SendCommand(byte[] buffer)
         {

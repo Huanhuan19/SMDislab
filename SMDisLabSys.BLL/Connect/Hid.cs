@@ -13,40 +13,28 @@ namespace SMDisLabSys.BLL.Connect
     {
         private static bool _keepReading = true;
         public HidLibrary.HidDevice _device;
-        public void CreatHid(UInt16 vID, UInt16 pID)
+        public void CreatHid(UInt16 vID, UInt16 pID, int hidNo)
         {
-            Creet(vID, pID);
+            Creet(vID, pID, hidNo);
         }
-        async void Creet(UInt16 vID, UInt16 pID)
+        async void Creet(UInt16 vID, UInt16 pID, int hidNo)
         {
             // 获取所有连接的HID设备
             var devices = HidDevices.Enumerate(vID, pID);
             if (devices.Any())
             {
-                _device = devices.First();
+                if (devices.Count() < hidNo)
+                {
+                    return;
+                }
+                _device = devices.ElementAt(hidNo - 1);
                 if (_device != null)
                 {
                     _device.OpenDevice();
 
-
                     // 使用异步读取
                     var readTask = Task.Run(() => ReadContinuously(_device));
-
-                    //// 主线程可以做其他事情
-                    //for (int i = 0; i < 5; i++)
-                    //{
-                    //    Console.WriteLine($"主线程运行中... {i}");
-                    //    await Task.Delay(1000);
-                    //}
-
                     await readTask;
-
-                    //// 启动读取线程
-                    //Thread readThread = new Thread(() => ReadDeviceData(_device));
-                    //readThread.Start();
-                    //readThread.Join();  // 等待读取线程结束
-
-                    ////device.CloseDevice();
                 }
             }
         }

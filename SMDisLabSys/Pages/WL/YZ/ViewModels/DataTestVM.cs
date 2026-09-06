@@ -178,6 +178,7 @@ namespace SMDisLabSys.Pages.WL.YZ.ViewModels
             Thread.Sleep(500);//等有无USB数据
             if (SMDataSource.Instance.HidConnected())
             {
+                ConnectItem = "USB 已连接";
                 return;
             }
             Task.Run(() =>

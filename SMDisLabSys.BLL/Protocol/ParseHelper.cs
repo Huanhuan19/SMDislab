@@ -16,7 +16,7 @@ namespace SMDisLabSys.BLL.Protocol
     {
         public static ParseHelper Instance = new ParseHelper();
         byte[] header = new byte[2] { 0xCE, 0xCB };
-        public void Parse(byte[] buffer, ConnectTypeEnum connectType, string belAddr = "")
+        public void Parse(byte[] buffer, ConnectTypeEnum connectType, byte channel, string belAddr = "")
         {
             try
             {
@@ -34,7 +34,7 @@ namespace SMDisLabSys.BLL.Protocol
                     short win = 0x3;
                     for (byte i = 0; i < sensors; i++)
                     {
-                        if (i!=0)//第一次不移位
+                        if (i != 0)//第一次不移位
                         {
                             placeSensorData = (short)(placeSensorData >> (2));
                         }
@@ -66,6 +66,8 @@ namespace SMDisLabSys.BLL.Protocol
                         dataParseArgs.ParamListDic.Add(sensorId + j, sensorValue[j]);
                     }
                     dataParseArgs.BLEAddress = belAddr;
+                    dataParseArgs.Channel = channel;
+
                     RealDataBLE.Instance.UpdataBLEData(dataParseArgs);
                 }
             }
