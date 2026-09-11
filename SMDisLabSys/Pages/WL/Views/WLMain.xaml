@@ -158,7 +158,7 @@ Margin="10,0,10,10" HorizontalAlignment="Left" >
         
         <Grid Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="5" Background="#f0f0f0" Margin="3,3,10,3"/>
         <Viewbox Height="21" Grid.Row="6" Grid.Column="1" HorizontalAlignment="Left" Margin="0,0,0,0">
-            <RadioButton GroupName="TypeIndentity" Command="{Binding Command}" Content="力的合成与分解" Style="{StaticResource RadioButton_Defaut}" Margin="10,0,0,0"></RadioButton>
+            <RadioButton GroupName="TypeIndentity" Command="{Binding Command}" CommandParameter="LiDeHeCheng" Content="力的合成与分解" Style="{StaticResource RadioButton_Defaut}" Margin="10,0,0,0"></RadioButton>
         </Viewbox>
         
         <Grid Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="5" Background="LightGray" Margin="3,3,10,3"/>

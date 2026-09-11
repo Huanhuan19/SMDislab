@@ -23,6 +23,8 @@ using SMDisLabSys.Pages.WL;
 using SMDisLabSys.Pages.WL.AG.ViewModels;
 using SMDisLabSys.Pages.WL.YZ.Views;
 using SMDisLabSys.Pages.WL.YZ.ViewModels;
+using SMDisLabSys.Pages.WL.KL.Views;
+using SMDisLabSys.Pages.WL.KL.ViewModels;
 
 
 namespace SMDisLabSys
@@ -61,6 +63,7 @@ namespace SMDisLabSys
             containerRegistry.RegisterDialog<DanBai, DanBaiVM>();
             containerRegistry.RegisterDialog<DanBaiNew, DanBaiNewVM>();
             containerRegistry.RegisterDialog<FaLaDi, FaLaDiVM>();
+            containerRegistry.RegisterDialog<LiDeHeCheng, LiDeHeChengVM>();
             containerRegistry.RegisterDialog<DataTest, DataTestVM>();
 
             containerRegistry.Register<IDialogWindow, UcWinSize>(nameof(UcWinSize));
