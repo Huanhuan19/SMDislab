@@ -32,59 +32,46 @@ using MessageBox = System.Windows.MessageBox;
 
 namespace SMDisLabSys.Pages.WL.KL.ViewModels
 {
-    class LiDeHeChengVM : UIChartBase, IDialogAware
+    class LiDeHeChengVM : UIScottPlotBase, IDialogAware
     {
         DateTime dtCreat;
         double xAxis = 0;
 
         public DelegateCommand ClearSelectCommand { get; private set; }
-        public DelegateCommand SendCommand { get; private set; }
+        public DelegateCommand HeLiCommand { get; private set; }
+        public DelegateCommand F1F2Command { get; private set; }
 
         #region 属性
-        double data1;
-        public double Data1
+        double f1;
+        public double F1
         {
-            get { return data1; }
-            set { SetProperty(ref data1, value); }
+            get { return f1; }
+            set { SetProperty(ref f1, value); }
         }
-        double data2;
-        public double Data2
+        double f2;
+        public double F2
         {
-            get { return data2; }
-            set { SetProperty(ref data2, value); }
+            get { return f2; }
+            set { SetProperty(ref f2, value); }
         }
-        double data3;
-        public double Data3
+        double a1;
+        public double A1
         {
-            get { return data3; }
-            set { SetProperty(ref data3, value); }
+            get { return a1; }
+            set { SetProperty(ref a1, value); }
         }
-        double data4;
-        public double Data4
+        double a2;
+        public double A2
         {
-            get { return data4; }
-            set { SetProperty(ref data4, value); }
+            get { return a2; }
+            set { SetProperty(ref a2, value); }
         }
-        double data5;
-        public double Data5
+        double fHe;
+        public double FHe
         {
-            get { return data5; }
-            set { SetProperty(ref data5, value); }
+            get { return fHe; }
+            set { SetProperty(ref fHe, value); }
         }
-        double data6;
-        public double Data6
-        {
-            get { return data6; }
-            set { SetProperty(ref data6, value); }
-        }
-        string sendStr;
-        public string SendStr
-        {
-            get { return sendStr; }
-            set { SetProperty(ref sendStr, value); }
-        }
-
-
 
         #endregion
         public LiDeHeChengVM()
@@ -96,81 +83,48 @@ namespace SMDisLabSys.Pages.WL.KL.ViewModels
         {
             RealDataBLE.Instance.BLEDataUpdated += Instance_BLEDataUpdated;
 
+            HeLiCommand = new DelegateCommand(HeLiCommandMethod);
+            F1F2Command = new DelegateCommand(F1F2CommandMethod);
+
             ClearSelectCommand = new DelegateCommand(ClearSelectCommandMethod);
-            SendCommand = new DelegateCommand(SendCommandMethod);
-
-            //Dictionary<int, List<double>> ParamListDic = new Dictionary<int, List<double>>();
-            //ParamListDic.Add(300, new List<double>() { 1 });
-            //ParamListDic.Add(301, new List<double>() { 2 });
-            //ParamListDic.Add(302, new List<double>() { 3 });
-            //ParamListDic.Add(303, new List<double>() { 4 });
-            //ParamListDic.Add(304, new List<double>() { 5 });
-            //ParamListDic.Add(305, new List<double>() { 6 });
-            //int index = 0;
-
-            //foreach (var item in ParamListDic)
-            //{
-            //    if (index == 0)
-            //    {
-            //        Data1 = item.Value[0];
-            //    }
-            //    if (index == 1)
-            //    {
-            //        Data2 = item.Value[0];
-            //    }
-            //    if (index == 2)
-            //    {
-            //        Data3 = item.Value[0];
-            //    }
-            //    if (index == 3)
-            //    {
-            //        Data4 = item.Value[0];
-            //    }
-            //    if (index == 4)
-            //    {
-            //        Data5 = item.Value[0];
-            //    }
-            //    if (index == 5)
-            //    {
-            //        Data6 = item.Value[0];
-            //    }
-            //    index++;
-            //}
         }
 
         private void Instance_BLEDataUpdated(object? sender, EventArgs e)
         {
             DataParseEventArgs args = (DataParseEventArgs)e;
-            int index = 0;
-            foreach (var item in args.ParamListDic)
+            if (args.Channel == 1)
             {
-                if (index==0)
+                int index = 0;
+                foreach (var item in args.ParamListDic)
                 {
-                    Data1 = item.Value[0];
+                    if (index == 0)
+                    {
+                        Sensor1Value1 = item.Value[0];
+                    }
+                    if (index == 2)
+                    {
+                        Sensor1Value2 = item.Value[0];
+                    }
+                    index++;
                 }
-                if (index == 1)
-                {
-                    Data2 = item.Value[0];
-                }
-                if (index == 2)
-                {
-                    Data3 = item.Value[0];
-                }
-                if (index == 3)
-                {
-                    Data4 = item.Value[0];
-                }
-                if (index == 4)
-                {
-                    Data5 = item.Value[0];
-                }
-                if (index == 5)
-                {
-                    Data6 = item.Value[0];
-                }
-                index++;
             }
-            
+            else if (args.Channel == 2)
+            {
+                int index = 0;
+                foreach (var item in args.ParamListDic)
+                {
+                    if (index == 0)
+                    {
+                        Sensor2Value1 = item.Value[0];
+                    }
+                    if (index == 2)
+                    {
+                        Sensor2Value2 = item.Value[0];
+                    }
+                    index++;
+                }
+            }
+
         }
 
         void ConnectDevice()
@@ -197,7 +151,7 @@ namespace SMDisLabSys.Pages.WL.KL.ViewModels
                             ConnectItem = $"蓝牙{bluetooth.Adresse} 已连接";
                             break;
                         }
-                        
+
                     }
                     Thread.Sleep(500);//50s
 
@@ -205,31 +159,25 @@ namespace SMDisLabSys.Pages.WL.KL.ViewModels
                 }
             });
         }
-        
+
         void ClearSelectCommandMethod()
         {
-            Data1 = 0;
-            Data2 = 0;
-            Data3 = 0;
-            Data4 = 0;
-            Data5 = 0;
-            Data6 = 0;
+
         }
 
-        void SendCommandMethod()
+        void HeLiCommandMethod()
         {
-            var buffer = BufferConvertHelper.HexStringToByteArray(SendStr.Replace(" ", ""));
-            if (SMDataSource.Instance.HidConnected())
-            {
-                SMDataSource.Instance.hid1.SendBuffer(buffer);
-            }
-            else
-            {
-                if (SMDataSource.Instance.BluetoothList.Count > 0)
-                {
-                    SMDataSource.Instance.SendCommandBle(buffer);
-                }
-            }
+            FHe = Sensor1Value1 > Sensor2Value1 ? Sensor1Value1 : Sensor2Value1;
+
+            CreatArrow(0, 0, 0, 1);
+        }
+        void F1F2CommandMethod()
+        {
+            F1 = Sensor1Value1;
+            F2 = Sensor2Value1;
+
+            A1 = Sensor1Value2;
+            A2 = Sensor2Value2;
         }
 
         #region IDialogAware接口实现

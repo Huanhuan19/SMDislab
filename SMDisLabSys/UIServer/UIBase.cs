@@ -19,12 +19,53 @@ namespace SMDisLabSys.UIServer
 
         public string ExpDes = "";
 
+        #region Props
         string connectItem = "未连接";
         public string ConnectItem
         {
             get { return connectItem; }
             set { SetProperty(ref connectItem, value); }
         }
+
+        double sensor1Value1;
+        public double Sensor1Value1
+        {
+            get { return sensor1Value1; }
+            set { SetProperty(ref sensor1Value1, value); }
+        }
+        double sensor1Value2;
+        public double Sensor1Value2
+        {
+            get { return sensor1Value2; }
+            set { SetProperty(ref sensor1Value2, value); }
+        }
+        double sensor1Value3;
+        public double Sensor1Value3
+        {
+            get { return sensor1Value3; }
+            set { SetProperty(ref sensor1Value3, value); }
+        }
+
+        double sensor2Value1;
+        public double Sensor2Value1
+        {
+            get { return sensor2Value1; }
+            set { SetProperty(ref sensor2Value1, value); }
+        }
+        double sensor2Value2;
+        public double Sensor2Value2
+        {
+            get { return sensor2Value2; }
+            set { SetProperty(ref sensor2Value2, value); }
+        }
+        double sensor2Value3;
+        public double Sensor2Value3
+        {
+            get { return sensor2Value3; }
+            set { SetProperty(ref sensor2Value3, value); }
+        }
+        #endregion
+
 
         public UIBase()
         {

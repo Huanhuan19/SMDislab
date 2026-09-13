@@ -24,6 +24,7 @@
 		<PackageReference Include="Prism.Core" Version="8.1.97" />
 		<PackageReference Include="Prism.Unity" Version="8.1.97" />
 		<PackageReference Include="Panuon.UI.Silver" Version="2.2.20" />
+		<PackageReference Include="ScottPlot.WPF" Version="5.0.36" />
 		<PackageReference Include="WpfAnimatedGif" Version="2.0.2" />
 	</ItemGroup>
 
