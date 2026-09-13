@@ -17,10 +17,10 @@
         <Grid.RowDefinitions>
 
             <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="50"></RowDefinition>
-            <RowDefinition Height="100"></RowDefinition>
-            <RowDefinition Height="100"></RowDefinition>
-            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="80"></RowDefinition>
+            <RowDefinition Height="80"></RowDefinition>
+            <RowDefinition Height="80"></RowDefinition>
             <!--<RowDefinition Height="80"></RowDefinition>-->
             <RowDefinition Height="80"></RowDefinition>
         </Grid.RowDefinitions>

@@ -29,6 +29,8 @@ using System.Windows.Threading;
 using Windows.UI.Input.Inking;
 using static SMDisLabSys.BLL.RealData.RealDataBLE;
 using MessageBox = System.Windows.MessageBox;
+using ScottPlot;
+using Colors = ScottPlot.Colors;
 
 namespace SMDisLabSys.Pages.WL.KL.ViewModels
 {
@@ -87,6 +89,8 @@ namespace SMDisLabSys.Pages.WL.KL.ViewModels
             F1F2Command = new DelegateCommand(F1F2CommandMethod);
 
             ClearSelectCommand = new DelegateCommand(ClearSelectCommandMethod);
+
+            CreatArrow(0, 0, 0, 3, Colors.Blue, "F′", 0, 3 * 1.1);
         }
 
         private void Instance_BLEDataUpdated(object? sender, EventArgs e)
@@ -169,7 +173,8 @@ namespace SMDisLabSys.Pages.WL.KL.ViewModels
         {
             FHe = Sensor1Value1 > Sensor2Value1 ? Sensor1Value1 : Sensor2Value1;
 
-            CreatArrow(0, 0, 0, 1);
+            CreatArrow(0, 0, 0, FHe, Colors.Blue, "F′", 0, FHe * 1.1);
+            CreatArrow(0, 0, 0, -1 * FHe, Colors.Red, "F", 0, -1.1 * FHe);
         }
         void F1F2CommandMethod()
         {
@@ -214,7 +219,7 @@ namespace SMDisLabSys.Pages.WL.KL.ViewModels
             //{
             //    Title = (parameters.GetValue<string>("Title"));
             //}
-            Title = "数据测试";
+            Title = "力的合成与分解";
             Width = 1350;
             Height = 820;
         }
