@@ -89,8 +89,6 @@ namespace SMDisLabSys.Pages.WL.KL.ViewModels
             F1F2Command = new DelegateCommand(F1F2CommandMethod);
 
             ClearSelectCommand = new DelegateCommand(ClearSelectCommandMethod);
-
-            CreatArrow(0, 0, 0, 3, Colors.Blue, "F′", 0, 3 * 1.1);
         }
 
         private void Instance_BLEDataUpdated(object? sender, EventArgs e)
