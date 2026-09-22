@@ -15,6 +15,7 @@ namespace SMDisLabSys.UIServer
     {
 
         ObservableCollection<Arrow> ArrowList { get; set; } = new();
+        ObservableCollection<Text> TextList { get; set; } = new();
 
         #region Props
         WpfPlot _plotControl;
@@ -38,10 +39,10 @@ namespace SMDisLabSys.UIServer
             newArrow.ArrowLineColor = color;
             newArrow.ArrowFillColor = color;
 
-            newArrow.ArrowWidth = 5;
-            newArrow.ArrowLineWidth = 0;
+            newArrow.ArrowWidth = 3;
+            newArrow.ArrowLineWidth = 1;
             newArrow.ArrowheadLength = 15;               //箭头三角长度
-            newArrow.ArrowheadWidth = 20;                 //箭头三角宽度
+            newArrow.ArrowheadWidth = 10;                 //箭头三角宽度
 
             ArrowList.Add(newArrow);
 
@@ -49,6 +50,10 @@ namespace SMDisLabSys.UIServer
             txt.LabelFontSize = 25;
             PlotControl.Plot.Axes.AutoScale();
             PlotControl.Refresh(); // 新增后必须刷新
+        }
+        public void CreatMarker(double startX, double startY)
+        {
+            PlotControl.Plot.Add.Marker(startX, startY, MarkerShape.FilledCircle, size: 12, color: Colors.Black);
         }
     }
 }

@@ -41,6 +41,7 @@ namespace SMDisLabSys.Pages.WL.KL.ViewModels
 
         public DelegateCommand ClearSelectCommand { get; private set; }
         public DelegateCommand HeLiCommand { get; private set; }
+        public DelegateCommand F1F2StartCommand { get; private set; }
         public DelegateCommand F1F2Command { get; private set; }
 
         #region 属性
@@ -68,11 +69,17 @@ namespace SMDisLabSys.Pages.WL.KL.ViewModels
             get { return a2; }
             set { SetProperty(ref a2, value); }
         }
-        double fHe;
-        public double FHe
+        string fHe;
+        public string FHe
         {
             get { return fHe; }
             set { SetProperty(ref fHe, value); }
+        }
+        string fHePie;
+        public string FHePie
+        {
+            get { return fHePie; }
+            set { SetProperty(ref fHePie, value); }
         }
 
         #endregion
@@ -86,9 +93,12 @@ namespace SMDisLabSys.Pages.WL.KL.ViewModels
             RealDataBLE.Instance.BLEDataUpdated += Instance_BLEDataUpdated;
 
             HeLiCommand = new DelegateCommand(HeLiCommandMethod);
+            F1F2StartCommand = new DelegateCommand(F1F2StartCommandMethod);
             F1F2Command = new DelegateCommand(F1F2CommandMethod);
 
             ClearSelectCommand = new DelegateCommand(ClearSelectCommandMethod);
+
+            Sensor2Value2 = 9;
         }
 
         private void Instance_BLEDataUpdated(object? sender, EventArgs e)
@@ -169,10 +179,36 @@ namespace SMDisLabSys.Pages.WL.KL.ViewModels
 
         void HeLiCommandMethod()
         {
-            FHe = Sensor1Value1 > Sensor2Value1 ? Sensor1Value1 : Sensor2Value1;
+            var he = Sensor1Value1 > Sensor2Value1 ? Sensor1Value1 : Sensor2Value1;
+            FHe = he.ToString();
 
-            CreatArrow(0, 0, 0, FHe, Colors.Blue, "F′", 0, FHe * 1.1);
-            CreatArrow(0, 0, 0, -1 * FHe, Colors.Red, "F", 0, -1.1 * FHe);
+            FHe = "4";
+            CreatArrow(0, 0, 0, he, Colors.Red, "F′", 0, he * 1.1);
+            CreatArrow(0, 0, 0, -1 * he, Colors.Blue, "F=mg", 0, -1.02 * he);
+            CreatMarker(0, 0);
+
+        }
+        void F1F2StartCommandMethod()
+        {
+            Task.Run(() =>
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    Sensor1Value1 = 2 + i * 0.1;
+                    Sensor1Value2 = 2 + i * 0.2;
+                    A1 = -33 + 0.2 * i;
+                    A2 = 40 + i * 1;
+
+                    var x1 = Sensor1Value1 * Math.Cos((90 - A1) * Math.PI / 180);
+                    var x2 = Sensor1Value2 * Math.Cos((90 + A2) * Math.PI / 180);
+                    var y1 = Sensor1Value1 * Math.Sin((90 - A1) * Math.PI / 180);
+                    var y2 = Sensor1Value2 * Math.Sin((90 + A2) * Math.PI / 180);
+
+                    CreatArrow(0, 0, x1, y1, Colors.Red, "F1", x1 * 1.1, y1 * 1.05);
+                    CreatArrow(0, 0, x2, y2, Colors.Blue, "F2", x2 * 1.1, y2 * 1.05);
+                    Thread.Sleep(2000);
+                }
+            });
         }
         void F1F2CommandMethod()
         {

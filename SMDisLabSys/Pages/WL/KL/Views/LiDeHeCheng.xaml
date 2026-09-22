@@ -17,72 +17,89 @@
         <Grid.RowDefinitions>
 
             <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
             <RowDefinition Height="80"></RowDefinition>
             <RowDefinition Height="80"></RowDefinition>
-            <RowDefinition Height="80"></RowDefinition>
+            <RowDefinition Height="10"></RowDefinition>
             <!--<RowDefinition Height="80"></RowDefinition>-->
             <RowDefinition Height="80"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10"></ColumnDefinition>
-            <ColumnDefinition Width="900"></ColumnDefinition>
-            <ColumnDefinition Width="400"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="10"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid Grid.Row="0" Grid.ColumnSpan="4">
             <Grid.RowDefinitions>
-                <RowDefinition Height="40"></RowDefinition>
+                <RowDefinition Height="10"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
             <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding ChartTitle}" Style="{StaticResource TextBlock_Default}" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
             <!--<sp:WpfPlot x:Name="WpfPlot1" Grid.Row="1" Grid.Column="3" Grid.RowSpan="5" Margin="10 5 5 0" />-->
             <ContentControl Grid.Row="1" Grid.Column="3" Grid.RowSpan="5" Content="{Binding PlotControl}" />
         </Grid>
-        <GroupBox Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Grid.RowSpan="2" BorderThickness="2" FontSize="26" Header="传感器1" Foreground="{DynamicResource SolidColorBrush_11}" BorderBrush="{DynamicResource SolidColorBrush_8}" Margin="10,15,5,-25"/>
-        <GroupBox Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" Grid.RowSpan="2" BorderThickness="2" FontSize="26" Header="传感器2" Foreground="{DynamicResource SolidColorBrush_11}" BorderBrush="{DynamicResource SolidColorBrush_8}" Margin="10,65,5,5"/>
-        <StackPanel Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="3" Style="{StaticResource StackPanel_Center}"  Margin="20,10,0,0" Height="60">
-            <TextBlock Grid.Row="1" Grid.Column="1" Text="F" FontSize="30" Style="{StaticResource TextBlock_Default}" Margin="55,5,5,5" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+        <!--<GroupBox Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Grid.RowSpan="2" BorderThickness="2" FontSize="26" Header="传感器1" Foreground="{DynamicResource SolidColorBrush_11}" BorderBrush="{DynamicResource SolidColorBrush_8}" Margin="10,15,5,-25"/>
+        <GroupBox Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" Grid.RowSpan="2" BorderThickness="2" FontSize="26" Header="传感器2" Foreground="{DynamicResource SolidColorBrush_11}" BorderBrush="{DynamicResource SolidColorBrush_8}" Margin="10,65,5,5"/>-->
+        <StackPanel Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Style="{StaticResource StackPanel_Center}"  Margin="20,10,0,0" Height="60">
+            <TextBlock Grid.Row="1" Grid.Column="1" Text="F1" FontSize="50" Style="{StaticResource TextBlock_Default}" Margin="55,5,5,5" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
             <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource TextBox_DefaultRadius}" Margin="25,5,5,5" Width="160" Text="{Binding Sensor1Value1}"  FontSize="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Center" />
-            <TextBlock Grid.Row="1" Grid.Column="1" Text="Angle" FontSize="30" Style="{StaticResource TextBlock_Default}" Margin="55,5,5,5" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+            <TextBlock Grid.Row="1" Grid.Column="1" Text="(N)" FontSize="50" Style="{StaticResource TextBlock_Default}" Margin="15,5,5,5" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="3" Style="{StaticResource StackPanel_Center}"  Margin="20,10,0,0" Height="60">
+            <TextBlock Grid.Row="1" Grid.Column="1" Text="θ" FontSize="50" Style="{StaticResource TextBlock_Default}" Margin="55,5,5,5" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
             <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource TextBox_DefaultRadius}" Margin="25,5,5,5" Width="160" Text="{Binding Sensor1Value2}"  FontSize="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Center" />
         </StackPanel>
-        <StackPanel Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="3" Style="{StaticResource StackPanel_Center}"  Margin="20,10,0,0" Height="60">
-            <TextBlock Grid.Row="1" Grid.Column="1" Text="F" FontSize="30" Style="{StaticResource TextBlock_Default}" Margin="55,5,5,5" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
-            <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource TextBox_DefaultRadius}" Margin="25,5,5,5" Width="160" Text="{Binding Sensor2Value1}"  FontSize="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Center" />
-            <TextBlock Grid.Row="1" Grid.Column="1" Text="Angle" FontSize="30" Style="{StaticResource TextBlock_Default}" Margin="55,5,5,5" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+        <StackPanel Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" Style="{StaticResource StackPanel_Center}"  Margin="20,10,0,0" Height="60">
+            <TextBlock Grid.Row="1" Grid.Column="1" Text="F2" FontSize="50" Style="{StaticResource TextBlock_Default}" Margin="55,5,5,5" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+            <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource TextBox_DefaultRadius}" Margin="23,5,5,5" Width="160" Text="{Binding Sensor2Value1}"  FontSize="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Center" />
+            <TextBlock Grid.Row="1" Grid.Column="1" Text="(N)" FontSize="50" Style="{StaticResource TextBlock_Default}" Margin="15,5,5,5" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+
+        </StackPanel>
+        <StackPanel Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="3" Style="{StaticResource StackPanel_Center}"  Margin="20,10,0,0" Height="60">
+            <TextBlock Grid.Row="1" Grid.Column="1" Text="θ" FontSize="50" Style="{StaticResource TextBlock_Default}" Margin="55,5,5,5" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
             <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource TextBox_DefaultRadius}" Margin="25,5,5,5" Width="160" Text="{Binding Sensor2Value2}"  FontSize="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Center" />
         </StackPanel>
 
-        <StackPanel Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Style="{StaticResource StackPanel_Center}"  Margin="20,10,0,0" Height="80">
+        <!--<StackPanel Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Style="{StaticResource StackPanel_Center}"  Margin="20,10,0,0" Height="80">
             <TextBlock Grid.Row="1" Grid.Column="1" Text="F1" FontSize="50" Style="{StaticResource TextBlock_Default}" Margin="55,5,5,5" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
             <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource TextBox_DefaultRadius}" Margin="25,5,5,5" Width="160" Text="{Binding F1}"  FontSize="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Center" />
             <TextBlock Grid.Row="1" Grid.Column="1" Text="(N)" FontSize="50" Style="{StaticResource TextBlock_Default}" Margin="15,5,5,5" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
             <TextBlock Grid.Row="1" Grid.Column="1" Text="Angle" FontSize="45" Style="{StaticResource TextBlock_Default}" Margin="55,5,5,5" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
             <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource TextBox_DefaultRadius}" Margin="25,5,5,5" Width="160" Text="{Binding A1}"  FontSize="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Center" />
-            <!--<TextBlock Grid.Row="1" Grid.Column="1" Text="(N)" FontSize="50" Style="{StaticResource TextBlock_Default}" Margin="15,5,5,5" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>-->
-        </StackPanel>
-        <StackPanel Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" Style="{StaticResource StackPanel_Center}"  Margin="20,10,0,0" Height="80">
+            -->
+        <!--<TextBlock Grid.Row="1" Grid.Column="1" Text="(N)" FontSize="50" Style="{StaticResource TextBlock_Default}" Margin="15,5,5,5" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>-->
+        <!--
+        </StackPanel>-->
+        <!--<StackPanel Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" Style="{StaticResource StackPanel_Center}"  Margin="20,10,0,0" Height="80">
             <TextBlock Grid.Row="1" Grid.Column="1" Text="F2" FontSize="50" Style="{StaticResource TextBlock_Default}" Margin="55,5,5,5" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
             <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource TextBox_DefaultRadius}" Margin="25,5,5,5" Width="160" Text="{Binding F2}"  FontSize="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Center" />
             <TextBlock Grid.Row="1" Grid.Column="1" Text="(N)" FontSize="50" Style="{StaticResource TextBlock_Default}" Margin="15,5,5,5" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
             <TextBlock Grid.Row="1" Grid.Column="1" Text="Angle" FontSize="45" Style="{StaticResource TextBlock_Default}" Margin="55,5,5,5" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
             <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource TextBox_DefaultRadius}" Margin="25,5,5,5" Width="160" Text="{Binding A2}"  FontSize="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Center" />
+        </StackPanel>-->
+        <StackPanel Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="3" Style="{StaticResource StackPanel_Center}"  Margin="20,10,0,0" Height="80">
+            <TextBlock Grid.Row="1" Grid.Column="1" Text="F" FontSize="50" Style="{StaticResource TextBlock_Default}" Margin="55,5,0,5" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+            <TextBlock Grid.Row="1" Grid.Column="1" Text="合" FontSize="30" Style="{StaticResource TextBlock_Default}" Margin="0,25,5,5" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+            <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource TextBox_DefaultRadius}" Margin="30,5,5,5" Width="160" Text="{Binding FHe}"  FontSize="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Center" />
+            <TextBlock Grid.Row="1" Grid.Column="1" Text="(N)" FontSize="50" Style="{StaticResource TextBlock_Default}" Margin="15,5,5,5" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
         </StackPanel>
-        <StackPanel Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" Style="{StaticResource StackPanel_Center}"  Margin="20,10,0,0" Height="80">
-            <TextBlock Grid.Row="1" Grid.Column="1" Text="F" FontSize="80" Style="{StaticResource TextBlock_Default}" Margin="55,5,5,5" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
-            <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource TextBox_DefaultRadius}" Margin="40,5,5,5" Width="160" Text="{Binding FHe}"  FontSize="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Center" />
+        <StackPanel Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="3" Style="{StaticResource StackPanel_Center}"  Margin="20,10,0,0" Height="80">
+            <TextBlock Grid.Row="1" Grid.Column="1" Text="F′" FontSize="50" Style="{StaticResource TextBlock_Default}" Margin="55,5,5,5" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+            <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource TextBox_DefaultRadius}" Margin="46,5,5,5" Width="160" Text="{Binding FHePie}"  FontSize="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Center" />
             <TextBlock Grid.Row="1" Grid.Column="1" Text="(N)" FontSize="50" Style="{StaticResource TextBlock_Default}" Margin="15,5,5,5" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
         </StackPanel>
         <StackPanel Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="3" Style="{StaticResource StackPanel_Center}"  Margin="0,0,0,0" Height="60">
             <Button Style="{StaticResource BtnInfoStyle2}" Command="{Binding HeLiCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}}}" VerticalAlignment="Center"
 Margin="10,0,0,0" Content="合力采集" Width="160"></Button>
-            <Button Style="{StaticResource BtnInfoStyle2}" Command="{Binding ClearSelectCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}}}" VerticalAlignment="Center"
+            <Button Style="{StaticResource BtnInfoStyle2}" Command="{Binding F1F2StartCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}}}" VerticalAlignment="Center"
+Margin="10,0,0,0" Content="F1、F2开始采集" Width="200"></Button>
+            <Button Style="{StaticResource BtnInfoStyle2}" Command="{Binding F1F2Command}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}}}" VerticalAlignment="Center"
 Margin="10,0,0,0" Content="F1、F2采集" Width="180"></Button>
             <Button Style="{StaticResource BtnInfoStyle2}" Command="{Binding TAndLCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}}}" VerticalAlignment="Center"
 Margin="10,0,0,0" Content="理论合理" Width="160"></Button>
-            <Button Style="{StaticResource BtnInfoStyle2}" Command="{Binding TAndLCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}}}" VerticalAlignment="Center"
+            <Button Style="{StaticResource BtnInfoStyle2}" Command="{Binding ClearSelectCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}}}" VerticalAlignment="Center"
 Margin="10,0,0,0" Content="清屏" Width="160"></Button>
             <Button Style="{StaticResource BtnInfoStyle2}" Command="{Binding ExplainCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}}}" VerticalAlignment="Center"
 Margin="10,0,0,0" Content="实验说明" Width="200"></Button>
