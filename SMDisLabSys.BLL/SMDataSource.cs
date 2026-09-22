@@ -45,7 +45,6 @@ namespace SMDisLabSys.BLL
         }
         void InitBLE()
         {
-            Thread.Sleep(500);
             ble = new BLEDeviceConnect(0, "", "", "");
             ble.BleWarchingChanged += Ble_BleWarchingChanged;
 
@@ -120,7 +119,7 @@ namespace SMDisLabSys.BLL
         {
             ConnectLog(btList);
             BLEDispose();
-            Thread.Sleep(1000);
+            Thread.Sleep(100);
             sensorBuffer.RemoveAll(o => o.connectName.Contains("ble"));
             byte usbCount = 0;
             for (int i = 0; i < btList.Count; i++)

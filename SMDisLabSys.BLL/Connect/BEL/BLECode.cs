@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using SMDisLabSys.Common.DataConvert;
 using SMDisLabSys.Common;
 using Windows.Devices.Bluetooth;
+using Windows.Devices.Bluetooth.Advertisement;
 using Windows.Devices.Bluetooth.GenericAttributeProfile;
 using Windows.Devices.Enumeration;
 using Windows.Foundation;
@@ -39,7 +40,9 @@ namespace SMDisLabSys.BLL
 
         private Boolean asyncLock = false;
 
-        private DeviceWatcher deviceWatcher;
+        private BluetoothLEAdvertisementWatcher advertisementWatcher;
+        private readonly HashSet<ulong> discoveredAddresses = new HashSet<ulong>();
+        private readonly object discoverLock = new object();
 
 
 
@@ -58,68 +61,89 @@ namespace SMDisLabSys.BLL
             NotifyCharacteristicGuid = notifyCharacteristicGuid;
         }
 
+        /// <summary>
+        /// 使用广播扫描快速发现 BLE 设备（Active 模式通常可在 1s 内收到名称）。
+        /// 替代原先 DeviceWatcher/AssociationEndpoint，避免 Windows 枚举设备耗时可达数十秒的问题。
+        /// </summary>
         public void StartBleDeviceWatcher()
         {
             try
             {
+                StopBleDeviceWatcher();
+                lock (discoverLock)
+                {
+                    discoveredAddresses.Clear();
+                }
 
-
-                string[] requestedProperties = { "System.Devices.Aep.DeviceAddress", "System.Devices.Aep.IsConnected", "System.Devices.Aep.Bluetooth.Le.IsConnectable" };
-                string aqsAllBluetoothLEDevices = "(System.Devices.Aep.ProtocolId:=\"{bb7bb05e-5972-42b5-94fc-76eaa7084d49}\")";
-                string[] requestedProperties2 = { "System.Devices.Aep.DeviceAddress" };
-
-                deviceWatcher =
-                        DeviceInformation.CreateWatcher(
-                            aqsAllBluetoothLEDevices,
-                            requestedProperties,
-                            DeviceInformationKind.AssociationEndpoint);
-                //deviceWatcher = DeviceInformation.CreateWatcher(DeviceClas);
-                //deviceWatcher = DeviceInformation.CreateWatcher(aqsAllBluetoothLEDevices);
-                // deviceWatcher = DeviceInformation.CreateWatcher();
-                // Register event handlers before starting the watcher.
-                deviceWatcher.Added += DeviceWatcher_Added;
-                deviceWatcher.Stopped += DeviceWatcher_Stopped;
-                deviceWatcher.Start();
-                //string msg = "自动发现设备中..";
-
-                //ValueChanged(MsgType.NotifyTxt, msg);
+                advertisementWatcher = new BluetoothLEAdvertisementWatcher
+                {
+                    ScanningMode = BluetoothLEScanningMode.Active
+                };
+                advertisementWatcher.Received += AdvertisementWatcher_Received;
+                advertisementWatcher.Stopped += AdvertisementWatcher_Stopped;
+                advertisementWatcher.Start();
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
 
-
-        private void DeviceWatcher_Stopped(DeviceWatcher sender, object args)
+        public void StopBleDeviceWatcher()
         {
-            //string msg = "自动发现设备停止";
-            //ValueChanged(MsgType.NotifyTxt, msg);
-        }
-
-        private void DeviceWatcher_Added(DeviceWatcher sender, DeviceInformation args)
-        {
-            if (args.Name.Length < 3)
+            if (advertisementWatcher == null)
             {
                 return;
             }
-            LogMgr.Instance.Info($"查询到 {args.Name} 蓝牙");
-            switch (args.Name.Substring(0, 3))
+            try
             {
-                //case "A5":
-                //case "B5":
-                //case "C5":
-                //case "A0":
-                //case "B0":
-                //case "C0":
-                //case "WC"://2021新协议 WCY开头
-                case "SHM":
-                    ValueChanged(MsgType.AddBluetooth, null, new BluetoothInfo() { Adresse = args.Name, MAC = args.Id });
-                    break;
-                default:
-                    break;
+                advertisementWatcher.Received -= AdvertisementWatcher_Received;
+                advertisementWatcher.Stopped -= AdvertisementWatcher_Stopped;
+                var status = advertisementWatcher.Status;
+                if (status == BluetoothLEAdvertisementWatcherStatus.Started)
+                {
+                    advertisementWatcher.Stop();
+                }
             }
+            catch
+            {
+                // ignore stop errors during teardown/restart
+            }
+            finally
+            {
+                advertisementWatcher = null;
+            }
+        }
+
+        private void AdvertisementWatcher_Stopped(BluetoothLEAdvertisementWatcher sender, BluetoothLEAdvertisementWatcherStoppedEventArgs args)
+        {
+        }
+
+        private void AdvertisementWatcher_Received(BluetoothLEAdvertisementWatcher sender, BluetoothLEAdvertisementReceivedEventArgs args)
+        {
+            string name = args.Advertisement?.LocalName;
+            if (string.IsNullOrEmpty(name) || name.Length < 3)
+            {
+                return;
+            }
+
+            if (!name.StartsWith("SHM", StringComparison.Ordinal))
+            {
+                return;
+            }
+
+            lock (discoverLock)
+            {
+                if (!discoveredAddresses.Add(args.BluetoothAddress))
+                {
+                    return;
+                }
+            }
+
+            // MAC 存为 12 位十六进制地址，连接时走 FromBluetoothAddressAsync
+            string macHex = args.BluetoothAddress.ToString("X12");
+            LogMgr.Instance.Info($"查询到 {name} 蓝牙");
+            ValueChanged(MsgType.AddBluetooth, null, new BluetoothInfo() { Adresse = name, MAC = macHex });
         }
 
         /// <summary>
@@ -159,20 +183,38 @@ namespace SMDisLabSys.BLL
 
         private async Task Matching(string Id)
         {
-
             try
             {
-                BluetoothLEDevice.FromIdAsync(Id).Completed = async (asyncInfo, asyncStatus) =>
+                if (TryParseBluetoothAddress(Id, out ulong bluetoothAddress))
                 {
-                    if (asyncStatus == AsyncStatus.Completed)
+                    BluetoothLEDevice.FromBluetoothAddressAsync(bluetoothAddress).Completed = async (asyncInfo, asyncStatus) =>
                     {
-                        BluetoothLEDevice bleDevice = asyncInfo.GetResults();
-                        //在当前设备变量中保存检测到的设备。
-                        CurrentDevice = bleDevice;
-                        await Connect();
-
-                    }
-                };
+                        if (asyncStatus == AsyncStatus.Completed)
+                        {
+                            BluetoothLEDevice bleDevice = asyncInfo.GetResults();
+                            if (bleDevice == null)
+                            {
+                                StartBleDeviceWatcher();
+                                return;
+                            }
+                            CurrentDevice = bleDevice;
+                            await Connect();
+                        }
+                    };
+                }
+                else
+                {
+                    // 兼容旧的 DeviceInformation.Id
+                    BluetoothLEDevice.FromIdAsync(Id).Completed = async (asyncInfo, asyncStatus) =>
+                    {
+                        if (asyncStatus == AsyncStatus.Completed)
+                        {
+                            BluetoothLEDevice bleDevice = asyncInfo.GetResults();
+                            CurrentDevice = bleDevice;
+                            await Connect();
+                        }
+                    };
+                }
             }
             catch (Exception e)
             {
@@ -180,7 +222,28 @@ namespace SMDisLabSys.BLL
                 //ValueChanged(MsgType.NotifyTxt, msg);
                 StartBleDeviceWatcher();
             }
+        }
 
+        private static bool TryParseBluetoothAddress(string id, out ulong address)
+        {
+            address = 0;
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                return false;
+            }
+            // DeviceInformation.Id 形如 BluetoothLE#BluetoothLE..-..
+            if (id.IndexOf("BluetoothLE#", StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                return false;
+            }
+
+            string cleaned = id.Replace(":", string.Empty).Replace("-", string.Empty).Trim();
+            if (cleaned.Length != 12)
+            {
+                return false;
+            }
+
+            return ulong.TryParse(cleaned, System.Globalization.NumberStyles.HexNumber, null, out address);
         }
 
         private async Task Connect()
@@ -199,7 +262,7 @@ namespace SMDisLabSys.BLL
         /// <returns></returns>
         public void Dispose()
         {
-
+            StopBleDeviceWatcher();
             CurrentDeviceMAC = null;
             CurrentService?.Dispose();
             CurrentDevice?.Dispose();
@@ -209,7 +272,6 @@ namespace SMDisLabSys.BLL
             CurrentNotifyCharacteristic = null;
             IsConnected = false;
             //ValueChanged(MsgType.NotifyTxt, "主动断开连接");
-
         }
 
         private void CurrentDevice_ConnectionStatusChanged(BluetoothLEDevice sender, object args)
