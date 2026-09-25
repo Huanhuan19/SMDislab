@@ -70,6 +70,7 @@ namespace SMDisLabSys.ViewModels
         {
             main = mainWindow;
             SystemInit.Instance.Init();
+            SMDataSource.Instance.EnableUsbHotPlug(mainWindow);
             SensorCollection.Instance.LoadSensor(DefaultSensorDefineFileName);
         }
         string DefaultSensorDefineFileName
