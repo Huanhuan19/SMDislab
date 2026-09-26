@@ -31,6 +31,7 @@ using static SMDisLabSys.BLL.RealData.RealDataBLE;
 using MessageBox = System.Windows.MessageBox;
 using ScottPlot;
 using Colors = ScottPlot.Colors;
+using Newtonsoft.Json.Linq;
 
 namespace SMDisLabSys.Pages.WL.KL.ViewModels
 {
@@ -43,6 +44,8 @@ namespace SMDisLabSys.Pages.WL.KL.ViewModels
         public DelegateCommand HeLiCommand { get; private set; }
         public DelegateCommand F1F2StartCommand { get; private set; }
         public DelegateCommand F1F2Command { get; private set; }
+
+        public DelegateCommand LiLunHeCommand { get; private set; }
 
         #region 属性
         double f1;
@@ -83,10 +86,14 @@ namespace SMDisLabSys.Pages.WL.KL.ViewModels
         }
 
         #endregion
+
+        CancellationTokenSource cts = new CancellationTokenSource();
         public LiDeHeChengVM()
         {
             InitCommand();
             ConnectDevice();
+
+            SetAxis(-14, 14, -5, 5);
         }
         void InitCommand()
         {
@@ -95,10 +102,11 @@ namespace SMDisLabSys.Pages.WL.KL.ViewModels
             HeLiCommand = new DelegateCommand(HeLiCommandMethod);
             F1F2StartCommand = new DelegateCommand(F1F2StartCommandMethod);
             F1F2Command = new DelegateCommand(F1F2CommandMethod);
+            LiLunHeCommand = new DelegateCommand(LiLunHeCommandMethod);
 
             ClearSelectCommand = new DelegateCommand(ClearSelectCommandMethod);
 
-            Sensor2Value2 = 9;
+            Sensor2Value1 = 3;
         }
 
         private void Instance_BLEDataUpdated(object? sender, EventArgs e)
@@ -190,33 +198,81 @@ namespace SMDisLabSys.Pages.WL.KL.ViewModels
         }
         void F1F2StartCommandMethod()
         {
+
             Task.Run(() =>
             {
-                for (int i = 0; i < 10; i++)
+                try
                 {
-                    Sensor1Value1 = 2 + i * 0.1;
-                    Sensor1Value2 = 2 + i * 0.2;
-                    A1 = -33 + 0.2 * i;
-                    A2 = 40 + i * 1;
+                    CancellationToken token = cts.Token;
+                    while (true)
+                    {
+                        if (token.IsCancellationRequested)//停止任务使用
+                        {
+                            token.ThrowIfCancellationRequested();
+                        }
+                        RemoveArrowAndTextOver(2);
 
-                    var x1 = Sensor1Value1 * Math.Cos((90 - A1) * Math.PI / 180);
-                    var x2 = Sensor1Value2 * Math.Cos((90 + A2) * Math.PI / 180);
-                    var y1 = Sensor1Value1 * Math.Sin((90 - A1) * Math.PI / 180);
-                    var y2 = Sensor1Value2 * Math.Sin((90 + A2) * Math.PI / 180);
+                        Sensor1Value1 = 3;
+                        Sensor2Value1 = 3;
 
-                    CreatArrow(0, 0, x1, y1, Colors.Red, "F1", x1 * 1.1, y1 * 1.05);
-                    CreatArrow(0, 0, x2, y2, Colors.Blue, "F2", x2 * 1.1, y2 * 1.05);
-                    Thread.Sleep(2000);
+                        Sensor1Value2 = 30;
+                        Sensor2Value2 = -60;
+
+                        var x1 = Sensor1Value1 * Math.Cos((90 - Sensor1Value2) * Math.PI / 180);
+                        var y1 = Sensor1Value1 * Math.Sin((90 - Sensor1Value2) * Math.PI / 180);
+
+                        var x2 = Sensor2Value1 * Math.Cos((90 - Sensor2Value2) * Math.PI / 180);
+                        var y2 = Sensor2Value1 * Math.Sin((90 - Sensor2Value2) * Math.PI / 180);
+
+                        CreatArrow(0, 0, x1, y1, Colors.Green, "F1", x1 * 1.1, y1 * 1.05);
+                        CreatArrow(0, 0, x2, y2, Colors.Orange, "F2", x2 * 1.1, y2 * 1.05);
+                        Thread.Sleep(1000);
+                    }
+                }
+                catch (Exception)
+                {
                 }
             });
         }
         void F1F2CommandMethod()
         {
+            cts.Cancel();
+
             F1 = Sensor1Value1;
             F2 = Sensor2Value1;
 
             A1 = Sensor1Value2;
             A2 = Sensor2Value2;
+
+            RemoveArrowAndTextOver(2);
+
+            var x1 = F1 * Math.Cos((90 - A1) * Math.PI / 180);
+            var y1 = F1 * Math.Sin((90 - A1) * Math.PI / 180);
+
+            var x2 = F2 * Math.Cos((90 - A2) * Math.PI / 180);
+            var y2 = F2 * Math.Sin((90 - A2) * Math.PI / 180);
+
+            CreatArrow(0, 0, x1, y1, Colors.Green, "F1", x1 * 1.1, y1 * 1.05);
+            CreatArrow(0, 0, x2, y2, Colors.Orange, "F2", x2 * 1.1, y2 * 1.05);
+
+
+
+            Thread.Sleep(1000);
+        }
+
+        void LiLunHeCommandMethod()
+        {
+            var x1 = F1 * Math.Cos((90 - A1) * Math.PI / 180);
+            var y1 = F1 * Math.Sin((90 - A1) * Math.PI / 180);
+
+            var x2 = F2 * Math.Cos((90 - A2) * Math.PI / 180);
+            var y2 = F2 * Math.Sin((90 - A2) * Math.PI / 180);
+
+            var xhe = x1 + x2;
+            var yhe = y1 + y2;
+            CreatLineDashed(x1, y1, xhe, yhe);
+            CreatLineDashed(x2, y2, xhe, yhe);
+            CreatArrow(0, 0, xhe, yhe, Colors.Brown, "F", x2 * 1.1, y2 * 1.05);
         }
 
         #region IDialogAware接口实现

@@ -97,7 +97,7 @@ Margin="10,0,0,0" Content="合力采集" Width="160"></Button>
 Margin="10,0,0,0" Content="F1、F2开始采集" Width="200"></Button>
             <Button Style="{StaticResource BtnInfoStyle2}" Command="{Binding F1F2Command}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}}}" VerticalAlignment="Center"
 Margin="10,0,0,0" Content="F1、F2采集" Width="180"></Button>
-            <Button Style="{StaticResource BtnInfoStyle2}" Command="{Binding TAndLCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}}}" VerticalAlignment="Center"
+            <Button Style="{StaticResource BtnInfoStyle2}" Command="{Binding LiLunHeCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}}}" VerticalAlignment="Center"
 Margin="10,0,0,0" Content="理论合理" Width="160"></Button>
             <Button Style="{StaticResource BtnInfoStyle2}" Command="{Binding ClearSelectCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}}}" VerticalAlignment="Center"
 Margin="10,0,0,0" Content="清屏" Width="160"></Button>
