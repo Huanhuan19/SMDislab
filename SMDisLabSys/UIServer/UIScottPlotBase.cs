@@ -36,6 +36,26 @@ namespace SMDisLabSys.UIServer
             PlotControl.Plot.Axes.SetLimits(minX, maxX, minY, maxY);
             PlotControl.Refresh(); // 新增后必须刷新
         }
+        public void CreatDashArrow(double startX, double startY, double endX, double endY, Color color, string title = "", double titleX = 0, double titleY = 0)
+        {
+            System.Windows.Application.Current.Dispatcher.Invoke(() =>
+            {
+                // 示例：新增一个蓝色箭头
+                var newArrow = PlotControl.Plot.Add.Arrow(startX, startY, endX, endY);
+                newArrow.ArrowShape = ArrowShape.Single.GetShape();
+                newArrow.ArrowLineColor = color;
+                newArrow.ArrowFillColor = color;
+
+                newArrow.ArrowWidth = 0.1f;
+                newArrow.ArrowLineWidth = 1;
+                newArrow.ArrowheadLength = 15;               //箭头三角长度
+                newArrow.ArrowheadWidth = 10;                 //箭头三角宽度
+
+                PlotControl.Refresh(); // 新增后必须刷新
+
+                CreatPlotText(title, titleX, titleY);
+            });
+        }
 
         public void CreatArrow(double startX, double startY, double endX, double endY, Color color, string title = "", double titleX = 0, double titleY = 0)
         {
