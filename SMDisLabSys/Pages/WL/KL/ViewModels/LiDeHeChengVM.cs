@@ -189,7 +189,6 @@ namespace SMDisLabSys.Pages.WL.KL.ViewModels
         void HeLiCommandMethod()
         {
             var he = Sensor1Value1 > Sensor2Value1 ? Sensor1Value1 : Sensor2Value1;
-            he = 3;
             FHePie = he.ToString();
 
             double maxY = he * 1.3;
