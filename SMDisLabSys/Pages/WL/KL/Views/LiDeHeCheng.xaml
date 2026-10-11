@@ -47,7 +47,7 @@
             <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource TextBox_DefaultRadius}" Margin="25,5,5,5" Width="160" Text="{Binding Sensor1Value1 , StringFormat={}{0:F0}N}"  FontSize="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Center" />
         </StackPanel>
         <StackPanel Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="3" Style="{StaticResource StackPanel_Center}"  Margin="20,10,0,0" Height="60">
-            <TextBlock Grid.Row="1" Grid.Column="1" Text="θ1" FontSize="50" Style="{StaticResource TextBlock_Default}" Margin="55,5,5,5" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+            <TextBlock Grid.Row="1" Grid.Column="1" Text="θ₁" FontSize="50" Style="{StaticResource TextBlock_Default}" Margin="55,5,5,5" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
             <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource TextBox_DefaultRadius}" Margin="25,5,5,5" Width="160" Text="{Binding Sensor1Value2 , StringFormat={}{0:F0}°}"  FontSize="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Center" />
         </StackPanel>
         <StackPanel Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" Style="{StaticResource StackPanel_Center}"  Margin="20,10,0,0" Height="60">
@@ -56,7 +56,7 @@
 
         </StackPanel>
         <StackPanel Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="3" Style="{StaticResource StackPanel_Center}"  Margin="20,10,0,0" Height="60">
-            <TextBlock Grid.Row="1" Grid.Column="1" Text="θ2" FontSize="50" Style="{StaticResource TextBlock_Default}" Margin="55,5,5,5" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+            <TextBlock Grid.Row="1" Grid.Column="1" Text="θ₂" FontSize="50" Style="{StaticResource TextBlock_Default}" Margin="55,5,5,5" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
             <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource TextBox_DefaultRadius}" Margin="25,5,5,5" Width="160" Text="{Binding Sensor2Value2 , StringFormat={}{0:F0}°}"  FontSize="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Center" />
         </StackPanel>
 
