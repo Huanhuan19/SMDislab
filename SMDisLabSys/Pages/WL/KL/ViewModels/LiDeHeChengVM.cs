@@ -218,11 +218,11 @@ namespace SMDisLabSys.Pages.WL.KL.ViewModels
                         }
                         RemoveArrowAndTextOver(2);
 
-                        Sensor1Value1 = 2.3 + count * 0.1;
-                        Sensor2Value1 = 2 + count * 0.1;
+                        //Sensor1Value1 = 2.3 + count * 0.1;
+                        //Sensor2Value1 = 2 + count * 0.1;
 
-                        Sensor1Value2 = 30;
-                        Sensor2Value2 = -60;
+                        //Sensor1Value2 = 30;
+                        //Sensor2Value2 = -60;
 
                         var x1 = -Sensor1Value1 * Math.Cos((90 - Sensor1Value2) * Math.PI / 180);
                         var y1 = Sensor1Value1 * Math.Sin((90 - Sensor1Value2) * Math.PI / 180);
