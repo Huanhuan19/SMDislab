@@ -52,9 +52,20 @@ namespace SMDisLabSys.UIServer
                 newArrow.ArrowheadLength = 15;               //箭头三角长度
                 newArrow.ArrowheadWidth = 10;                 //箭头三角宽度
 
+                PlotControl.Refresh(); // 新增后必须刷新
 
+                CreatPlotText(title, titleX, titleY);
+            });
+        }
+        public void CreatPlotText(string title, double titleX, double titleY, float fontSize = 25)
+        {
+            System.Windows.Application.Current.Dispatcher.Invoke(() =>
+            {
+                string fontName = Fonts.Detect(title);
                 var txt = PlotControl.Plot.Add.Text(title, titleX, titleY);
-                txt.LabelFontSize = 25;
+                txt.LabelFontSize = fontSize;
+                txt.LabelFontName = fontName;
+
 
                 //PlotControl.Plot.Axes.AutoScale();
                 PlotControl.Refresh(); // 新增后必须刷新

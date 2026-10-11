@@ -218,8 +218,8 @@ namespace SMDisLabSys.Pages.WL.KL.ViewModels
                         }
                         RemoveArrowAndTextOver(2);
 
-                        Sensor1Value1 = 2.3+ count*0.1;
-                        Sensor2Value1 = 2+count * 0.1;
+                        Sensor1Value1 = 2.3 + count * 0.1;
+                        Sensor2Value1 = 2 + count * 0.1;
 
                         Sensor1Value2 = 30;
                         Sensor2Value2 = -60;
@@ -230,8 +230,11 @@ namespace SMDisLabSys.Pages.WL.KL.ViewModels
                         var x2 = -Sensor2Value1 * Math.Cos((90 - Sensor2Value2) * Math.PI / 180);
                         var y2 = Sensor2Value1 * Math.Sin((90 - Sensor2Value2) * Math.PI / 180);
 
-                        CreatArrow(0, 0, x1, y1, Colors.Green, "F1", x1 * 1.1, y1 * 1.05);
+                        CreatArrow(0, 0, x1, y1, Colors.Brown, "F1", x1 * 1.1, y1 * 1.05);
                         CreatArrow(0, 0, x2, y2, Colors.Orange, "F2", x2 * 1.1, y2 * 1.05);
+
+                        CreatPlotText("θ1", x1 * 0.22, y1 * 0.33, 18);
+                        CreatPlotText("θ2", x2 * 0.12, y2 * 0.33, 18);
 
                         F1 = Sensor1Value1;
                         F2 = Sensor2Value1;
@@ -244,14 +247,14 @@ namespace SMDisLabSys.Pages.WL.KL.ViewModels
                         CreatLineDashed(x1, y1, xhe, yhe);
                         CreatLineDashed(x2, y2, xhe, yhe);
 
-                        CreatArrow(0, 0, xhe, yhe, Colors.Green, "F", xhe * 1.1, yhe * 1.05);
+                        CreatArrow(0, 0, xhe, yhe, Colors.Green, "F合", xhe * 1.1, yhe * 1.05);
                         Thread.Sleep(1000);
                     }
                 }
                 catch (Exception)
                 {
                 }
-        });
+            });
         }
         void F1F2CommandMethod()
         {
