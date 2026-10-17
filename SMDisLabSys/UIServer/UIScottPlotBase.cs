@@ -117,6 +117,36 @@ namespace SMDisLabSys.UIServer
             });
         }
 
+        public void CreatArc(double startA, double sweepA, string title, double arcR = 1)
+        {
+            System.Windows.Application.Current.Dispatcher.Invoke(() =>
+            {
+                // 角度顶点（圆心）
+                Coordinates center = new(0, 0);
+                // 圆弧半径（角标大小）
+                double arcRadius = arcR;
+                // 起始角度、扫过角度（单位：度）
+                Angle startAngle = Angle.FromDegrees(startA);
+                Angle sweepAngle = Angle.FromDegrees(sweepA); // 总共60°角
+                                                              // ========== 1. 画角度弧线（核心：Arc） ==========
+                var arc = PlotControl.Plot.Add.Arc(center, arcRadius, startAngle, sweepAngle);
+                arc.LineWidth = 1f;
+                arc.LineColor = Colors.DarkBlue;
+
+                // ========== 3. 添加角度文字标注 ==========
+                // 文字放在圆弧中间位置
+                Angle midAngle = startAngle + sweepAngle / 2;
+                double textR = arcRadius + 0.25;
+                double tx = center.X + textR * Math.Cos(midAngle.Radians);
+                double ty = center.Y + textR * Math.Sin(midAngle.Radians);
+
+                CreatPlotText(title, tx, ty, Colors.DarkRed, 20);
+
+                //// 关键！正方形坐标轴，圆弧不会被拉伸变成椭圆
+                //PlotControl.Plot.Axes.SquareUnits();
+            });
+
+        }
         #endregion
 
 
@@ -193,7 +223,11 @@ namespace SMDisLabSys.UIServer
         #endregion
 
 
-
+        public void ClearArc()
+        {
+            PlotControl.Plot.Remove<ScottPlot.Plottables.Ellipse>();
+            PlotControl.Refresh();
+        }
 
         public void Clear()
         {
@@ -201,6 +235,7 @@ namespace SMDisLabSys.UIServer
             PlotControl.Plot.Remove<ScottPlot.Plottables.Text>();  //全部坐标文本删掉
             PlotControl.Plot.Remove<ScottPlot.Plottables.Marker>();
             PlotControl.Plot.Remove<ScottPlot.Plottables.LinePlot>();
+            PlotControl.Plot.Remove<ScottPlot.Plottables.Ellipse>();
 
             PlotControl.Refresh();
         }

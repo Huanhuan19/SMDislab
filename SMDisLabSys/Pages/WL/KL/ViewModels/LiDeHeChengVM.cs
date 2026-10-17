@@ -192,12 +192,13 @@ namespace SMDisLabSys.Pages.WL.KL.ViewModels
             he = 3;
             FHePie = he.ToString();
 
-            double maxY = he * 1.2;
+            double maxY = he * 1.15;
             SetAxis(-2.8 * maxY, 2.8 * maxY, -maxY, maxY);
 
             CreatDashArrow(0, 0, 0, he, Colors.Red, "F′", 0, he * 1.1);
             CreatArrow(0, 0, 0, -1 * he, Colors.Blue, "F=mg", 0, -1.02 * he);
             CreatMarker(0, 0);
+
 
         }
         void F1F2StartCommandMethod()
@@ -218,11 +219,11 @@ namespace SMDisLabSys.Pages.WL.KL.ViewModels
                         }
                         RemoveArrowTextLine();
 
-                        Sensor1Value1 = 2.3 + count * 0.01;
-                        Sensor2Value1 = 2 + count * 0.01;
+                        Sensor1Value1 = 2.1 + count * 0.01;
+                        Sensor2Value1 = 2.1 + count * 0.01;
 
-                        Sensor1Value2 = 30;
-                        Sensor2Value2 = -60;
+                        Sensor1Value2 = 45;
+                        Sensor2Value2 = -45;
 
                         var x1 = -Sensor1Value1 * Math.Cos((90 - Sensor1Value2) * Math.PI / 180);
                         var y1 = Sensor1Value1 * Math.Sin((90 - Sensor1Value2) * Math.PI / 180);
@@ -230,11 +231,34 @@ namespace SMDisLabSys.Pages.WL.KL.ViewModels
                         var x2 = -Sensor2Value1 * Math.Cos((90 - Sensor2Value2) * Math.PI / 180);
                         var y2 = Sensor2Value1 * Math.Sin((90 - Sensor2Value2) * Math.PI / 180);
 
-                        CreatArrow(0, 0, x1, y1, Colors.Brown, "F₁", x1 * 1.1, y1 * 1.05);
-                        CreatArrow(0, 0, x2, y2, Colors.Orange, "F₂", x2 * 1.1, y2 * 1.05);
+                        
 
-                        CreatPlotText("θ₁", x1 * 0.22, y1 * 0.33, Colors.DarkRed, 22);
-                        CreatPlotText("θ₂", x2 * 0.12, y2 * 0.33, Colors.DarkRed, 22);
+                        var min = Sensor1Value1 > Sensor2Value1 ? Sensor2Value1 : Sensor1Value1;
+                        #region 标注角度
+                        if (Sensor1Value2 > 0)
+                        {
+                            CreatArc(90, Sensor1Value2, "θ₁", 0.4* min);
+                            CreatArrow(0, 0, x1, y1, Colors.Brown, "F₁", x1 * 1.25, y1 * 1.05);
+                        }
+                        else
+                        {
+                            CreatArc(90, Sensor1Value2, "θ₁", 0.4 * min);
+                            CreatArrow(0, 0, x1, y1, Colors.Brown, "F₁", x1 * 1.15, y1 * 1.05);
+                        }
+                        if (Sensor2Value2 > 0)
+                        {
+                            CreatArc(90, Sensor2Value2, "θ₂",0.45 * min);
+                            CreatArrow(0, 0, x2, y2, Colors.Orange, "F₂", x2 * 1.25, y2 * 1.05);
+                        }
+                        else
+                        {
+                            CreatArc(90, Sensor2Value2, "θ₂", 0.45 * min);
+                            CreatArrow(0, 0, x2, y2, Colors.Orange, "F₂", x2 * 1.15, y2 * 1.05);
+                        }
+                        #endregion
+                        //
+                        //CreatPlotText("θ₁", x1 * 0.22, y1 * 0.33, Colors.DarkRed, 22);
+                        //CreatPlotText("θ₂", x2 * 0.12, y2 * 0.33, Colors.DarkRed, 22);
 
                         F1 = Sensor1Value1;
                         F2 = Sensor2Value1;
@@ -262,6 +286,7 @@ namespace SMDisLabSys.Pages.WL.KL.ViewModels
             RemoveArrowOver(2);
             RemoveTextOver(2);
             RemoveLineOver(1);
+            ClearArc();
         }
 
         void LiLunHeCommandMethod()
