@@ -17,12 +17,12 @@
         <Grid.RowDefinitions>
 
             <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="20"></RowDefinition>
-            <RowDefinition Height="80"></RowDefinition>
-            <RowDefinition Height="80"></RowDefinition>
+            <RowDefinition Height="10"></RowDefinition>
+            <RowDefinition Height="70"></RowDefinition>
+            <RowDefinition Height="70"></RowDefinition>
             <RowDefinition Height="10"></RowDefinition>
             <!--<RowDefinition Height="80"></RowDefinition>-->
-            <RowDefinition Height="80"></RowDefinition>
+            <RowDefinition Height="70"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10"></ColumnDefinition>
@@ -33,7 +33,7 @@
         </Grid.ColumnDefinitions>
         <Grid Grid.Row="0" Grid.ColumnSpan="4">
             <Grid.RowDefinitions>
-                <RowDefinition Height="10"></RowDefinition>
+                <RowDefinition Height="3"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
             <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding ChartTitle}" Style="{StaticResource TextBlock_Default}" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
@@ -77,12 +77,12 @@
             <TextBlock Grid.Row="1" Grid.Column="1" Text="Angle" FontSize="45" Style="{StaticResource TextBlock_Default}" Margin="55,5,5,5" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
             <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource TextBox_DefaultRadius}" Margin="25,5,5,5" Width="160" Text="{Binding A2}"  FontSize="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Center" />
         </StackPanel>-->
-        <StackPanel Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="3" Style="{StaticResource StackPanel_Center}"  Margin="20,10,0,0" Height="80">
+        <StackPanel Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="3" Style="{StaticResource StackPanel_Center}"  Margin="20,10,0,0" Height="60">
             <TextBlock Grid.Row="1" Grid.Column="1" Text="F" FontSize="50" Style="{StaticResource TextBlock_Default}" Margin="55,5,0,5" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
             <TextBlock Grid.Row="1" Grid.Column="1" Text="合" FontSize="30" Style="{StaticResource TextBlock_Default}" Margin="0,25,5,5" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
             <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource TextBox_DefaultRadius}" Margin="30,5,5,5" Width="160" Text="{Binding FHe , StringFormat={}{0:F0}N}"  FontSize="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Center" />
         </StackPanel>
-        <StackPanel Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="3" Style="{StaticResource StackPanel_Center}"  Margin="20,10,0,0" Height="80">
+        <StackPanel Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="3" Style="{StaticResource StackPanel_Center}"  Margin="20,10,0,0" Height="60">
             <TextBlock Grid.Row="1" Grid.Column="1" Text="F′" FontSize="50" Style="{StaticResource TextBlock_Default}" Margin="55,5,5,5" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
             <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource TextBox_DefaultRadius}" Margin="46,5,5,5" Width="160" Text="{Binding FHePie , StringFormat={}{0:F0}N}"  FontSize="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" HorizontalAlignment="Center" />
         </StackPanel>

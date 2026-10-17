@@ -192,7 +192,7 @@ namespace SMDisLabSys.Pages.WL.KL.ViewModels
             he = 3;
             FHePie = he.ToString();
 
-            double maxY = he * 1.3;
+            double maxY = he * 1.2;
             SetAxis(-2.8 * maxY, 2.8 * maxY, -maxY, maxY);
 
             CreatDashArrow(0, 0, 0, he, Colors.Red, "F′", 0, he * 1.1);
@@ -218,8 +218,8 @@ namespace SMDisLabSys.Pages.WL.KL.ViewModels
                         }
                         RemoveArrowTextLine();
 
-                        Sensor1Value1 = 2.3 + count * 0.1;
-                        Sensor2Value1 = 2 + count * 0.1;
+                        Sensor1Value1 = 2.3 + count * 0.01;
+                        Sensor2Value1 = 2 + count * 0.01;
 
                         Sensor1Value2 = 30;
                         Sensor2Value2 = -60;
@@ -233,8 +233,8 @@ namespace SMDisLabSys.Pages.WL.KL.ViewModels
                         CreatArrow(0, 0, x1, y1, Colors.Brown, "F₁", x1 * 1.1, y1 * 1.05);
                         CreatArrow(0, 0, x2, y2, Colors.Orange, "F₂", x2 * 1.1, y2 * 1.05);
 
-                        CreatPlotText("θ₁", x1 * 0.22, y1 * 0.33, Colors.Black, 18);
-                        CreatPlotText("θ₂", x2 * 0.12, y2 * 0.33, Colors.Black, 18);
+                        CreatPlotText("θ₁", x1 * 0.22, y1 * 0.33, Colors.DarkRed, 22);
+                        CreatPlotText("θ₂", x2 * 0.12, y2 * 0.33, Colors.DarkRed, 22);
 
                         F1 = Sensor1Value1;
                         F2 = Sensor2Value1;
