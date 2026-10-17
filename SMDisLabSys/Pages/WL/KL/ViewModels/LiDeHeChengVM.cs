@@ -189,7 +189,7 @@ namespace SMDisLabSys.Pages.WL.KL.ViewModels
         void HeLiCommandMethod()
         {
             var he = Sensor1Value1 > Sensor2Value1 ? Sensor1Value1 : Sensor2Value1;
-            he = 3;
+            //he = 3;
             FHePie = he.ToString();
 
             double maxY = he * 1.15;
@@ -211,7 +211,7 @@ namespace SMDisLabSys.Pages.WL.KL.ViewModels
                     CancellationToken token = cts.Token;
                     while (true)
                     {
-                        count++;
+                        //count++;
                         if (token.IsCancellationRequested)//停止任务使用
                         {
                             cts = new CancellationTokenSource();
@@ -219,11 +219,11 @@ namespace SMDisLabSys.Pages.WL.KL.ViewModels
                         }
                         RemoveArrowTextLine();
 
-                        Sensor1Value1 = 2.1 + count * 0.01;
-                        Sensor2Value1 = 2.1 + count * 0.01;
+                        //Sensor1Value1 = 2.1 + count * 0.01;
+                        //Sensor2Value1 = 2.1 + count * 0.01;
 
-                        Sensor1Value2 = 45;
-                        Sensor2Value2 = -45;
+                        //Sensor1Value2 = 45;
+                        //Sensor2Value2 = -45;
 
                         var x1 = -Sensor1Value1 * Math.Cos((90 - Sensor1Value2) * Math.PI / 180);
                         var y1 = Sensor1Value1 * Math.Sin((90 - Sensor1Value2) * Math.PI / 180);
