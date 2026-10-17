@@ -36,27 +36,9 @@ namespace SMDisLabSys.UIServer
             PlotControl.Plot.Axes.SetLimits(minX, maxX, minY, maxY);
             PlotControl.Refresh(); // 新增后必须刷新
         }
-        public void CreatDashArrow(double startX, double startY, double endX, double endY, Color color, string title = "", double titleX = 0, double titleY = 0)
-        {
-            System.Windows.Application.Current.Dispatcher.Invoke(() =>
-            {
-                // 示例：新增一个蓝色箭头
-                var newArrow = PlotControl.Plot.Add.Arrow(startX, startY, endX, endY);
-                newArrow.ArrowShape = ArrowShape.Single.GetShape();
-                newArrow.ArrowLineColor = color;
-                newArrow.ArrowFillColor = color;
+        #region 创建
 
-                newArrow.ArrowWidth = 0.1f;
-                newArrow.ArrowLineWidth = 1;
-                newArrow.ArrowheadLength = 15;               //箭头三角长度
-                newArrow.ArrowheadWidth = 10;                 //箭头三角宽度
-
-                PlotControl.Refresh(); // 新增后必须刷新
-
-                CreatPlotText(title, titleX, titleY);
-            });
-        }
-
+        #region 创建箭头
         public void CreatArrow(double startX, double startY, double endX, double endY, Color color, string title = "", double titleX = 0, double titleY = 0)
         {
             System.Windows.Application.Current.Dispatcher.Invoke(() =>
@@ -74,10 +56,36 @@ namespace SMDisLabSys.UIServer
 
                 PlotControl.Refresh(); // 新增后必须刷新
 
-                CreatPlotText(title, titleX, titleY);
+            });
+
+            CreatPlotText(title, titleX, titleY, color);
+        }
+        public void CreatArrowNoText(double startX, double startY, double endX, double endY, Color color)
+        {
+            System.Windows.Application.Current.Dispatcher.Invoke(() =>
+            {
+                // 示例：新增一个蓝色箭头
+                var newArrow = PlotControl.Plot.Add.Arrow(startX, startY, endX, endY);
+                newArrow.ArrowShape = ArrowShape.Single.GetShape();
+                newArrow.ArrowLineColor = color;
+                newArrow.ArrowFillColor = color;
+
+                newArrow.ArrowWidth = 3;
+                newArrow.ArrowLineWidth = 1;
+                newArrow.ArrowheadLength = 15;               //箭头三角长度
+                newArrow.ArrowheadWidth = 10;                 //箭头三角宽度
+                PlotControl.Refresh(); // 新增后必须刷新
+
             });
         }
-        public void CreatPlotText(string title, double titleX, double titleY, float fontSize = 25)
+        public void CreatDashArrow(double startX, double startY, double endX, double endY, Color color, string title = "", double titleX = 0, double titleY = 0)
+        {
+            CreatLineDashed(startX, startY, endX, endY, color);
+            CreatArrow(0.95 * endX, 0.95 * endY, endX, endY, color, title, titleX, titleY);
+        }
+        #endregion
+
+        public void CreatPlotText(string title, double titleX, double titleY, Color color, float fontSize = 25)
         {
             System.Windows.Application.Current.Dispatcher.Invoke(() =>
             {
@@ -85,39 +93,36 @@ namespace SMDisLabSys.UIServer
                 var txt = PlotControl.Plot.Add.Text(title, titleX, titleY);
                 txt.LabelFontSize = fontSize;
                 txt.LabelFontName = fontName;
-
+                txt.LabelFontColor = color;
 
                 //PlotControl.Plot.Axes.AutoScale();
                 PlotControl.Refresh(); // 新增后必须刷新
             });
         }
 
-        public void RemoveArrowAt(int index)
+        public void CreatMarker(double startX, double startY)
         {
-            // 获取所有箭头（按添加顺序）转成List
-            var allArrows = PlotControl.Plot.GetPlottables<ScottPlot.Plottables.Arrow>().ToList();
-
-            // 判断：必须确认至少有5个箭头
-            if (allArrows.Count > index)
-            {
-                var fifthArrow = allArrows[index]; // 
-                PlotControl.Plot.Remove(fifthArrow);
-                PlotControl.Refresh();
-            }
+            PlotControl.Plot.Add.Marker(startX, startY, MarkerShape.FilledCircle, size: 12, color: Colors.Black);
         }
-        public void RemoveTextAt(int index)
+
+        public void CreatLineDashed(double startX, double startY, double endX, double endY, Color color)
         {
-            // 获取所有文本（按添加顺序）转成List
-            var allTexts = PlotControl.Plot.GetPlottables<ScottPlot.Plottables.Text>().ToList();
-
-            // 判断：必须确认至少有5个箭头
-            if (allTexts.Count > index)
+            System.Windows.Application.Current.Dispatcher.Invoke(() =>
             {
-                var fifthArrow = allTexts[index]; // 
-                PlotControl.Plot.Remove(fifthArrow);
+                var dashLine = PlotControl.Plot.Add.Line(startX, startY, endX, endY);
+                dashLine.LinePattern = LinePattern.Dashed; //虚线
+                dashLine.LineWidth = 2;
+                dashLine.Color = color;
                 PlotControl.Refresh();
-            }
+            });
         }
+
+        #endregion
+
+
+        #region 移除
+
+
         public void RemoveLineAt(int index)
         {
             // 获取所有文本（按添加顺序）转成List
@@ -131,7 +136,29 @@ namespace SMDisLabSys.UIServer
                 PlotControl.Refresh();
             }
         }
-        public void RemoveArrowAndTextOver(int index)
+        public void RemoveLineOver(int index)
+        {
+            var lineCount = PlotControl.Plot.GetPlottables<ScottPlot.Plottables.LinePlot>().Count();
+            for (int i = lineCount - 1; i >= index; i--)
+            {
+                RemoveLineAt(i);
+            }
+
+        }
+        public void RemoveArrowAt(int index)
+        {
+            // 获取所有箭头（按添加顺序）转成List
+            var allArrows = PlotControl.Plot.GetPlottables<ScottPlot.Plottables.Arrow>().ToList();
+
+            // 判断：
+            if (allArrows.Count > index)
+            {
+                var fifthArrow = allArrows[index]; // 
+                PlotControl.Plot.Remove(fifthArrow);
+                PlotControl.Refresh();
+            }
+        }
+        public void RemoveArrowOver(int index)
         {
             var arrowCount = PlotControl.Plot.GetPlottables<ScottPlot.Plottables.Arrow>().Count();
             for (int i = arrowCount - 1; i >= index; i--)
@@ -139,36 +166,34 @@ namespace SMDisLabSys.UIServer
                 RemoveArrowAt(i);
             }
 
+
+        }
+        public void RemoveTextAt(int index)
+        {
+            // 获取所有文本（按添加顺序）转成List
+            var allTexts = PlotControl.Plot.GetPlottables<ScottPlot.Plottables.Text>().ToList();
+
+            // 判断：
+            if (allTexts.Count > index)
+            {
+                var fifthArrow = allTexts[index]; // 
+                PlotControl.Plot.Remove(fifthArrow);
+                PlotControl.Refresh();
+            }
+        }
+        public void RemoveTextOver(int index)
+        {
             var textCount = PlotControl.Plot.GetPlottables<ScottPlot.Plottables.Text>().Count();
             for (int i = textCount - 1; i >= index; i--)
             {
                 RemoveTextAt(i);
             }
-
-            var lineCount = PlotControl.Plot.GetPlottables<ScottPlot.Plottables.LinePlot>().Count();
-            for (int i = lineCount - 1; i >= 0; i--)
-            {
-                RemoveLineAt(i);
-            }
-
         }
 
-        public void CreatMarker(double startX, double startY)
-        {
-            PlotControl.Plot.Add.Marker(startX, startY, MarkerShape.FilledCircle, size: 12, color: Colors.Black);
-        }
+        #endregion
 
-        public void CreatLineDashed(double startX, double startY, double endX, double endY)
-        {
-            System.Windows.Application.Current.Dispatcher.Invoke(() =>
-            {
-                var dashLine = PlotControl.Plot.Add.Line(startX, startY, endX, endY);
-                dashLine.LinePattern = LinePattern.Dashed; //虚线
-                dashLine.LineWidth = 2;
-                dashLine.Color = Colors.DarkGray;
-                PlotControl.Refresh();
-            });
-        }
+
+
 
         public void Clear()
         {

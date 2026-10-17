@@ -32,6 +32,7 @@ using MessageBox = System.Windows.MessageBox;
 using ScottPlot;
 using Colors = ScottPlot.Colors;
 using Newtonsoft.Json.Linq;
+using Windows.Management.Deployment;
 
 namespace SMDisLabSys.Pages.WL.KL.ViewModels
 {
@@ -43,7 +44,6 @@ namespace SMDisLabSys.Pages.WL.KL.ViewModels
         public DelegateCommand ClearSelectCommand { get; private set; }
         public DelegateCommand HeLiCommand { get; private set; }
         public DelegateCommand F1F2StartCommand { get; private set; }
-        public DelegateCommand F1F2Command { get; private set; }
 
         public DelegateCommand LiLunHeCommand { get; private set; }
 
@@ -104,7 +104,6 @@ namespace SMDisLabSys.Pages.WL.KL.ViewModels
 
             HeLiCommand = new DelegateCommand(HeLiCommandMethod);
             F1F2StartCommand = new DelegateCommand(F1F2StartCommandMethod);
-            F1F2Command = new DelegateCommand(F1F2CommandMethod);
             LiLunHeCommand = new DelegateCommand(LiLunHeCommandMethod);
 
             ClearSelectCommand = new DelegateCommand(ClearSelectCommandMethod);
@@ -217,13 +216,13 @@ namespace SMDisLabSys.Pages.WL.KL.ViewModels
                             cts = new CancellationTokenSource();
                             token.ThrowIfCancellationRequested();
                         }
-                        RemoveArrowAndTextOver(2);
+                        RemoveArrowTextLine();
 
-                        //Sensor1Value1 = 2.3 + count * 0.1;
-                        //Sensor2Value1 = 2 + count * 0.1;
+                        Sensor1Value1 = 2.3 + count * 0.1;
+                        Sensor2Value1 = 2 + count * 0.1;
 
-                        //Sensor1Value2 = 30;
-                        //Sensor2Value2 = -60;
+                        Sensor1Value2 = 30;
+                        Sensor2Value2 = -60;
 
                         var x1 = -Sensor1Value1 * Math.Cos((90 - Sensor1Value2) * Math.PI / 180);
                         var y1 = Sensor1Value1 * Math.Sin((90 - Sensor1Value2) * Math.PI / 180);
@@ -234,8 +233,8 @@ namespace SMDisLabSys.Pages.WL.KL.ViewModels
                         CreatArrow(0, 0, x1, y1, Colors.Brown, "F₁", x1 * 1.1, y1 * 1.05);
                         CreatArrow(0, 0, x2, y2, Colors.Orange, "F₂", x2 * 1.1, y2 * 1.05);
 
-                        CreatPlotText("θ₁", x1 * 0.22, y1 * 0.33, 18);
-                        CreatPlotText("θ₂", x2 * 0.12, y2 * 0.33, 18);
+                        CreatPlotText("θ₁", x1 * 0.22, y1 * 0.33, Colors.Black, 18);
+                        CreatPlotText("θ₂", x2 * 0.12, y2 * 0.33, Colors.Black, 18);
 
                         F1 = Sensor1Value1;
                         F2 = Sensor2Value1;
@@ -245,8 +244,8 @@ namespace SMDisLabSys.Pages.WL.KL.ViewModels
 
                         xhe = x1 + x2;
                         yhe = y1 + y2;
-                        CreatLineDashed(x1, y1, xhe, yhe);
-                        CreatLineDashed(x2, y2, xhe, yhe);
+                        CreatLineDashed(x1, y1, xhe, yhe, Colors.DarkGray);
+                        CreatLineDashed(x2, y2, xhe, yhe, Colors.DarkGray);
 
                         CreatArrow(0, 0, xhe, yhe, Colors.Green, "F合", xhe * 1.1, yhe * 1.05);
                         FHe = Math.Round(Math.Sqrt(xhe * xhe + yhe * yhe), 2).ToString();
@@ -258,35 +257,11 @@ namespace SMDisLabSys.Pages.WL.KL.ViewModels
                 }
             });
         }
-        void F1F2CommandMethod()
+        void RemoveArrowTextLine()
         {
-            cts.Cancel();
-
-            F1 = Sensor1Value1;
-            F2 = Sensor2Value1;
-
-            A1 = Sensor1Value2;
-            A2 = Sensor2Value2;
-
-            RemoveArrowAndTextOver(2);
-
-            var x1 = -F1 * Math.Cos((90 - A1) * Math.PI / 180);
-            var y1 = F1 * Math.Sin((90 - A1) * Math.PI / 180);
-
-            var x2 = -F2 * Math.Cos((90 - A2) * Math.PI / 180);
-            var y2 = F2 * Math.Sin((90 - A2) * Math.PI / 180);
-
-            CreatArrow(0, 0, x1, y1, Colors.Brown, "F1", x1 * 1.1, y1 * 1.05);
-            CreatArrow(0, 0, x2, y2, Colors.Orange, "F2", x2 * 1.1, y2 * 1.05);
-
-
-
-
-            var xhe = x1 + x2;
-            var yhe = y1 + y2;
-            CreatLineDashed(x1, y1, xhe, yhe);
-            CreatLineDashed(x2, y2, xhe, yhe);
-            CreatArrow(0, 0, xhe, yhe, Colors.Green, "F", xhe * 1.1, yhe * 1.05);
+            RemoveArrowOver(2);
+            RemoveTextOver(2);
+            RemoveLineOver(1);
         }
 
         void LiLunHeCommandMethod()
