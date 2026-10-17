@@ -66,11 +66,9 @@ namespace SMDisLabSys.UIServer
         }
         #endregion
 
-
         public UIBase()
         {
             ExplainCommand = new DelegateCommand(ExplainCommandMethod);
-
         }
 
         #region 蓝牙连接
@@ -89,14 +87,14 @@ namespace SMDisLabSys.UIServer
                 {
                     if (SMDataSource.Instance.BluetoothList.Count > 0)
                     {
-                        var bluetooth = SMDataSource.Instance.BluetoothList.Where(o => o.Adresse.Contains(bleName)).FirstOrDefault();
+                        var bluetooth = SMDataSource.Instance.BluetoothList.Where(o => o.Adresse.Contains(bleName)).ToList();
                         if (bluetooth != null)
                         {
                             List<BluetoothInfo> selectList = new List<BluetoothInfo>();
-                            selectList.Add(bluetooth);
+                            selectList.AddRange(bluetooth);
                             SMDataSource.Instance.BluetoothConnect(selectList);
 
-                            ConnectItem = $"蓝牙{bluetooth.Adresse} 已连接";
+                            ConnectItem = $"蓝牙 已连接";
                             break;
                         }
 

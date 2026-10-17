@@ -90,13 +90,13 @@ namespace SMDisLabSys.Pages.WL.KL.ViewModels
         double xhe;
         double yhe;
 
+        string BLEName = "SHM:1";
+
         CancellationTokenSource cts = new CancellationTokenSource();
         public LiDeHeChengVM()
         {
             InitCommand();
-            ConnectDevice();
-
-
+            ConnectDevice(BLEName);
         }
         void InitCommand()
         {
@@ -147,43 +147,14 @@ namespace SMDisLabSys.Pages.WL.KL.ViewModels
 
         }
 
-        void ConnectDevice()
-        {
-            Thread.Sleep(500);//等有无USB数据
-            if (SMDataSource.Instance.HidConnected())
-            {
-                ConnectItem = "USB 已连接";
-                return;
-            }
-            Task.Run(() =>
-            {
-                int loop = 100;
-                while (loop > 0)//
-                {
-                    if (SMDataSource.Instance.BluetoothList.Count > 0)
-                    {
-                        var bluetooth = SMDataSource.Instance.BluetoothList[0];
-                        if (bluetooth != null)
-                        {
-                            List<BluetoothInfo> selectList = new List<BluetoothInfo>();
-                            selectList.Add(bluetooth);
-                            SMDataSource.Instance.BluetoothConnect(selectList);
-                            ConnectItem = $"蓝牙{bluetooth.Adresse} 已连接";
-                            break;
-                        }
-
-                    }
-                    Thread.Sleep(500);//50s
-
-                    loop--;
-                }
-            });
-        }
-
         void ClearSelectCommandMethod()
         {
             cts.Cancel();
             Clear();
+
+
+            FHe = "";
+            FHePie = "";
         }
 
         void HeLiCommandMethod()
@@ -231,13 +202,13 @@ namespace SMDisLabSys.Pages.WL.KL.ViewModels
                         var x2 = -Sensor2Value1 * Math.Cos((90 - Sensor2Value2) * Math.PI / 180);
                         var y2 = Sensor2Value1 * Math.Sin((90 - Sensor2Value2) * Math.PI / 180);
 
-                        
+
 
                         var min = Sensor1Value1 > Sensor2Value1 ? Sensor2Value1 : Sensor1Value1;
                         #region 标注角度
                         if (Sensor1Value2 > 0)
                         {
-                            CreatArc(90, Sensor1Value2, "θ₁", 0.4* min);
+                            CreatArc(90, Sensor1Value2, "θ₁", 0.4 * min);
                             CreatArrow(0, 0, x1, y1, Colors.Brown, "F₁", x1 * 1.25, y1 * 1.05);
                         }
                         else
@@ -247,7 +218,7 @@ namespace SMDisLabSys.Pages.WL.KL.ViewModels
                         }
                         if (Sensor2Value2 > 0)
                         {
-                            CreatArc(90, Sensor2Value2, "θ₂",0.45 * min);
+                            CreatArc(90, Sensor2Value2, "θ₂", 0.45 * min);
                             CreatArrow(0, 0, x2, y2, Colors.Orange, "F₂", x2 * 1.25, y2 * 1.05);
                         }
                         else
@@ -271,7 +242,8 @@ namespace SMDisLabSys.Pages.WL.KL.ViewModels
                         CreatLineDashed(x1, y1, xhe, yhe, Colors.DarkGray);
                         CreatLineDashed(x2, y2, xhe, yhe, Colors.DarkGray);
 
-                        CreatArrow(0, 0, xhe, yhe, Colors.Green, "F合", xhe * 1.1, yhe * 1.05);
+                        CreatArrow(0, 0, xhe, yhe, Colors.Green, "F", xhe * 1.1, yhe * 1.05);
+                        CreatPlotText("合", xhe * 1.1 + 0.05, yhe * 1.05 - 0.06, Colors.Green, 13);
                         FHe = Math.Round(Math.Sqrt(xhe * xhe + yhe * yhe), 2).ToString();
                         Thread.Sleep(1000);
                     }
@@ -287,6 +259,7 @@ namespace SMDisLabSys.Pages.WL.KL.ViewModels
             RemoveTextOver(2);
             RemoveLineOver(1);
             ClearArc();
+
         }
 
         void LiLunHeCommandMethod()
