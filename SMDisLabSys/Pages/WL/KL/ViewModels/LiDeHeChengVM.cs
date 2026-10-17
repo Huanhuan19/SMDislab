@@ -96,7 +96,7 @@ namespace SMDisLabSys.Pages.WL.KL.ViewModels
         public LiDeHeChengVM()
         {
             InitCommand();
-            ConnectDevice(BLEName);
+            ConnectDevice(BLEName, 2);
         }
         void InitCommand()
         {

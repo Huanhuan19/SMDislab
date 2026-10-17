@@ -72,7 +72,7 @@ namespace SMDisLabSys.UIServer
         }
 
         #region 蓝牙连接
-        public void ConnectDevice(string bleName)
+        public void ConnectDevice(string bleName, int BLECount = 1)
         {
             Thread.Sleep(500);//等有无USB数据
             if (SMDataSource.Instance.HidConnected())
@@ -82,24 +82,29 @@ namespace SMDisLabSys.UIServer
             }
             Task.Run(() =>
             {
-                int loop = 100;
+                int loop = 500;
                 while (loop > 0)//
                 {
-                    if (SMDataSource.Instance.BluetoothList.Count > 0)
+                    if (SMDataSource.Instance.BluetoothList.Count >= BLECount)
                     {
                         var bluetooth = SMDataSource.Instance.BluetoothList.Where(o => o.Adresse.Contains(bleName)).ToList();
                         if (bluetooth != null)
                         {
+                            if (bluetooth.Count < BLECount)
+                            {
+                                Thread.Sleep(100);//
+                                continue;
+                            }
                             List<BluetoothInfo> selectList = new List<BluetoothInfo>();
                             selectList.AddRange(bluetooth);
                             SMDataSource.Instance.BluetoothConnect(selectList);
 
-                            ConnectItem = $"蓝牙 已连接";
+                            ConnectItem = $"{bluetooth.Count}蓝牙 已连接";
                             break;
                         }
 
                     }
-                    Thread.Sleep(500);//50s
+                    Thread.Sleep(100);//50s
 
                     loop--;
                 }

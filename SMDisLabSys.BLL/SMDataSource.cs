@@ -77,25 +77,23 @@ namespace SMDisLabSys.BLL
             }
         }
 
-        void BLEDispose()
+        public void BLEDispose()
         {
-            foreach (var item in sensorBuffer)
+            if (ble1 != null)
             {
-                switch (item.connectName)
-                {
-                    case "ble1":
-                        ble1.bluetooth.Dispose();
-                        break;
-                    case "ble2":
-                        ble2.bluetooth.Dispose();
-                        break;
-                    case "ble3":
-                        ble3.bluetooth.Dispose();
-                        break;
-                    case "ble4":
-                        ble4.bluetooth.Dispose();
-                        break;
-                }
+                ble1.bluetooth.Dispose();
+            }
+            if (ble2 != null)
+            {
+                ble2.bluetooth.Dispose();
+            }
+            if (ble3 != null)
+            {
+                ble3.bluetooth.Dispose();
+            }
+            if (ble4 != null)
+            {
+                ble4.bluetooth.Dispose();
             }
         }
 

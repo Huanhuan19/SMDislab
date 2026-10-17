@@ -25,6 +25,7 @@ using SMDisLabSys.Pages.WL.YZ.Views;
 using SMDisLabSys.Pages.WL.YZ.ViewModels;
 using SMDisLabSys.Pages.WL.KL.Views;
 using SMDisLabSys.Pages.WL.KL.ViewModels;
+using SMDisLabSys.BLL;
 
 
 namespace SMDisLabSys
@@ -41,6 +42,7 @@ namespace SMDisLabSys
         }
         private void App_Exit(object sender, ExitEventArgs e)
         {
+            SMDataSource.Instance.BLEDispose();
             System.Environment.Exit(0);//线程都被强制退出
         }
         private void App_Startup(object sender, StartupEventArgs e)
