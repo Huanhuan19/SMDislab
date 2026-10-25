@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:SMDisLabSys.Pages.WL.AG.Views"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:convert="clr-namespace:SMDisLabSys.UIServer.DataConvert"
+             xmlns:btnStyle="clr-namespace:SMDisLabSys.Styles;assembly=SMDisLabSys.Style"
              xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              mc:Ignorable="d" 
              d:DesignHeight="850" d:DesignWidth="1800">
@@ -88,10 +89,10 @@
             <!--<Button Style="{StaticResource BtnInfoStyle2}" Command="{Binding RecordDataCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}}}" VerticalAlignment="Center"
 Margin="10,0,0,0" Content="记录数据" Width="160"></Button>-->
 
-            <Button Style="{StaticResource BtnInfoStyle2}" Command="{Binding UpCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}}}" VerticalAlignment="Center"
-Margin="10,0,0,0" Content="上升" Width="160"></Button>
-            <Button Style="{StaticResource BtnInfoStyle2}" Command="{Binding DownCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}}}" VerticalAlignment="Center"
-Margin="10,0,0,0" Content="下降" Width="160"></Button>
+            <btnStyle:ConnectButton Style="{StaticResource BtnConnectOpenStyle}" Command="{Binding UpCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}}}" VerticalAlignment="Center" ConnectState="{Binding UpState}"
+Margin="10,0,0,0" Content="上升" Width="160"></btnStyle:ConnectButton>
+            <btnStyle:ConnectButton Style="{StaticResource BtnConnectOpenStyle}" Command="{Binding DownCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}}}" VerticalAlignment="Center" ConnectState="{Binding DownState}"
+Margin="10,0,0,0" Content="下降" Width="160"></btnStyle:ConnectButton>
             <Button Style="{StaticResource BtnInfoStyle2}" Command="{Binding StopCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type Window}}}" VerticalAlignment="Center"
 Margin="10,0,0,0" Content="停止" Width="160"></Button>
             <TextBlock Grid.Row="0" Text="选择速度" FontSize="23" Style="{StaticResource TextBlock_Default}" Margin="20,0,10,0"></TextBlock>

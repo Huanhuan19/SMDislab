@@ -257,6 +257,41 @@
         </Setter>
     </Style>
 
+    <!-- 参数下发：命令按钮 -->
+    <Style x:Key="BtnConnectOpenStyle" TargetType="Button">
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Width" Value="122.12"/>
+        <Setter Property="Height" Value="41.88"/>
+        <Setter Property="FontSize" Value="15.71"/>
+        <Setter Property="FontStyle" Value="Normal"/>
+        <Setter Property="Cursor" Value="Hand"></Setter>
+        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+        <Setter Property="Foreground" Value="{DynamicResource SolidColorBrush_4}"/>
+        <Setter Property="Background" Value="DarkRed"/>
+        <!--<Setter Property="Background" Value="{DynamicResource LinearGradientBrush_111}" />-->
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="True" CornerRadius="10.94">
+                        <Grid>
+                            <!--<Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="25"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>-->
+                            <TextBlock Grid.Column="1" x:Name="txt" Text="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <!--<Trigger Property="IsMouseOver" Value="True">
+                        <Setter TargetName="border" Property="Background" Value="{StaticResource LinearGradientBrush_112}"/>
+                    </Trigger>-->
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <!-- TextBlock  -->
     <Style x:Key="TextBlock_Default" TargetType="{x:Type TextBlock}">
         <Setter Property="TextBlock.TextAlignment" Value="Justify" />

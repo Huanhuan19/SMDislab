@@ -88,6 +88,18 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
             set { SetProperty(ref cmdState, value); }
         }
 
+        private bool upState = false;
+        public bool UpState
+        {
+            get { return upState; }
+            set { SetProperty(ref upState, value); }
+        }
+        private bool downState = false;
+        public bool DownState
+        {
+            get { return downState; }
+            set { SetProperty(ref downState, value); }
+        }
         #endregion
         public FaLaDiVM()
         {
@@ -210,6 +222,8 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
             data.Add(0x01);
             SendMethod(data.ToArray());
 
+            UpState = true;
+            DownState = false;
             CMDState = "已操作  上升";
         }
         void DownCommandMethod()
@@ -223,6 +237,8 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
             data.Add(0x00);
             data.Add(0x02);
             SendMethod(data.ToArray());
+            UpState = false;
+            DownState = true;
             CMDState = "已操作  下降";
         }
         void StopCommandMethod()
