@@ -1,18 +1,7 @@
 ﻿using SMDisLabSys.Common;
-using System;
-using System.Collections.Generic;
-using System.Data.Common;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using SMDisLabSys.UIServer;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace SMDisLabSys.Views
 {
@@ -25,6 +14,8 @@ namespace SMDisLabSys.Views
         {
             KillSameProcess.KillRunningInstance();
             InitializeComponent();
+            Title = "实验系统";
+            WindowTaskbarHelper.Attach(this, "实验系统");
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

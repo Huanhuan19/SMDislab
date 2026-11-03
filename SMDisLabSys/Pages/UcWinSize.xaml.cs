@@ -1,17 +1,7 @@
 ﻿using Prism.Services.Dialogs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using SMDisLabSys.UIServer;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace SMDisLabSys.Pages
 {
@@ -25,6 +15,7 @@ namespace SMDisLabSys.Pages
             InitializeComponent();
             CommandBindings.Add(new CommandBinding(ApplicationCommands.Close, CloseEvent));
             CommandBindings.Add(new CommandBinding(ApplicationCommands.Properties, WindowsEvent));
+            WindowTaskbarHelper.Attach(this);
         }
         IDialogResult result;
         public IDialogResult Result

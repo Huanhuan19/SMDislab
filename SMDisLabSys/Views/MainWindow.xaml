@@ -10,7 +10,7 @@
         xmlns:gif="http://wpfanimatedgif.codeplex.com"
         WindowState="Maximized"
         WindowStartupLocation="CenterScreen" 
-        Title="MainWindow" Height="1550" Width="1800">
+        Title="实验系统" Height="1550" Width="1800">
 
     <Grid Background="{DynamicResource Background_Image_1}" >
         <Grid.RowDefinitions>

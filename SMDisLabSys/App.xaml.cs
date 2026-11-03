@@ -26,6 +26,7 @@ using SMDisLabSys.Pages.WL.YZ.ViewModels;
 using SMDisLabSys.Pages.WL.KL.Views;
 using SMDisLabSys.Pages.WL.KL.ViewModels;
 using SMDisLabSys.BLL;
+using SMDisLabSys.UIServer;
 
 
 namespace SMDisLabSys
@@ -37,6 +38,7 @@ namespace SMDisLabSys
     {
         public App()
         {
+            WindowTaskbarHelper.InitProcess();
             Startup += App_Startup;
             Exit += App_Exit;
         }
