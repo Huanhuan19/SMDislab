@@ -65,6 +65,7 @@ namespace SMDisLabSys
             containerRegistry.RegisterDialog<DanBai, DanBaiVM>();
             containerRegistry.RegisterDialog<DanBaiNew, DanBaiNewVM>();
             containerRegistry.RegisterDialog<FaLaDi, FaLaDiVM>();
+            containerRegistry.RegisterDialog<AnPeiLi, AnPeiLiVM>();
             containerRegistry.RegisterDialog<LiDeHeCheng, LiDeHeChengVM>();
             containerRegistry.RegisterDialog<DataTest, DataTestVM>();
 

@@ -38,6 +38,9 @@
 	  <Compile Update="Pages\WL\AG\Views\FaLaDi.xaml.cs">
 	    <SubType>Code</SubType>
 	  </Compile>
+	  <Compile Update="Pages\WL\AG\Views\AnPeiLi.xaml.cs">
+	    <SubType>Code</SubType>
+	  </Compile>
 	  <Compile Update="Pages\WL\AG\Views\DanBaiNew.xaml.cs">
 	    <SubType>Code</SubType>
 	  </Compile>

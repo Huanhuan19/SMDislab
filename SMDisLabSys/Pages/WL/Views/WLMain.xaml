@@ -113,7 +113,7 @@ Margin="10,0,10,10" HorizontalAlignment="Left" >
         </Button>
         <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="5" Background="LightGray" Margin="3,3,10,3"/>
         <Viewbox Grid.Row="1" Grid.Column="1" Height="21" HorizontalAlignment="Left" Margin="0,0,0,0">
-            <RadioButton GroupName="TypeIndentity" Command="{Binding APLCommand}" Content="安培力研究" Style="{StaticResource RadioButton_Defaut}" Margin="10,0,0,0"></RadioButton>
+            <RadioButton GroupName="TypeIndentity" Command="{Binding ExpCommand}" CommandParameter="AnPeiLi" Content="安培力研究" Style="{StaticResource RadioButton_Defaut}" Margin="10,0,0,0"></RadioButton>
         </Viewbox>
         <Viewbox Height="21" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left" Margin="0,0,0,0">
             <RadioButton GroupName="TypeIndentity" Command="{Binding Command}" Content="半导体温差发电片特性" Style="{StaticResource RadioButton_Defaut}" Margin="10,0,0,0"></RadioButton>
