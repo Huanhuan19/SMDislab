@@ -20,6 +20,10 @@ namespace SMDisLabSys.BLL.Protocol
         {
             try
             {
+                if (buffer[0] != 0xce)//安培力  有自带长度
+                {
+                    buffer = buffer.Skip(1).Take(buffer.Length - 1).ToArray();
+                }
                 if (Enumerable.SequenceEqual(buffer.Take(2).ToArray(), header))//协议识别码
                 {
                     DataParseEventArgs dataParseArgs = new DataParseEventArgs();

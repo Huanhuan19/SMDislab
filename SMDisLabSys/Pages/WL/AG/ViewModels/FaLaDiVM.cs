@@ -139,8 +139,8 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
         }
         void InitAxis()
         {
-            MaxY = 2;
-            MinY = -2;
+            MaxY = 100;
+            MinY = -100;
         }
 
         private void Instance_BLEDataUpdated(object? sender, EventArgs e)
