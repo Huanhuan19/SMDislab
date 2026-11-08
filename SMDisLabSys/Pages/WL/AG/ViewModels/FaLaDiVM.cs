@@ -139,8 +139,8 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
         }
         void InitAxis()
         {
-            MaxY = 100;
-            MinY = -100;
+            MaxY = 200;
+            MinY = -200;
         }
 
         private void Instance_BLEDataUpdated(object? sender, EventArgs e)
@@ -189,8 +189,12 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
                 }
                 CreatLinePointAddCheckBoxItem("速度" + title);
             }
-
-            AddPointSameMaxYMinY(Index, Voltage - MiddleVol, lineIndex - 1);
+            var valueShown = Voltage - MiddleVol;//10以下  强制归零
+            if (Math.Abs(valueShown) <= 10)
+            {
+                valueShown = 0;
+            }
+            AddPointSameMaxYMinY(Index, valueShown, lineIndex - 1);
             dtCreat = DateTime.Now;
         }
 
