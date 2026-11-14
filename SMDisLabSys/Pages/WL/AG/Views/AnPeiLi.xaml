@@ -34,6 +34,27 @@
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
             <TextBlock Grid.Row="0" Text="{Binding ChartTitle}" Style="{StaticResource TextBlock_Default}" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+            <ItemsControl ItemsSource="{Binding CheckBoxItems}" Grid.Row="0" HorizontalAlignment="Left" Margin="10,0,0,0">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <CheckBox Style="{StaticResource CheckBoxStyle}" Height="30" Content="{Binding Text}" IsChecked="{Binding IsChecked}" Foreground="{Binding Foreground}" Margin="0,0,16,0">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Checked">
+                                    <i:InvokeCommandAction Command="{Binding DataContext.SelectChecked,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=UserControl}, UpdateSourceTrigger=PropertyChanged}" CommandParameter="{Binding Index}" />
+                                </i:EventTrigger>
+                                <i:EventTrigger EventName="Unchecked">
+                                    <i:InvokeCommandAction Command="{Binding DataContext.SelectUnchecked,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=UserControl}, UpdateSourceTrigger=PropertyChanged}" CommandParameter="{Binding Index}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </CheckBox>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
             <lvc:CartesianChart x:Name="Chart" Grid.Row="1" Margin="10,5,5,0" Hoverable="False" DisableAnimations="True" DataTooltip="{x:Null}" Foreground="White"
             Series="{Binding SeriesDic}" Zoom="X" Pan="Xy" Background="#FFf7f1" LegendLocation="None">
                 <lvc:CartesianChart.AxisX>

@@ -20,11 +20,13 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
         const byte CmdCycle = 0x99;
         const byte CmdCurrentUp = 0x66;
         const byte CmdCurrentDown = 0x55;
-        const int SendIntervalMs = 100;
-        const byte CurrentMax = 100;
+        const int CurrentSendIntervalMs = 500;
+        const int CurrentStep = 10;
+        const int CurrentMax = 300;
+        const int CurrentMin = 0;
 
         double xAxis = 0;
-        byte currentXx = 0;
+        int currentXx = 0;
         CancellationTokenSource pressCts;
         readonly object sendLock = new object();
         volatile bool isPressing;
@@ -70,9 +72,13 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
             XFormatter = XFormatters;
             YFormatter = YFormatters;
             ChartTitle = "安培力";
-            YLineTitle = "F";
+            YLineTitle = "";
             InitAxis();
-            CreatLinePoint("F");
+            CreatLinePointAddCheckBoxItem("F");
+            CreatLinePointAddCheckBoxItem("B");
+            CreatLinePointAddCheckBoxItem("I");
+            CreatLinePointAddCheckBoxItem("L");
+            CreatLinePointAddCheckBoxItem("θ");
             PressCommand = new DelegateCommand<string>(PressCommandMethod);
             ReleaseCommand = new DelegateCommand<string>(ReleaseCommandMethod);
             ConnectDevice("SHM");
@@ -126,7 +132,16 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
                 haveUSBData = true;
             }
 
+            if (!isPressing)
+            {
+                currentXx = ClampCurrent(I);
+            }
+
             AddPointSameMaxYMinY(xAxis, F, 0);
+            AddPointSameMaxYMinY(xAxis, B, 1);
+            AddPointSameMaxYMinY(xAxis, I, 2);
+            AddPointSameMaxYMinY(xAxis, L, 3);
+            AddPointSameMaxYMinY(xAxis, Theta, 4);
             xAxis += 1;
             if (xAxis > Max)
             {
@@ -140,16 +155,42 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
             {
                 return;
             }
-            StartRepeat(cmd, currentUp, currentDown);
+            if (currentUp || currentDown)
+            {
+                StartCurrentRepeat(cmd, currentUp);
+            }
+            else
+            {
+                lock (sendLock)
+                {
+                    isPressing = true;
+                }
+                SendFrame(cmd, 0x00, 0x01);
+            }
         }
 
         void ReleaseCommandMethod(string action)
         {
-            if (!TryGetCmd(action, out byte cmd, out _, out _))
+            if (!TryGetCmd(action, out byte cmd, out bool currentUp, out bool currentDown))
             {
                 return;
             }
-            StopRepeat(cmd);
+            if (currentUp || currentDown)
+            {
+                StopRepeat(cmd);
+            }
+            else
+            {
+                lock (sendLock)
+                {
+                    if (!isPressing)
+                    {
+                        return;
+                    }
+                    isPressing = false;
+                }
+                SendFrame(cmd, 0x00, 0x00);
+            }
         }
 
         static bool TryGetCmd(string action, out byte cmd, out bool currentUp, out bool currentDown)
@@ -184,39 +225,45 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
             }
         }
 
-        void StartRepeat(byte cmd, bool currentUp, bool currentDown)
+        static int ClampCurrent(double value)
+        {
+            int v = (int)Math.Round(value);
+            if (v < CurrentMin)
+            {
+                return CurrentMin;
+            }
+            if (v > CurrentMax)
+            {
+                return CurrentMax;
+            }
+            return v;
+        }
+
+        void StartCurrentRepeat(byte cmd, bool currentUp)
         {
             lock (sendLock)
             {
                 CancelRepeatLocked();
                 isPressing = true;
+                currentXx = ClampCurrent(I);
                 pressCts = new CancellationTokenSource();
                 var token = pressCts.Token;
                 Task.Run(async () =>
                 {
                     while (!token.IsCancellationRequested)
                     {
-                        byte dataLow = 0x01;
                         if (currentUp)
                         {
-                            if (currentXx < CurrentMax)
-                            {
-                                currentXx++;
-                            }
-                            dataLow = currentXx;
+                            currentXx = Math.Min(CurrentMax, currentXx + CurrentStep);
                         }
-                        else if (currentDown)
+                        else
                         {
-                            if (currentXx > 0)
-                            {
-                                currentXx--;
-                            }
-                            dataLow = currentXx;
+                            currentXx = Math.Max(CurrentMin, currentXx - CurrentStep);
                         }
-                        SendFrame(cmd, 0x00, dataLow);
+                        SendCurrentFrame(cmd, currentXx);
                         try
                         {
-                            await Task.Delay(SendIntervalMs, token);
+                            await Task.Delay(CurrentSendIntervalMs, token);
                         }
                         catch (TaskCanceledException)
                         {
@@ -255,6 +302,13 @@ namespace SMDisLabSys.Pages.WL.AG.ViewModels
                 }
                 pressCts = null;
             }
+        }
+
+        void SendCurrentFrame(byte cmd, int current)
+        {
+            byte dataHigh = (byte)((current >> 8) & 0xFF);
+            byte dataLow = (byte)(current & 0xFF);
+            SendFrame(cmd, dataHigh, dataLow);
         }
 
         void SendFrame(byte cmd, byte dataHigh, byte dataLow)
